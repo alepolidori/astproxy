@@ -1,0 +1,30 @@
+{
+  "name": "astproxy",
+  "version": "0.0.3",
+  "description": "Node.js proxy for Asterisk PBX",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alepolidori/astproxy.git"
+  },
+  "keywords": [
+    "asterisk",
+    "pbx",
+    "voip"
+  ],
+  "author": "Alessandro Polidori",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/alepolidori/astproxy/issues"
+  },
+  "homepage": "https://github.com/alepolidori/astproxy#readme",
+  "dependencies": {
+    "asterisk-ami": "0.2.0-beta1",
+    "jsplugs": "0.1.0",
+    "moment": "2.22.0",
+    "winston": "2.3.1"
+  }
+}
