@@ -1,0 +1,42 @@
+{
+  "name": "nethcti-server",
+  "version": "3.0.0",
+  "description": "NethCti Server",
+  "main": "nethcti.js",
+  "dependencies": {
+    "architect": "0.1.11",
+    "asterisk-ami": "0.2.0-beta1",
+    "ejs": "2.5.6",
+    "http-proxy": "1.16.2",
+    "http-proxy-rules": "1.0.1",
+    "jsplugs": "0.1.0",
+    "moment": "2.22.0",
+    "mssql": "3.3.0",
+    "mysql": "2.16.0",
+    "netmask": "1.0.6",
+    "node-ipc": "9.1.1",
+    "node-static": "0.7.10",
+    "pg": "6.1.6",
+    "request": "2.88.0",
+    "restify": "4.3.4",
+    "sequelize": "3.34.0",
+    "socket.io": "2.2.0",
+    "winston": "2.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@code.nethesis.it:22022/Nethesis/nethcti-server.git"
+  },
+  "scripts": {
+    "start": "/usr/bin/scl enable rh-nodejs10 \"node nethcti.js\"",
+    "dev": "/usr/bin/scl enable rh-nodejs10 \"nodemon nethcti.js\""
+  },
+  "engines": {
+    "node": ">=6.16.0"
+  },
+  "author": "Nethesis srl",
+  "license": "GPL-2.0"
+}
