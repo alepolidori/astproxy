@@ -19,6 +19,7 @@ var pluginsCmd = require('jsplugs')().require(__dirname + '/plugins_command_13')
 var proxyLogic = require(__dirname + '/proxy_logic_13/proxy_logic_13');
 var pluginsEvent = require('jsplugs')().require(__dirname + '/plugins_event_13');
 var EventEmitter = require('events').EventEmitter;
+var queueRecallingManager = require(__dirname + '/queue_recalling_manager');
 
 /**
  * The module identifier used by the logger.
@@ -318,6 +319,7 @@ function start() {
     logger.log.info(IDLOG, 'asterisk manager initialized');
     logger.log.info(IDLOG, 'connecting to asterisk...');
     am.connect();
+    queueRecallingManager.setCompAstProxy(self);
   } catch (err) {
     logger.log.error(IDLOG, err.stack);
   }
@@ -587,6 +589,7 @@ function setLogger(log) {
       // set the logger for all plugins
       setAllPluginsCmdLogger(log);
       setAllPluginsEventLogger(log);
+      queueRecallingManager.setLogger(log);
 
     } else {
       throw new Error('wrong logger object');
@@ -687,6 +690,20 @@ function getSipWebrtcConf() {
   }
 }
 
+/**
+ * Sets the database architect component.
+ *
+ * @method setCompDbconn
+ * @param {object} comp The database architect component.
+ */
+function setCompDbconn(comp) {
+  try {
+    queueRecallingManager.setCompDbconn(comp);
+  } catch (err) {
+    logger.log.error(IDLOG, err.stack);
+  }
+}
+
 // public interface
 exports.on = on;
 exports.emit = emit;
@@ -702,3 +719,5 @@ exports.getSipWebrtcConf = getSipWebrtcConf;
 exports.configAstObjects = configAstObjects;
 exports.configExtens = configExtens;
 exports.configRemoteSitesPrefixes = configRemoteSitesPrefixes;
+exports.queueRecallingManager = queueRecallingManager;
+exports.setCompDbconn = setCompDbconn;
