@@ -160,23 +160,10 @@ function config(asteriskConf) {
  * Reads the extension names and mac.
  *
  * @method configExtens
- * @param {string} path The file path of the users JSON file
+ * @param {object} extenObj
  */
-function configExtens(path) {
+function configExtens(extenObj) {
   try {
-    if (typeof path !== 'string') {
-      throw new TypeError('wrong parameter: ' + path);
-    }
-    if (!fs.existsSync(path)) {
-      throw new Error(path + ' does not exist');
-    }
-    USERS_CONF_FILEPATH = path;
-
-    var json = JSON.parse(fs.readFileSync(USERS_CONF_FILEPATH, 'utf8'));
-    if (typeof json !== 'object') {
-      throw new Error(USERS_CONF_FILEPATH + ' wrong file format');
-    }
-
     var u, e, i, allextens;
     var obj = {
       names: {},
@@ -185,27 +172,27 @@ function configExtens(path) {
     };
     let macByMac = {}; // keys are mac addresses and the values are the corresponding extension identifiers
     let macByExt = {}; // keys are extension identifiers and the values are the corresponding mac addresses
-    for (u in json) {
-      for (e in json[u].endpoints.mainextension) {
-        obj.names[e] = json[u].name;
+    for (u in extenObj) {
+      for (e in extenObj[u].endpoints.mainextension) {
+        obj.names[e] = extenObj[u].name;
 
         // construct array of secondary extensions
         obj.mainExtens[e] = [];
-        allextens = Object.keys(json[u].endpoints.extension);
+        allextens = Object.keys(extenObj[u].endpoints.extension);
         for (i = 0; i < allextens.length; i++) {
           if (allextens[i] !== e) {
             obj.mainExtens[e].push(allextens[i]);
           }
         }
       }
-      for (e in json[u].endpoints.extension) {
-        obj.names[e] = json[u].name;
+      for (e in extenObj[u].endpoints.extension) {
+        obj.names[e] = extenObj[u].name;
         if (obj.mainExtens[e] === undefined) {
-          obj.secondExtens[e] = Object.keys(json[u].endpoints.mainextension)[0];
+          obj.secondExtens[e] = Object.keys(extenObj[u].endpoints.mainextension)[0];
         }
-        if (json[u].endpoints.extension[e].mac) {
-          macByMac[json[u].endpoints.extension[e].mac] = e;
-          macByExt[e] = json[u].endpoints.extension[e].mac;
+        if (extenObj[u].endpoints.extension[e].mac) {
+          macByMac[extenObj[u].endpoints.extension[e].mac] = e;
+          macByExt[e] = extenObj[u].endpoints.extension[e].mac;
         }
       }
     }
