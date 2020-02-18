@@ -700,20 +700,6 @@ function getSipWebrtcConf() {
   }
 }
 
-/**
- * Sets the database architect component.
- *
- * @method setCompDbconn
- * @param {object} comp The database architect component.
- */
-function setCompDbconn(comp) {
-  try {
-    queueRecallingManager.setCompDbconn(comp);
-  } catch (err) {
-    logger.error(IDLOG, err.stack);
-  }
-}
-
 // public interface
 exports.on = on;
 exports.emit = emit;
@@ -730,4 +716,3 @@ exports.configAstObjects = configAstObjects;
 exports.configExtens = configExtens;
 exports.configRemoteSitesPrefixes = configRemoteSitesPrefixes;
 exports.queueRecallingManager = queueRecallingManager;
-exports.setCompDbconn = setCompDbconn;

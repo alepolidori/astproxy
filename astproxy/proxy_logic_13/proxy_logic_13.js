@@ -903,36 +903,6 @@ function getPrefix() {
 }
 
 /**
- * Sets the phonebook architect component.
- *
- * @method setCompPhonebook
- * @param {object} comp The phonebook architect component.
- */
-function setCompPhonebook(comp) {
-  try {
-    compPhonebook = comp;
-    logger.info(IDLOG, 'set phonebook architect component');
-  } catch (err) {
-    logger.error(IDLOG, err.stack);
-  }
-}
-
-/**
- * Sets the caller note architect component.
- *
- * @method setCompCallerNote
- * @param {object} comp The caller note architect component.
- */
-function setCompCallerNote(comp) {
-  try {
-    compCallerNote = comp;
-    logger.info(IDLOG, 'set caller note architect component');
-  } catch (err) {
-    logger.error(IDLOG, err.stack);
-  }
-}
-
-/**
  * Store the asterisk proxy to visit.
  *
  * @method visit
@@ -9781,12 +9751,10 @@ exports.setAutoC2CStatus = setAutoC2CStatus;
 exports.setNullCallPeriod = setNullCallPeriod;
 exports.getNullCallPeriod = getNullCallPeriod;
 exports.isAutoC2CEnabled = isAutoC2CEnabled;
-exports.setCompPhonebook = setCompPhonebook;
 exports.getJSONExtension = getJSONExtension;
 exports.getExtensionAgent = getExtensionAgent;
 exports.getMeetmeConfCode = getMeetmeConfCode;
 exports.getJSONExtensions = getJSONExtensions;
-exports.setCompCallerNote = setCompCallerNote;
 exports.queueMemberRemove = queueMemberRemove;
 exports.EVT_EXTEN_CHANGED = EVT_EXTEN_CHANGED;
 exports.disableTrunksEvents = disableTrunksEvents;
