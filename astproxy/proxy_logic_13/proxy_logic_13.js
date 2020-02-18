@@ -457,16 +457,6 @@ var compPhonebook;
  */
 var intervalUpdateQueuesDetails;
 
-
-/**
- * The database component.
- *
- * @property compDbconn
- * @type object
- * @private
- */
-var compDbconn;
-
 /**
  * The caller note component.
  *
@@ -680,15 +670,6 @@ var trunks = {};
 var queues = {};
 
 /**
- * Statistics about queues calls. It is updated once every half an hour.
- *
- * @property qCallsStatsHist
- * @type object
- * @private
- */
-var qCallsStatsHist = {};
-
-/**
  * All parkings. The key is the parkings number and the value
  * is the _Parking_ object.
  *
@@ -837,6 +818,22 @@ function setNullCallPeriod(period) {
 }
 
 /**
+ * Get the period of time to consider a call as null. All calls with
+ * waiting time less than this period is considered null.
+ *
+ * @method getNullCallPeriod
+ * @return {number} The period of time.
+ * @static
+ */
+function getNullCallPeriod() {
+  try {
+    return nullCallPeriod;
+  } catch (err) {
+    logger.log.error(IDLOG, err.stack);
+  }
+}
+
+/**
  * Return true if the automatic click 2 call has to be used.
  *
  * @method isAutoC2CEnabled
@@ -846,21 +843,6 @@ function setNullCallPeriod(period) {
 function isAutoC2CEnabled() {
   try {
     return autoC2CEnabled;
-  } catch (err) {
-    logger.log.error(IDLOG, err.stack);
-  }
-}
-
-/**
- * Return true if the PIN has been enabled on at least one outbound route.
- *
- * @method isPinEnabledAtLeastOneRoute
- * @param {function} cb The callback function
- * @return {boolean} True if the PIN has been enabled on at least one outbound route.
- */
-function isPinEnabledAtLeastOneRoute(cb) {
-  try {
-    compDbconn.isPinEnabledAtLeastOneRoute(cb);
   } catch (err) {
     logger.log.error(IDLOG, err.stack);
   }
@@ -930,21 +912,6 @@ function setCompPhonebook(comp) {
   try {
     compPhonebook = comp;
     logger.log.info(IDLOG, 'set phonebook architect component');
-  } catch (err) {
-    logger.log.error(IDLOG, err.stack);
-  }
-}
-
-/**
- * Sets the database architect component.
- *
- * @method setCompDbconn
- * @param {object} comp The database architect component.
- */
-function setCompDbconn(comp) {
-  try {
-    compDbconn = comp;
-    logger.log.info(IDLOG, 'set database architect component');
   } catch (err) {
     logger.log.error(IDLOG, err.stack);
   }
@@ -1148,6 +1115,22 @@ function setStaticDataQueues(obj) {
     staticDataQueues = obj;
   } catch (err) {
     logger.log.error(IDLOG, err.stack);
+  }
+}
+
+/**
+ * Get the initial trunks list read from JSON configuration file.
+ *
+ * @method getStaticDataQueues
+ * @return {object} The queues object read from JSON config file
+ * @static
+ */
+function getStaticDataQueues() {
+  try {
+    return staticDataQueues;
+  } catch (err) {
+    logger.log.error(IDLOG, err.stack);
+    return {};
   }
 }
 
@@ -2189,40 +2172,6 @@ function addQueueMemberLoggedIn(data, queueId) {
 }
 
 /**
- * Return the JSON representation of queue statistics.
- *
- * @method getJSONQueueStats
- * @param {string} qid The queue identifier
- * @param {function} cb The callback function
- * @return {object} The JSON representation of extended queue statistics.
- */
-function getJSONQueueStats(qid, cb) {
-  try {
-    if (typeof qid !== 'string' || typeof cb !== 'function') {
-      throw new Error('wrong parameters: ' + JSON.stringify(arguments));
-    }
-    if (!queues[qid]) {
-      var msg = 'getting JSON stats of queue "' + qid + '": queue does not exist';
-      logger.log.warn(IDLOG, msg);
-      cb(msg);
-      return;
-    }
-    if (!staticDataQueues[qid] || !staticDataQueues[qid].sla) {
-      var msg = 'getting JSON stats of queue "' + qid + '": no static data about the queue';
-      logger.log.warn(IDLOG, msg);
-      cb(msg);
-      return;
-    }
-    compDbconn.getQueueStats(qid, nullCallPeriod, staticDataQueues[qid].sla, function (err1, result) {
-      cb(err1, result);
-    });
-  } catch (error) {
-    logger.log.error(IDLOG, error.stack);
-    cb(error);
-  }
-}
-
-/**
  * Return the list of all agents of all queues.
  *
  * @method getAllQueuesAgents
@@ -2242,69 +2191,6 @@ function getAllQueuesAgents() {
     return Object.keys(ret);
   } catch (error) {
     logger.log.error(IDLOG, error.stack);
-  }
-}
-
-/**
- * Return the JSON representation of agents statistics.
- *
- * @method getJSONAllAgentsStats
- * @param {array} qlist The queue identifiers
- * @param {function} cb The callback function
- * @return {object} The JSON representation of queue agents statistics.
- */
-function getJSONAllAgentsStats(qlist, cb) {
-  try {
-    if (Array.isArray(qlist) === false || typeof cb !== 'function') {
-      throw new Error('wrong parameters: ' + JSON.stringify(arguments));
-    }
-    var q, i, m;
-    var temp;
-    var allAgents = {};
-    for (q in queues) {
-      if (queues[q] === undefined) {
-        continue;
-      }
-      temp = queues[q].getAllMembers();
-      for (m in temp) {
-        if (!allAgents[temp[m].getName()]) {
-          allAgents[temp[m].getName()] = {};
-        }
-        allAgents[temp[m].getName()][q] = {
-          isInPause: temp[m].isInPause(),
-          isLoggedIn: temp[m].isLoggedIn()
-        };
-      }
-    }
-    var permittedAgents = {};
-    for (i = 0; i < qlist.length; i++) {
-      if (queues[qlist[i]] === undefined) {
-        continue;
-      }
-      temp = queues[qlist[i]].getAllMembers();
-      for (var m in temp) {
-        if (!permittedAgents[temp[m].getName()]) {
-          permittedAgents[temp[m].getName()] = true;
-        }
-      }
-    }
-    compDbconn.getAgentsStatsByList(allAgents, function (err1, result) {
-      for (var u in result) {
-        if (!permittedAgents[u]) {
-          delete result[u];
-        } else {
-          for (var q in result[u]) {
-            if (qlist.indexOf(q) === -1 && q !== 'incomingCalls' && q !== 'outgoingCalls' && q !== 'allCalls') {
-              delete result[u][q];
-            }
-          }
-        }
-      }
-      cb(err1, result);
-    });
-  } catch (error) {
-    logger.log.error(IDLOG, error.stack);
-    cb(error);
   }
 }
 
@@ -2404,49 +2290,6 @@ function getAgentsOfQueues(queuesList, cb) {
 }
 
 /**
- * Return history of stasts of queues calls. Updates data once every half an hour.
- *
- * @method getQCallsStatsHist
- * @param {function} cb The callback function
- * @return {object} The JSON statistics about all queues.
- */
-function getQCallsStatsHist(cb) {
-  try {
-    if (typeof cb !== 'function') {
-      throw new Error('wrong parameters: ' + JSON.stringify(arguments));
-    }
-    if (qCallsStatsHist.last) {
-      var now = moment();
-      var dd = now.format('DD');
-      var HH = now.format('HH');
-      var mm = now.format('mm');
-      mm = parseInt(mm/30)*30;
-      var newdate = dd + '-' + HH + ':' + mm;
-      if (qCallsStatsHist.last === newdate) {
-        logger.log.info(IDLOG, 'return cached history of queues calls stats');
-        cb(null, qCallsStatsHist.data, qCallsStatsHist.len);
-        return;
-      }
-    }
-    compDbconn.getQCallsStatsHist(nullCallPeriod, function (err1, result, len) {
-      var now = moment();
-      var dd = now.format('DD');
-      var HH = now.format('HH');
-      var mm = now.format('mm');
-      mm = parseInt(mm/30)*30;
-      qCallsStatsHist.data = result;
-      qCallsStatsHist.len = len;
-      qCallsStatsHist.last = dd + '-' + HH + ':' + mm;
-      logger.log.info(IDLOG, 'return updated history of queues calls stats');
-      cb(err1, qCallsStatsHist.data, len);
-    });
-  } catch (error) {
-    logger.log.error(IDLOG, error.stack);
-    cb(error);
-  }
-}
-
-/**
  * Returns the JSON representation of all queues.
  *
  * @method getJSONQueues
@@ -2511,6 +2354,21 @@ function getQueuesList() {
   } catch (err) {
     logger.log.error(IDLOG, err.stack);
     return [];
+  }
+}
+
+/**
+ * Returns the queues.
+ *
+ * @method getQueues
+ * @return {object} The queues.
+ */
+function getQueues() {
+  try {
+    return queues;
+  } catch (err) {
+    logger.log.error(IDLOG, err.stack);
+    return {};
   }
 }
 
@@ -9825,38 +9683,6 @@ function setReloading(value) {
 }
 
 /**
- * Get pin of extensions.
- *
- * @method getPinExtens
- * @param {array} extens The extension list
- * @param {function} cb The callback
- */
-function getPinExtens(extens, cb) {
-  try {
-    compDbconn.getPinExtens(extens, cb);
-  } catch (e) {
-    logger.log.error(IDLOG, e.stack);
-  }
-}
-
-/**
- * Set pin for the extension.
- *
- * @method setPinExten
- * @param {string} extension The extension identifier
- * @param {string} pin The pin number to be set
- * @param {boolean} enabled True if the pin has to be enabled on the phone
- * @param {function} cb The callback
- */
-function setPinExten(extension, pin, enabled, cb) {
-  try {
-    compDbconn.setPinExten(extension, pin, enabled, cb);
-  } catch (e) {
-    logger.log.error(IDLOG, e.stack);
-  }
-}
-
-/**
  * Set the association between the extension and username.
  *
  * @method setExtensionUsername
@@ -9920,14 +9746,11 @@ exports.isExtenDnd = isExtenDnd;
 exports.isExtenCfVm = isExtenCfVm;
 exports.EVT_NEW_CDR = EVT_NEW_CDR;
 exports.createAlarm = createAlarm;
-exports.setPinExten = setPinExten;
 exports.deleteAlarm = deleteAlarm;
 exports.setReloading = setReloading;
 exports.EVT_RELOADED = EVT_RELOADED;
 exports.isExtenCfbVm = isExtenCfbVm;
-exports.getPinExtens = getPinExtens;
 exports.isExtenCfuVm = isExtenCfuVm;
-exports.setCompDbconn = setCompDbconn;
 exports.getExtensions = getExtensions;
 exports.getConference = getConference;
 exports.hangupChannel = hangupChannel;
@@ -9935,11 +9758,11 @@ exports.pickupParking = pickupParking;
 exports.getJSONQueues = getJSONQueues;
 exports.endMeetmeConf = endMeetmeConf;
 exports.opWaitConv = opWaitConv;
-exports.getQCallsStatsHist = getQCallsStatsHist;
 exports.getJSONTrunks = getJSONTrunks;
 exports.getTrunksList = getTrunksList;
 exports.getExtensList = getExtensList;
 exports.getQueuesList = getQueuesList;
+exports.getQueues = getQueues;
 exports.getExtensionIp = getExtensionIp;
 exports.queueMemberAdd = queueMemberAdd;
 exports.inoutDynQueues = inoutDynQueues;
@@ -9956,6 +9779,7 @@ exports.sendDTMFSequence = sendDTMFSequence;
 exports.parkConversation = parkConversation;
 exports.setAutoC2CStatus = setAutoC2CStatus;
 exports.setNullCallPeriod = setNullCallPeriod;
+exports.getNullCallPeriod = getNullCallPeriod;
 exports.isAutoC2CEnabled = isAutoC2CEnabled;
 exports.setCompPhonebook = setCompPhonebook;
 exports.getJSONExtension = getJSONExtension;
@@ -9978,9 +9802,7 @@ exports.EVT_TRUNK_CHANGED = EVT_TRUNK_CHANGED;
 exports.EVT_EXTEN_DIALING = EVT_EXTEN_DIALING;
 exports.EVT_QUEUE_CHANGED = EVT_QUEUE_CHANGED;
 exports.getQueueIdsOfExten = getQueueIdsOfExten;
-exports.getJSONQueueStats = getJSONQueueStats;
 exports.getJSONAllQueuesStats = getJSONAllQueuesStats;
-exports.getJSONAllAgentsStats = getJSONAllAgentsStats;
 exports.setQMAlarmsNotificationsStatus = setQMAlarmsNotificationsStatus;
 exports.getQMAlarmsNotificationsStatus = getQMAlarmsNotificationsStatus;
 exports.unmuteConversation = unmuteConversation;
@@ -10002,6 +9824,7 @@ exports.EVT_PARKING_CHANGED = EVT_PARKING_CHANGED;
 exports.setAsteriskPresence = setAsteriskPresence;
 exports.setStaticDataTrunks = setStaticDataTrunks;
 exports.setStaticDataQueues = setStaticDataQueues;
+exports.getStaticDataQueues = getStaticDataQueues;
 exports.setStaticDataExtens = setStaticDataExtens;
 exports.setMacDataByMac = setMacDataByMac;
 exports.setMacDataByExt = setMacDataByExt;
@@ -10056,7 +9879,6 @@ exports.getExtensionsFromConversation = getExtensionsFromConversation;
 exports.evtExtenUnconditionalCfChanged = evtExtenUnconditionalCfChanged;
 exports.transferConversationToVoicemail = transferConversationToVoicemail;
 exports.evtExtenUnconditionalCfVmChanged = evtExtenUnconditionalCfVmChanged;
-exports.isPinEnabledAtLeastOneRoute = isPinEnabledAtLeastOneRoute;
 exports.setExtensionUsername = setExtensionUsername;
 exports.getUsernameByExtension = getUsernameByExtension;
 exports.getAgentsOfQueues = getAgentsOfQueues;

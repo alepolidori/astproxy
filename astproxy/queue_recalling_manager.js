@@ -38,15 +38,6 @@ var logger = console;
 var compAstProxy;
 
 /**
- * The database component.
- *
- * @property compDbconn
- * @type object
- * @private
- */
-var compDbconn;
-
-/**
  * Sets the logger to be used.
  *
  * @method setLogger
@@ -82,21 +73,6 @@ function setCompAstProxy(comp) {
   try {
     compAstProxy = comp;
     logger.log.info(IDLOG, 'set asterisk proxy component');
-  } catch (err) {
-    logger.log.error(IDLOG, err.stack);
-  }
-}
-
-/**
- * Sets the database architect component.
- *
- * @method setCompDbconn
- * @param {object} comp The database architect component.
- */
-function setCompDbconn(comp) {
-  try {
-    compDbconn = comp;
-    logger.log.info(IDLOG, 'set database architect component');
   } catch (err) {
     logger.log.error(IDLOG, err.stack);
   }
@@ -160,67 +136,6 @@ function analizeQueueRecallingStatus(results, num, cb) {
   }
 }
 
-/**
- * Returns the recall data about the queues.
- *
- * @method getRecallData
- * @param {object} obj
- *   @param {string} obj.hours The amount of hours of the current day to be searched
- *   @param {array} obj.queues The queue identifiers
- *   @param {type} obj.type It can be ("lost"|"done"|"all"). The type of call to be retrieved
- *   @param {integer} obj.offset The results offset
- *   @param {integer} obj.limit The results limit
- * @param {function} cb The callback function
- */
-function getRecallData(obj, cb) {
-  try {
-    if (typeof obj !== 'object' || !obj.queues || !obj.type || !obj.hours) {
-      throw new Error('wrong parameters: ' + JSON.stringify(arguments));
-    }
-    obj.agents = compAstProxy.proxyLogic.getAgentsOfQueues(obj.queues);
-    compDbconn.getRecall(obj, cb);
-  } catch (error) {
-    logger.log.error(IDLOG, error.stack);
-    cb(error);
-  }
-}
-
-/**
- * Returns the details about the queue recall of the caller id.
- *
- * @method getQueueRecallInfo
- * @param {string} hours The amount of hours of the current day to be searched
- * @param {string} cid The caller identifier
- * @param {string} qid The queue identifier
- * @param {function} cb The callback function
- */
-function getQueueRecallInfo(hours, cid, qid, cb) {
-  try {
-    if (typeof cid !== 'string' ||
-      typeof cb !== 'function' ||
-      typeof qid !== 'string' ||
-      typeof hours !== 'string') {
-
-      throw new Error('wrong parameters');
-    }
-    compDbconn.getQueueRecallInfo({
-        hours: hours,
-        cid: cid,
-        qid: qid,
-        agents: compAstProxy.proxyLogic.getAgentsOfQueues([qid])
-      },
-      function (err, results) {
-        cb(err, results);
-      });
-  } catch (error) {
-    logger.log.error(IDLOG, error.stack);
-    callback(error);
-  }
-}
-
 exports.setLogger = setLogger;
-exports.setCompDbconn = setCompDbconn;
 exports.setCompAstProxy = setCompAstProxy;
-exports.getQueueRecallInfo = getQueueRecallInfo;
-exports.getRecallData = getRecallData;
 exports.checkQueueRecallingStatus = checkQueueRecallingStatus;
