@@ -1,0 +1,17 @@
+{
+  "name": "nethcti-server",
+  "version": "3.0.0",
+  "description": "NethCti Server",
+  "main": "nethcti.js",
+  "dependencies": {
+    "asterisk-ami": "0.2.0-beta1",
+    "jsplugs": "0.1.0",
+    "moment": "2.22.0",
+    "winston": "2.3.1"
+  },
+  "engines": {
+    "node": ">=10.16.3"
+  },
+  "author": "Nethesis srl",
+  "license": "GPL-3.0"
+}

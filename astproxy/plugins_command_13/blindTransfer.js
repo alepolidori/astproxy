@@ -130,6 +130,7 @@ var IDLOG = '[blindTransfer]';
             typeof log.log.error === 'function') {
 
             logger = log;
+            
           } else {
             throw new Error('wrong logger object');
           }

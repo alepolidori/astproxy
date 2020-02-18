@@ -15,9 +15,9 @@
 var fs = require('fs');
 var ast = require('asterisk-ami');
 var action = require('./action');
-var pluginsCmd = require('jsplugs')().require('./plugins/astproxy/plugins_command_13');
-var proxyLogic = require('./proxy_logic_13/proxy_logic_13');
-var pluginsEvent = require('jsplugs')().require('./plugins/astproxy/plugins_event_13');
+var pluginsCmd = require('jsplugs')().require(__dirname + '/plugins_command_13');
+var proxyLogic = require(__dirname + '/proxy_logic_13/proxy_logic_13');
+var pluginsEvent = require('jsplugs')().require(__dirname + '/plugins_event_13');
 var EventEmitter = require('events').EventEmitter;
 
 /**
@@ -181,7 +181,7 @@ function config(path) {
       proxyLogic.disableTrunksEvents();
     }
     logger.log.info(IDLOG, 'configuration done by ' + AST_CONF_FILEPATH);
-
+    
   } catch (err) {
     logger.log.error(IDLOG, err.stack);
   }
@@ -369,6 +369,9 @@ function configSipWebrtc(path) {
  */
 function start() {
   try {
+    astConf.debug = true;
+    console.log(astConf);
+    
     am = new ast(astConf);
     addAstListeners();
     logger.log.info(IDLOG, 'asterisk manager initialized');
@@ -688,6 +691,7 @@ function setAllPluginsCmdLogger(log) {
     for (key in pluginsCmd) {
 
       if (typeof pluginsCmd[key].setLogger === 'function') {
+        
         pluginsCmd[key].setLogger(log);
       }
     }
