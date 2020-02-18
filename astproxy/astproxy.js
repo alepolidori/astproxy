@@ -79,15 +79,6 @@ var emitter = new EventEmitter();
 var astConf;
 
 /**
- * The asterisk configuration file path.
- *
- * @property AST_CONF_FILEPATH
- * @type string
- * @private
- */
-var AST_CONF_FILEPATH;
-
-/**
  * The configuration file path of the asterisk objects.
  *
  * @property AST_OBJECTS_FILEPATH
@@ -143,44 +134,31 @@ var sipWebrtcConf;
  * It also reads the queues and trunks list.
  *
  * @method config
- * @param {string} path The file path of the asterisk JSON configuration file
+ * @param {object} asteriskConf
+ *  @param {object} asteriskConf.port The asterisk port
+ *  @param {object} asteriskConf.host The asterisk host
+ *  @param {object} asteriskConf.username The username
+ *  @param {object} asteriskConf.password The password
+ *  @param {object} asteriskConf.reconnect True to automatically reconnect to asterisk
+ *  @param {object} asteriskConf.reconnect_after How long to wait to reconnect
+ *  @param {object} asteriskConf.qm_alarms_notifications
+ *  @param {object} asteriskConf.prefix
+ *  @param {object} asteriskConf.auto_c2c
+ *  @param {object} asteriskConf.null_call_period
+ *  @param {object} asteriskConf.trunks_events
  */
-function config(path) {
+function config(asteriskConf) {
   try {
-    if (typeof path !== 'string') {
-      throw new TypeError('wrong parameter: ' + path);
-    }
-    if (!fs.existsSync(path)) {
-      throw new Error(path + ' does not exist');
-    }
-    AST_CONF_FILEPATH = path;
-
     // initialize asterisk configuration
-    var json = JSON.parse(fs.readFileSync(AST_CONF_FILEPATH, 'utf8'));
-    if (typeof json.user !== 'string' ||
-      typeof json.auto_c2c !== 'string' ||
-      typeof json.null_call_period !== 'string' ||
-      typeof json.pass !== 'string' || typeof json.prefix !== 'string' ||
-      typeof json.host !== 'string' || typeof json.port !== 'string') {
-
-      throw new Error(AST_CONF_FILEPATH + ' wrong file format');
-    }
-    astConf = {
-      port: json.port,
-      host: json.host,
-      username: json.user,
-      password: json.pass,
-      reconnect: true, // do you want the ami to reconnect if the connection is dropped, default: false
-      reconnect_after: 3000 // how long to wait to reconnect, in miliseconds, default: 3000
-    };
-    proxyLogic.setQMAlarmsNotificationsStatus(json.qm_alarms_notifications);
-    proxyLogic.setPrefix(json.prefix);
-    proxyLogic.setAutoC2CStatus(json.auto_c2c);
-    proxyLogic.setNullCallPeriod(parseInt(json.null_call_period));
-    if (json.trunks_events === 'disabled') {
+    astConf = asteriskConf;
+    proxyLogic.setQMAlarmsNotificationsStatus(asteriskConf.qm_alarms_notifications);
+    proxyLogic.setPrefix(asteriskConf.prefix);
+    proxyLogic.setAutoC2CStatus(asteriskConf.auto_c2c);
+    proxyLogic.setNullCallPeriod(parseInt(asteriskConf.null_call_period));
+    if (asteriskConf.trunks_events === 'disabled') {
       proxyLogic.disableTrunksEvents();
     }
-    logger.log.info(IDLOG, 'configuration done by ' + AST_CONF_FILEPATH);
+    logger.log.info(IDLOG, 'configuration done');
     
   } catch (err) {
     logger.log.error(IDLOG, err.stack);
@@ -370,8 +348,6 @@ function configSipWebrtc(path) {
 function start() {
   try {
     astConf.debug = true;
-    console.log(astConf);
-    
     am = new ast(astConf);
     addAstListeners();
     logger.log.info(IDLOG, 'asterisk manager initialized');
@@ -391,7 +367,7 @@ function reload() {
   try {
     proxyLogic.setReloading(true);
     reset();
-    config(AST_CONF_FILEPATH);
+    config(asteriskConf);
     configAstObjects(AST_OBJECTS_FILEPATH);
     configExtens(USERS_CONF_FILEPATH);
     start();
