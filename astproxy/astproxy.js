@@ -79,15 +79,6 @@ var emitter = new EventEmitter();
 var astConf;
 
 /**
- * The configuration file path of the asterisk objects.
- *
- * @property AST_OBJECTS_FILEPATH
- * @type string
- * @private
- */
-var AST_OBJECTS_FILEPATH;
-
-/**
  * The configuration file path of the users.
  *
  * @property USERS_CONF_FILEPATH
@@ -232,28 +223,15 @@ function configExtens(path) {
  * Reads the asterisk objects.
  *
  * @method configAstObjects
- * @param {string} path The file path of the asterisk JSON file
+ * @param {string} asteriskObj The file path of the asterisk JSON file
  */
-function configAstObjects(path) {
+function configAstObjects(asteriskObj) {
   try {
-    if (typeof path !== 'string') {
-      throw new TypeError('wrong parameter: ' + path);
-    }
-    if (!fs.existsSync(path)) {
-      throw new Error(path + ' does not exist');
-    }
-    AST_OBJECTS_FILEPATH = path;
-
-    var json = JSON.parse(fs.readFileSync(AST_OBJECTS_FILEPATH, 'utf8'));
-    if (typeof json.trunks !== 'object' || typeof json.queues !== 'object') {
-      throw new Error(AST_OBJECTS_FILEPATH + ' wrong file format');
-    }
-    proxyLogic.setStaticDataTrunks(json.trunks);
-    proxyLogic.setStaticDataQueues(json.queues);
-    proxyLogic.setFeatureCodes(json.feature_codes);
-    proxyLogic.setBlindTransferContext(json.transfer_context);
-    logger.log.info(IDLOG, 'asterisk objects configuration done by ' + AST_OBJECTS_FILEPATH);
-
+    proxyLogic.setStaticDataTrunks(asteriskObj.trunks);
+    proxyLogic.setStaticDataQueues(asteriskObj.queues);
+    proxyLogic.setFeatureCodes(asteriskObj.feature_codes);
+    proxyLogic.setBlindTransferContext(asteriskObj.transfer_context);
+    logger.log.info(IDLOG, 'asterisk objects configuration done');
   } catch (err) {
     logger.log.error(IDLOG, err.stack);
   }
