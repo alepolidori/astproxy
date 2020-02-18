@@ -78,7 +78,7 @@ var IDLOG = '[sipDetails]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -141,7 +141,7 @@ var IDLOG = '[sipDetails]';
           delete map[data.actionid];
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid];
@@ -169,7 +169,7 @@ var IDLOG = '[sipDetails]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -180,6 +180,6 @@ var IDLOG = '[sipDetails]';
     exports.setLogger = sipDetails.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

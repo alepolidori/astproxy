@@ -89,7 +89,7 @@ var IDLOG = '[listPjsipPeers]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -125,7 +125,7 @@ var IDLOG = '[listPjsipPeers]';
             delete map[data.actionid]; // remove association ActionID-callback
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid];
@@ -153,7 +153,7 @@ var IDLOG = '[listPjsipPeers]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -164,6 +164,6 @@ var IDLOG = '[listPjsipPeers]';
     exports.setLogger = listPjsipPeers.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

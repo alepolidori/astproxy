@@ -80,7 +80,7 @@ var IDLOG = '[sipTrunkStatus]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -129,7 +129,7 @@ var IDLOG = '[sipTrunkStatus]';
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid];
@@ -157,7 +157,7 @@ var IDLOG = '[sipTrunkStatus]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -168,6 +168,6 @@ var IDLOG = '[sipTrunkStatus]';
     exports.setLogger = sipTrunkStatus.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

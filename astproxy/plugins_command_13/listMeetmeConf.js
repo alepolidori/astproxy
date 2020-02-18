@@ -121,7 +121,7 @@ var IDLOG = '[listMeetmeConf]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -203,7 +203,7 @@ var IDLOG = '[listMeetmeConf]';
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid]; // remove association ActionID-callback
@@ -231,7 +231,7 @@ var IDLOG = '[listMeetmeConf]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -242,6 +242,6 @@ var IDLOG = '[listMeetmeConf]';
     exports.setLogger = listMeetmeConf.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

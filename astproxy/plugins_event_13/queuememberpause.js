@@ -58,7 +58,7 @@ var astProxy;
             data.queue && data.interface &&
             data.event === 'QueueMemberPause') {
 
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
 
             // extract the queue member identifier. e.g. data.interface is: "Local/214@from-queue/n"
             var memberId = data.interface.split('@')[0].split('/')[1];
@@ -68,11 +68,11 @@ var astProxy;
             astProxy.proxyLogic.evtQueueMemberPausedChanged(data.queue, memberId, paused, reason);
 
           } else {
-            logger.log.warn(IDLOG, 'QueueMemberPause event not recognized');
+            logger.warn(IDLOG, 'QueueMemberPause event not recognized');
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -96,7 +96,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -114,7 +114,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -125,6 +125,6 @@ var astProxy;
     exports.setLogger = queueMemberPause.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

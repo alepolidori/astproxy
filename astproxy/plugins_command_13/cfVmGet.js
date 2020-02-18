@@ -83,7 +83,7 @@ var IDLOG = '[cfVmGet]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -154,7 +154,7 @@ var IDLOG = '[cfVmGet]';
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid]; // remove association ActionID-callback
@@ -182,7 +182,7 @@ var IDLOG = '[cfVmGet]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -193,6 +193,6 @@ var IDLOG = '[cfVmGet]';
     exports.setLogger = cfVmGet.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

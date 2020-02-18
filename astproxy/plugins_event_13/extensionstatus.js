@@ -58,15 +58,15 @@ var astProxy;
           if (data.status && data.exten &&
             data.event === 'ExtensionStatus') {
 
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
             astProxy.proxyLogic.evtExtenStatusChanged(data.exten, AST_EXTEN_STATUS_2_STR_ADAPTER[data.status]);
 
           } else {
-            logger.log.warn(IDLOG, 'ExtensionStatus event not recognized');
+            logger.warn(IDLOG, 'ExtensionStatus event not recognized');
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -90,7 +90,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -108,7 +108,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -119,6 +119,6 @@ var astProxy;
     exports.setLogger = extensionStatus.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

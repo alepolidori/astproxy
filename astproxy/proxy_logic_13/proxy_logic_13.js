@@ -744,13 +744,13 @@ function setLogger(log) {
       typeof log.log.error === 'function') {
 
       logger = log;
-      logger.log.info(IDLOG, 'new logger has been set');
+      logger.info(IDLOG, 'new logger has been set');
 
     } else {
       throw new Error('wrong logger object');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -771,10 +771,10 @@ function setPrefix(code) {
 
     prefix = code;
 
-    logger.log.info(IDLOG, 'prefix number has been set to "' + prefix + '"');
+    logger.info(IDLOG, 'prefix number has been set to "' + prefix + '"');
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -791,9 +791,9 @@ function setAutoC2CStatus(status) {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
     autoC2CEnabled = status === 'enabled' ? true : false;
-    logger.log.info(IDLOG, 'auto c2c has been set to "' + status + '"');
+    logger.info(IDLOG, 'auto c2c has been set to "' + status + '"');
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -811,9 +811,9 @@ function setNullCallPeriod(period) {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
     nullCallPeriod = period;
-    logger.log.info(IDLOG, 'nullCallPeriod has been set to "' + nullCallPeriod + '"');
+    logger.info(IDLOG, 'nullCallPeriod has been set to "' + nullCallPeriod + '"');
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -829,7 +829,7 @@ function getNullCallPeriod() {
   try {
     return nullCallPeriod;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -844,7 +844,7 @@ function isAutoC2CEnabled() {
   try {
     return autoC2CEnabled;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -863,10 +863,10 @@ function setRemoteSitesPrefixes(obj) {
     }
 
     remoteSitesPrefixes = obj;
-    logger.log.info(IDLOG, 'remote sites has been set');
+    logger.info(IDLOG, 'remote sites has been set');
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -882,7 +882,7 @@ function getMeetmeConfCode() {
     return featureCodes.meetme_conf;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -898,7 +898,7 @@ function getPrefix() {
   try {
     return prefix;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -911,9 +911,9 @@ function getPrefix() {
 function setCompPhonebook(comp) {
   try {
     compPhonebook = comp;
-    logger.log.info(IDLOG, 'set phonebook architect component');
+    logger.info(IDLOG, 'set phonebook architect component');
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -926,9 +926,9 @@ function setCompPhonebook(comp) {
 function setCompCallerNote(comp) {
   try {
     compCallerNote = comp;
-    logger.log.info(IDLOG, 'set caller note architect component');
+    logger.info(IDLOG, 'set caller note architect component');
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -946,7 +946,7 @@ function visit(ap) {
     }
     astProxy = ap;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -962,7 +962,7 @@ function visit(ap) {
 function sipTrunkStructValidation(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'validating sip trunk structure: ' + err.toString());
+      logger.error(IDLOG, 'validating sip trunk structure: ' + err.toString());
       return;
     }
 
@@ -987,17 +987,17 @@ function sipTrunkStructValidation(err, resp) {
         if (siplist[struct[k].extension] === undefined) {
 
           delete struct[k];
-          logger.log.warn(IDLOG, 'inconsistency between ini structure file and asterisk for ' + k);
+          logger.warn(IDLOG, 'inconsistency between ini structure file and asterisk for ' + k);
         }
       }
     }
-    logger.log.info(IDLOG, 'all sip trunks have been validated');
+    logger.info(IDLOG, 'all sip trunks have been validated');
 
     // initialize all sip trunks as 'Trunk' objects into the 'trunks' property
     initializeSipTrunk();
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1013,7 +1013,7 @@ function sipTrunkStructValidation(err, resp) {
 function iaxTrunkStructValidation(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'validating iax trunk structure: ' + err.toString());
+      logger.error(IDLOG, 'validating iax trunk structure: ' + err.toString());
       return;
     }
 
@@ -1038,17 +1038,17 @@ function iaxTrunkStructValidation(err, resp) {
         if (iaxlist[struct[k].extension] === undefined) {
 
           delete struct[k];
-          logger.log.warn(IDLOG, 'inconsistency between ini structure file and asterisk for ' + k);
+          logger.warn(IDLOG, 'inconsistency between ini structure file and asterisk for ' + k);
         }
       }
     }
-    logger.log.info(IDLOG, 'all iax trunks have been validated');
+    logger.info(IDLOG, 'all iax trunks have been validated');
 
     // initialize all iax trunks as 'Trunk' objects into the 'trunks' property
     initializeIaxTrunk(resp);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1064,7 +1064,7 @@ function iaxTrunkStructValidation(err, resp) {
 function iaxExtenStructValidation(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'validating iax extension structure: ' + err.toString());
+      logger.error(IDLOG, 'validating iax extension structure: ' + err.toString());
       return;
     }
 
@@ -1089,17 +1089,17 @@ function iaxExtenStructValidation(err, resp) {
         if (iaxlist[struct[k].extension] === undefined) {
 
           delete struct[k];
-          logger.log.warn(IDLOG, 'inconsistency between ini structure file and asterisk for ' + k);
+          logger.warn(IDLOG, 'inconsistency between ini structure file and asterisk for ' + k);
         }
       }
     }
-    logger.log.info(IDLOG, 'all iax extensions have been validated');
+    logger.info(IDLOG, 'all iax extensions have been validated');
 
     // initialize all iax extensions as 'Extension' objects into the 'extensions' object
     initializeIaxExten(resp);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1114,7 +1114,7 @@ function setStaticDataQueues(obj) {
   try {
     staticDataQueues = obj;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1129,7 +1129,7 @@ function getStaticDataQueues() {
   try {
     return staticDataQueues;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return {};
   }
 }
@@ -1145,7 +1145,7 @@ function setQMAlarmsNotificationsStatus(val) {
   try {
     QMAlarmsNotificationsStatus = val;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1160,7 +1160,7 @@ function getQMAlarmsNotificationsStatus() {
   try {
     return QMAlarmsNotificationsStatus;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1175,7 +1175,7 @@ function setBlindTransferContext(ctx) {
   try {
     blindTransferContext = ctx;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1190,7 +1190,7 @@ function setFeatureCodes(obj) {
   try {
     featureCodes = obj;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1205,7 +1205,7 @@ function getPickupCode() {
   try {
     return featureCodes.pickup;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1220,7 +1220,7 @@ function setStaticDataTrunks(obj) {
   try {
     staticDataTrunks = obj;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1235,7 +1235,7 @@ function setMacDataByMac(obj) {
   try {
     macDataByMac = obj;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1250,7 +1250,7 @@ function setMacDataByExt(obj) {
   try {
     macDataByExt = obj;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1265,7 +1265,7 @@ function getExtenFromMac(mac) {
   try {
     return macDataByMac[mac];
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1280,7 +1280,7 @@ function setStaticDataExtens(obj) {
   try {
     staticDataExtens = obj;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1332,7 +1332,7 @@ function reset() {
       initializationStatus[k] = false;
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1344,10 +1344,10 @@ function reset() {
  */
 function evtFullyBooted() {
   try {
-    logger.log.info(IDLOG, 'asterisk fully booted');
+    logger.info(IDLOG, 'asterisk fully booted');
     start();
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1365,7 +1365,7 @@ var initializationStatus = {
  */
 function start() {
   try {
-    logger.log.info(IDLOG, 'start');
+    logger.info(IDLOG, 'start');
     // initialize pjsip extensions
     astProxy.doCmd({
       command: 'listPjsipPeers'
@@ -1403,7 +1403,7 @@ function start() {
     // initializes meetme conferences
     initMeetmeConf();
 
-    // logger.log.info(IDLOG, 'start asterisk structure ini file validation');
+    // logger.info(IDLOG, 'start asterisk structure ini file validation');
     // // validates all sip extensions
     // astProxy.doCmd({
     //   command: 'listSipPeers'
@@ -1433,7 +1433,7 @@ function start() {
     // initializes meetme conferences
     // initMeetmeConf();
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1468,7 +1468,7 @@ function initializeIaxExten(resp) {
 
         extensions[resp[i].exten].setIp(resp[i].ip);
         extensions[resp[i].exten].setPort(resp[i].port);
-        logger.log.info(IDLOG, 'set iax details for ext ' + resp[i].exten);
+        logger.info(IDLOG, 'set iax details for ext ' + resp[i].exten);
 
         // request the extension status
         astProxy.doCmd({
@@ -1479,13 +1479,13 @@ function initializeIaxExten(resp) {
     }
 
     // request all channels
-    logger.log.info(IDLOG, 'requests the channel list to initialize iax extensions');
+    logger.info(IDLOG, 'requests the channel list to initialize iax extensions');
     astProxy.doCmd({
       command: 'listChannels'
     }, updateConversationsForAllExten);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1507,7 +1507,7 @@ function listIaxPeers(resp) {
 
       extensions[resp[i].ext].setIp(resp[i].ip);
       extensions[resp[i].ext].setPort(resp[i].port);
-      logger.log.info(IDLOG, 'set iax details for ext ' + resp[i].ext);
+      logger.info(IDLOG, 'set iax details for ext ' + resp[i].ext);
 
       // request the extension status
       astProxy.doCmd({
@@ -1517,13 +1517,13 @@ function listIaxPeers(resp) {
     }
 
     // request all channels
-    logger.log.info(IDLOG, 'requests the channel list to initialize iax extensions');
+    logger.info(IDLOG, 'requests the channel list to initialize iax extensions');
     astProxy.doCmd({
       command: 'listChannels'
     }, updateConversationsForAllExten);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1538,7 +1538,7 @@ function listIaxPeers(resp) {
 function initializeParkings(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'initialing parkings: ' + err);
+      logger.error(IDLOG, 'initialing parkings: ' + err);
       return;
     }
     var pid, p;
@@ -1556,7 +1556,7 @@ function initializeParkings(err, resp) {
     }, listParkedCalls);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1576,7 +1576,7 @@ function addParkeeNames(resp) {
     }
     return resp;
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
     return resp;
   }
 }
@@ -1593,7 +1593,7 @@ function addParkeeNames(resp) {
 function listParkedCalls(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'listing parked calls: ' + err.toString());
+      logger.error(IDLOG, 'listing parked calls: ' + err.toString());
       return;
     }
     resp = addParkeeNames(resp);
@@ -1611,7 +1611,7 @@ function listParkedCalls(err, resp) {
     }, updateParkedCallerForAllParkings);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1628,7 +1628,7 @@ function listParkedCalls(err, resp) {
 function updateParkedChannelOfOneParking(err, resp, parking) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating parked channels of one parking ' + parking + ': ' + err.toString());
+      logger.error(IDLOG, 'updating parked channels of one parking ' + parking + ': ' + err.toString());
       return;
     }
     // check the parameters
@@ -1646,7 +1646,7 @@ function updateParkedChannelOfOneParking(err, resp, parking) {
 
       // request all channels to get the caller number information of
       // the parked channel of the specified parking
-      logger.log.info(IDLOG, 'request all channels to update parked caller information for parking ' + parking);
+      logger.info(IDLOG, 'request all channels to update parked caller information for parking ' + parking);
       astProxy.doCmd({
         command: 'listChannels'
       }, function (err, resp) {
@@ -1658,18 +1658,18 @@ function updateParkedChannelOfOneParking(err, resp, parking) {
       // there is not a parked caller for the parking, so
       // remove the parked channel from the memory
       delete parkedChannels[parking];
-      logger.log.info(IDLOG, 'removed parked channel from parkedChannels for parking ' + parking);
+      logger.info(IDLOG, 'removed parked channel from parkedChannels for parking ' + parking);
       // remove the parked caller from the parking object
       parkings[parking].removeParkedCaller();
-      logger.log.info(IDLOG, 'removed parked caller from parking ' + parking);
+      logger.info(IDLOG, 'removed parked caller from parking ' + parking);
 
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_PARKING_CHANGED + ' for parking ' + parking);
+      logger.info(IDLOG, 'emit event ' + EVT_PARKING_CHANGED + ' for parking ' + parking);
       astProxy.emit(EVT_PARKING_CHANGED, parkings[parking]);
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1685,7 +1685,7 @@ function updateParkedChannelOfOneParking(err, resp, parking) {
 function updateParkedCallerOfOneParking(err, resp, parking) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating parked caller of one parking ' + parking + ': ' + err.toString());
+      logger.error(IDLOG, 'updating parked caller of one parking ' + parking + ': ' + err.toString());
       return;
     }
     // check parameters
@@ -1710,17 +1710,17 @@ function updateParkedCallerOfOneParking(err, resp, parking) {
         // create and store a new parked call object
         pCall = new ParkedCaller(parkedChannels[parking]);
         parkings[parking].addParkedCaller(pCall);
-        logger.log.info(IDLOG, 'updated parked call ' + pCall.getNumber() + ' to parking ' + parking);
+        logger.info(IDLOG, 'updated parked call ' + pCall.getNumber() + ' to parking ' + parking);
 
         // emit the event
-        logger.log.info(IDLOG, 'emit event ' + EVT_PARKING_CHANGED + ' for parking ' + parking);
+        logger.info(IDLOG, 'emit event ' + EVT_PARKING_CHANGED + ' for parking ' + parking);
         astProxy.emit(EVT_PARKING_CHANGED, parkings[parking]);
       }
     } else {
-      logger.log.warn(IDLOG, 'try to update parked caller of the non existent parking ' + parking);
+      logger.warn(IDLOG, 'try to update parked caller of the non existent parking ' + parking);
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1736,7 +1736,7 @@ function updateParkedCallerOfOneParking(err, resp, parking) {
 function updateParkedCallerForAllParkings(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating parked caller for all parkings: ' + err.toString());
+      logger.error(IDLOG, 'updating parked caller for all parkings: ' + err.toString());
       return;
     }
     // cycle in all channels received from "listChannel" command plugin.
@@ -1756,19 +1756,19 @@ function updateParkedCallerForAllParkings(err, resp) {
         // create and store a new parked call object
         pCall = new ParkedCaller(parkedChannels[p]);
         parkings[p].addParkedCaller(pCall);
-        logger.log.info(IDLOG, 'added parked call ' + pCall.getNumber() + ' to parking ' + p);
+        logger.info(IDLOG, 'added parked call ' + pCall.getNumber() + ' to parking ' + p);
       }
     }
     if (!reloading) {
       Object.keys(parkings).forEach(function (p) {
-        logger.log.info(IDLOG, 'emit event ' + EVT_PARKING_CHANGED + ' for parking ' + p);
+        logger.info(IDLOG, 'emit event ' + EVT_PARKING_CHANGED + ' for parking ' + p);
         astProxy.emit(EVT_PARKING_CHANGED, parkings[p]);
       });
     }
     initializationStatus.parkings = true;
     checkInitializationStatus();
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1803,7 +1803,7 @@ function getQueueDetails(qid) {
 function initializeQueues(err, results) {
   try {
     if (err) {
-      logger.log.error(IDLOG, err);
+      logger.error(IDLOG, err);
       return;
     }
     var arr = [];
@@ -1820,12 +1820,12 @@ function initializeQueues(err, results) {
     async.parallel(arr,
       function (err) {
         if (err) {
-          logger.log.error(IDLOG, err);
+          logger.error(IDLOG, err);
         }
         if (!reloading) {
           results.forEach(function (o) {
             if (staticDataQueues[o.queue]) {
-              logger.log.info(IDLOG, 'emit event ' + EVT_QUEUE_CHANGED + ' for queue ' + o.queue);
+              logger.info(IDLOG, 'emit event ' + EVT_QUEUE_CHANGED + ' for queue ' + o.queue);
               astProxy.emit(EVT_QUEUE_CHANGED, queues[o.queue]);
             }
           });
@@ -1834,11 +1834,11 @@ function initializeQueues(err, results) {
         checkInitializationStatus();
       }
     );
-    logger.log.info(IDLOG, 'start the interval period to update the details of all the queues each ' + INTERVAL_UPDATE_QUEUE_DETAILS + ' msec');
+    logger.info(IDLOG, 'start the interval period to update the details of all the queues each ' + INTERVAL_UPDATE_QUEUE_DETAILS + ' msec');
     startIntervalUpdateQueuesDetails(INTERVAL_UPDATE_QUEUE_DETAILS);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1857,7 +1857,7 @@ function startIntervalUpdateQueuesDetails(interval) {
     intervalUpdateQueuesDetails = setInterval(function () {
       var q;
       for (q in queues) {
-        logger.log.info(IDLOG, 'update details of queue ' + q);
+        logger.info(IDLOG, 'update details of queue ' + q);
         astProxy.doCmd({
           command: 'queueDetails',
           queue: q
@@ -1865,7 +1865,7 @@ function startIntervalUpdateQueuesDetails(interval) {
       }
     }, interval);
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -1880,7 +1880,7 @@ function startIntervalUpdateQueuesDetails(interval) {
 function queueDetailsUpdate(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating queue details: ' + err.toString());
+      logger.error(IDLOG, 'updating queue details: ' + err.toString());
       return;
     }
 
@@ -1898,7 +1898,7 @@ function queueDetailsUpdate(err, resp) {
 
     // check the existence of the queue
     if (!queues[q]) {
-      logger.log.warn(IDLOG, 'try to update details of not existent queue "' + q + '"');
+      logger.warn(IDLOG, 'try to update details of not existent queue "' + q + '"');
       return;
     }
 
@@ -1906,11 +1906,11 @@ function queueDetailsUpdate(err, resp) {
     setQueueData(q, resp);
 
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_QUEUE_CHANGED + ' for queue ' + q);
+    logger.info(IDLOG, 'emit event ' + EVT_QUEUE_CHANGED + ' for queue ' + q);
     astProxy.emit(EVT_QUEUE_CHANGED, queues[q]);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1941,7 +1941,7 @@ function setQueueData(q, resp) {
     queues[q].setServiceLevelPercentage(resp.serviceLevelPercentage);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -1956,7 +1956,7 @@ function setQueueData(q, resp) {
 function updateQueueWaitingCallers(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating queue waiting callers: ' + err.toString());
+      logger.error(IDLOG, 'updating queue waiting callers: ' + err.toString());
       return;
     }
 
@@ -1969,11 +1969,11 @@ function updateQueueWaitingCallers(err, resp) {
 
     // check the existence of the queue
     if (!queues[q]) {
-      logger.log.warn(IDLOG, 'try to update queue waiting callers of the queue "' + q + '"');
+      logger.warn(IDLOG, 'try to update queue waiting callers of the queue "' + q + '"');
       return;
     }
 
-    logger.log.info(IDLOG, 'update all waiting callers of queue "' + q + '"');
+    logger.info(IDLOG, 'update all waiting callers of queue "' + q + '"');
 
     // remove all current waiting callers
     queues[q].removeAllWaitingCallers();
@@ -1984,15 +1984,15 @@ function updateQueueWaitingCallers(err, resp) {
     for (ch in resp.waitingCallers) {
       wCaller = new QueueWaitingCaller(resp.waitingCallers[ch]);
       queues[q].addWaitingCaller(wCaller);
-      logger.log.info(IDLOG, 'updated waiting caller ' + wCaller.getName() + ' of queue ' + wCaller.getQueue());
+      logger.info(IDLOG, 'updated waiting caller ' + wCaller.getName() + ' of queue ' + wCaller.getQueue());
     }
 
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_QUEUE_CHANGED + ' for queue ' + q);
+    logger.info(IDLOG, 'emit event ' + EVT_QUEUE_CHANGED + ' for queue ' + q);
     astProxy.emit(EVT_QUEUE_CHANGED, queues[q]);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2008,7 +2008,7 @@ function updateQueueWaitingCallers(err, resp) {
 function queueDetails(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'setting queue details: ' + err.toString());
+      logger.error(IDLOG, 'setting queue details: ' + err.toString());
       return;
     }
 
@@ -2026,7 +2026,7 @@ function queueDetails(err, resp) {
 
     // check the existence of the queue
     if (!queues[q]) {
-      logger.log.warn(IDLOG, 'try to set details of not existent queue "' + q + '"');
+      logger.warn(IDLOG, 'try to set details of not existent queue "' + q + '"');
       return;
     }
 
@@ -2060,10 +2060,10 @@ function queueDetails(err, resp) {
     for (ch in resp.waitingCallers) {
       wCaller = new QueueWaitingCaller(resp.waitingCallers[ch]);
       queues[q].addWaitingCaller(wCaller);
-      logger.log.info(IDLOG, 'added waiting caller ' + wCaller.getName() + ' to queue ' + wCaller.getQueue());
+      logger.info(IDLOG, 'added waiting caller ' + wCaller.getName() + ' to queue ' + wCaller.getQueue());
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2084,7 +2084,7 @@ function addQueueMemberLoggedOut(memberId, queueId) {
 
     // check the existence of the queue
     if (!queues[queueId]) {
-      logger.log.warn(IDLOG, 'try to add logged out member "' + memberId + '" to the not existent queue "' + queueId + '"');
+      logger.warn(IDLOG, 'try to add logged out member "' + memberId + '" to the not existent queue "' + queueId + '"');
       return;
     }
 
@@ -2102,10 +2102,10 @@ function addQueueMemberLoggedOut(memberId, queueId) {
 
       // add the member to the queue
       queues[queueId].addMember(member);
-      logger.log.info(IDLOG, 'added logged off member ' + member.getMember() + ' to the queue ' + queueId);
+      logger.info(IDLOG, 'added logged off member ' + member.getMember() + ' to the queue ' + queueId);
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2137,7 +2137,7 @@ function addQueueMemberLoggedIn(data, queueId) {
     }
 
     if (!queues[queueId]) {
-      logger.log.warn(IDLOG, 'try to add the queue member "' + data.member + '" to a not existent queue "' + queueId + '"');
+      logger.warn(IDLOG, 'try to add the queue member "' + data.member + '" to a not existent queue "' + queueId + '"');
       return;
     }
 
@@ -2161,13 +2161,13 @@ function addQueueMemberLoggedIn(data, queueId) {
       member.setLastCallTimestamp(data.lastCallTimestamp);
       // add the member to the queue
       queues[queueId].addMember(member);
-      logger.log.info(IDLOG, 'added member ' + member.getMember() + ' to the queue ' + queueId);
+      logger.info(IDLOG, 'added member ' + member.getMember() + ' to the queue ' + queueId);
 
-      logger.log.info(IDLOG, 'emit event ' + EVT_QUEUE_MEMBER_CHANGED + ' for member ' + data.member + ' of queue ' + queueId);
+      logger.info(IDLOG, 'emit event ' + EVT_QUEUE_MEMBER_CHANGED + ' for member ' + data.member + ' of queue ' + queueId);
       astProxy.emit(EVT_QUEUE_MEMBER_CHANGED, queues[queueId].getMember(data.member));
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2190,7 +2190,7 @@ function getAllQueuesAgents() {
     }
     return Object.keys(ret);
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2213,7 +2213,7 @@ function getCCCounterByQueue(qid) {
     }
     return count;
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
     return 0;
   }
 }
@@ -2232,7 +2232,7 @@ function getWaitingCounterByQueue(qid) {
     }
     return queues[qid].getWaitingCounter();
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
     return 0;
   }
 }
@@ -2260,7 +2260,7 @@ function getJSONAllQueuesStats(queuesList, cb) {
     }
     cb(null, result);
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
     cb(error);
   }
 }
@@ -2285,7 +2285,7 @@ function getAgentsOfQueues(queuesList, cb) {
     }
     return results.filter((item, pos) => results.indexOf(item) === pos);
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2306,7 +2306,7 @@ function getJSONQueues(privacyStr) {
     return qliteral;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -2321,7 +2321,7 @@ function getTrunksList() {
     return Object.keys(trunks);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return [];
   }
 }
@@ -2337,7 +2337,7 @@ function getExtensList() {
     return Object.keys(extensions);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return [];
   }
 }
@@ -2352,7 +2352,7 @@ function getQueuesList() {
   try {
     return Object.keys(queues);
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return [];
   }
 }
@@ -2367,7 +2367,7 @@ function getQueues() {
   try {
     return queues;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return {};
   }
 }
@@ -2389,7 +2389,7 @@ function getJSONTrunks(privacyStr) {
     return tliteral;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -2410,7 +2410,7 @@ function getJSONParkings(privacyStr) {
     return pliteral;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -2432,7 +2432,7 @@ function getJSONExtensions(privacyStrOutQueue, privacyStrInQueue) {
     return eliteral;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return {};
   }
 }
@@ -2457,7 +2457,7 @@ function getJSONExtension(exten, privacyStrOutQueue, privacyStrInQueue) {
     return extensions[exten].toJSON(privacyStrOutQueue, privacyStrInQueue);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return {};
   }
 }
@@ -2479,7 +2479,7 @@ function getExtensionIp(exten) {
     return extensions[exten].getIp();
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return '';
   }
 }
@@ -2504,7 +2504,7 @@ function getExtensionAgent(exten) {
     return '';
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return '';
   }
 }
@@ -2562,13 +2562,13 @@ function initializeSipExten() {
       }
     }
     // request all channels
-    logger.log.info(IDLOG, 'requests the channel list to initialize sip extensions');
+    logger.info(IDLOG, 'requests the channel list to initialize sip extensions');
     astProxy.doCmd({
       command: 'listChannels'
     }, updateConversationsForAllExten);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -2782,8 +2782,8 @@ function getListChannels() {
 function initializePjsipExten(err, results) {
   try {
     if (err) {
-      logger.log.error(IDLOG, err);
-      logger.log.warn(IDLOG, 'try again in 2 sec');
+      logger.error(IDLOG, err);
+      logger.warn(IDLOG, 'try again in 2 sec');
       setTimeout(() => {
         start();
       }, 2000);
@@ -2814,14 +2814,14 @@ function initializePjsipExten(err, results) {
     }
     async.series(arr, function (err) {
       if (err) {
-        logger.log.error(IDLOG, err);
+        logger.error(IDLOG, err);
       }
       initializationStatus.pjsipExtens = true;
       checkInitializationStatus();
       emitter.emit('pjsipExtenInitialized');
     });
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2841,12 +2841,12 @@ function checkInitializationStatus() {
       }
     }
     if (!ready) {
-      logger.log.warn(IDLOG, 'emit "' + EVT_READY + '" event');
+      logger.warn(IDLOG, 'emit "' + EVT_READY + '" event');
       astProxy.emit(EVT_READY);
       ready = true;
     } else {
-      logger.log.warn(IDLOG, 'reloaded');
-      logger.log.warn(IDLOG, 'emit "' + EVT_RELOADED + '" event');
+      logger.warn(IDLOG, 'reloaded');
+      logger.warn(IDLOG, 'emit "' + EVT_RELOADED + '" event');
       astProxy.emit(EVT_RELOADED);
       setReloading(false);
     }
@@ -2854,7 +2854,7 @@ function checkInitializationStatus() {
       initializationStatus[k] = false;
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2869,7 +2869,7 @@ function checkInitializationStatus() {
 function updateMeetmeConferences(err, data) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating data about all meetme conferences: ' + err.toString());
+      logger.error(IDLOG, 'updating data about all meetme conferences: ' + err.toString());
       return;
     }
     if (typeof data === 'object') {
@@ -2879,10 +2879,10 @@ function updateMeetmeConferences(err, data) {
         updateMeetmeConf(null, data[extOwnerId]);
       }
     }
-    logger.log.info(IDLOG, 'updated all meetme conferences: #' + Object.keys(conferences).length);
+    logger.info(IDLOG, 'updated all meetme conferences: #' + Object.keys(conferences).length);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2897,7 +2897,7 @@ function updateMeetmeConferences(err, data) {
 function updateMeetmeConf(err, data) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating data about single meetme conference: ' + err.toString());
+      logger.error(IDLOG, 'updating data about single meetme conference: ' + err.toString());
       return;
     }
 
@@ -2917,15 +2917,15 @@ function updateMeetmeConf(err, data) {
       }
       conferences[data.confId] = newConf;
 
-      logger.log.info(IDLOG, 'updated meetme conference "' + data.confId + '": users #' + data.users.length);
+      logger.info(IDLOG, 'updated meetme conference "' + data.confId + '": users #' + data.users.length);
 
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_MEETME_CONF_CHANGED + ' for conf ' + data.confId);
+      logger.info(IDLOG, 'emit event ' + EVT_MEETME_CONF_CHANGED + ' for conf ' + data.confId);
       astProxy.emit(EVT_MEETME_CONF_CHANGED, conferences[data.confId]);
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -2944,7 +2944,7 @@ function initMeetmeConf() {
     }, updateMeetmeConferences);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -2999,7 +2999,7 @@ function getSipTrunkStatus(trunk) {
 function initializeSipTrunk(err, results) {
   try {
     if (err) {
-      logger.log.error(IDLOG, err);
+      logger.error(IDLOG, err);
       return;
     }
 
@@ -3027,12 +3027,12 @@ function initializeSipTrunk(err, results) {
     }
     async.parallel(arr, function (err) {
       if (err) {
-        logger.log.error(IDLOG, err);
+        logger.error(IDLOG, err);
       }
       getListChannelsForTrunks();
     });
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -3050,7 +3050,7 @@ function getListChannelsForTrunks() {
       }, updateConversationsForAllTrunk);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -3071,7 +3071,7 @@ function getListChannelsForSingleTrunk(num) {
       });
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -3086,7 +3086,7 @@ function getListChannelsForSingleTrunk(num) {
 function initializePjsipTrunk(err, results) {
   try {
     if (err) {
-      logger.log.error(IDLOG, err);
+      logger.error(IDLOG, err);
       return;
     }
 
@@ -3111,13 +3111,13 @@ function initializePjsipTrunk(err, results) {
     async.parallel(arr,
       function (err) {
         if (err) {
-          logger.log.error(IDLOG, err);
+          logger.error(IDLOG, err);
         }
         getListChannelsForTrunks();
       }
     );
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -3132,7 +3132,7 @@ function initializePjsipTrunk(err, results) {
 function initializeIaxTrunk(err, results) {
   try {
     if (err) {
-      logger.log.error(IDLOG, err);
+      logger.error(IDLOG, err);
       return;
     }
 
@@ -3155,11 +3155,11 @@ function initializeIaxTrunk(err, results) {
       trunks[trunk.getExten()].setStatus(results[i].status);
       trunks[trunk.getExten()].setName(staticDataTrunks[results[i].exten].name);
       trunks[trunk.getExten()].setUserContext(staticDataTrunks[results[i].exten].usercontext);
-      logger.log.info(IDLOG, 'set iax details for trunk ' + results[i].exten);
+      logger.info(IDLOG, 'set iax details for trunk ' + results[i].exten);
     }
     getListChannelsForTrunks();
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -3185,16 +3185,16 @@ function setCfStatus(err, resp) {
     if (extensions[resp.exten]) { // the extension exists
       if (resp.status === 'on') {
         extensions[resp.exten].setCf(resp.to);
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cf enable to ' + resp.to);
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cf enable to ' + resp.to);
       } else {
         extensions[resp.exten].disableCf();
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cf disable');
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cf disable');
       }
     } else {
-      logger.log.warn(IDLOG, 'request cf for not existing extension ' + resp.exten);
+      logger.warn(IDLOG, 'request cf for not existing extension ' + resp.exten);
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3220,16 +3220,16 @@ function setCfbStatus(err, resp) {
     if (extensions[resp.exten]) { // the extension exists
       if (resp.status === 'on') {
         extensions[resp.exten].setCfb(resp.to);
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfb enable to ' + resp.to);
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfb enable to ' + resp.to);
       } else {
         extensions[resp.exten].disableCfb();
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfb disable');
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfb disable');
       }
     } else {
-      logger.log.warn(IDLOG, 'request cfb for not existing extension ' + resp.exten);
+      logger.warn(IDLOG, 'request cfb for not existing extension ' + resp.exten);
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3255,16 +3255,16 @@ function setCfuStatus(err, resp) {
     if (extensions[resp.exten]) { // the extension exists
       if (resp.status === 'on') {
         extensions[resp.exten].setCfu(resp.to);
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfu enable to ' + resp.to);
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfu enable to ' + resp.to);
       } else {
         extensions[resp.exten].disableCfu();
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfu disable');
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfu disable');
       }
     } else {
-      logger.log.warn(IDLOG, 'request cfu for not existing extension ' + resp.exten);
+      logger.warn(IDLOG, 'request cfu for not existing extension ' + resp.exten);
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3294,19 +3294,19 @@ function setCfVmStatus(err, resp) {
 
       if (resp.status === 'on') {
         extensions[resp.exten].setCfVm(resp.to);
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfvm enable to ' + resp.to);
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfvm enable to ' + resp.to);
 
       } else {
         extensions[resp.exten].disableCfVm();
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfvm disabled');
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfvm disabled');
       }
 
     } else {
-      logger.log.warn(IDLOG, 'request cfvm for not existing extension ' + resp.exten);
+      logger.warn(IDLOG, 'request cfvm for not existing extension ' + resp.exten);
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3336,19 +3336,19 @@ function setCfbVmStatus(err, resp) {
 
       if (resp.status === 'on') {
         extensions[resp.exten].setCfbVm(resp.to);
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfbvm enable to ' + resp.to);
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfbvm enable to ' + resp.to);
 
       } else {
         extensions[resp.exten].disableCfbVm();
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfbvm disabled');
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfbvm disabled');
       }
 
     } else {
-      logger.log.warn(IDLOG, 'request cfbvm for not existing extension ' + resp.exten);
+      logger.warn(IDLOG, 'request cfbvm for not existing extension ' + resp.exten);
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3378,19 +3378,19 @@ function setCfuVmStatus(err, resp) {
 
       if (resp.status === 'on') {
         extensions[resp.exten].setCfuVm(resp.to);
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfuvm enable to ' + resp.to);
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfuvm enable to ' + resp.to);
 
       } else {
         extensions[resp.exten].disableCfuVm();
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' cfuvm disabled');
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' cfuvm disabled');
       }
 
     } else {
-      logger.log.warn(IDLOG, 'request cfuvm for not existing extension ' + resp.exten);
+      logger.warn(IDLOG, 'request cfuvm for not existing extension ' + resp.exten);
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3417,16 +3417,16 @@ function setDndStatus(err, resp) {
 
       if (resp.dnd === 'on') {
         extensions[resp.exten].setDnd(true);
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' dnd true');
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' dnd true');
       } else {
         extensions[resp.exten].setDnd(false);
-        logger.log.info(IDLOG, 'set extension ' + resp.exten + ' dnd false');
+        logger.info(IDLOG, 'set extension ' + resp.exten + ' dnd false');
       }
     } else {
-      logger.log.warn(IDLOG, 'request dnd for not existing extension ' + resp.exten);
+      logger.warn(IDLOG, 'request dnd for not existing extension ' + resp.exten);
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3441,7 +3441,7 @@ function setDndStatus(err, resp) {
 function extSipDetails(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'setting sip extension details: ' + err.toString());
+      logger.error(IDLOG, 'setting sip extension details: ' + err.toString());
       return;
     }
 
@@ -3459,10 +3459,10 @@ function extSipDetails(err, resp) {
     extensions[data.exten].setName(data.name);
     extensions[data.exten].setContext(data.context);
     extensions[data.exten].setSipUserAgent(data.sipuseragent);
-    logger.log.info(IDLOG, 'set sip details for ext ' + data.exten);
+    logger.info(IDLOG, 'set sip details for ext ' + data.exten);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3477,7 +3477,7 @@ function extSipDetails(err, resp) {
 function extPjsipDetails(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'setting pjsip extension details: ' + err.toString());
+      logger.error(IDLOG, 'setting pjsip extension details: ' + err.toString());
       return;
     }
     // check parameter
@@ -3493,10 +3493,10 @@ function extPjsipDetails(err, resp) {
       extensions[resp.exten].setCodecs(resp.codecs);
       extensions[resp.exten].setSipUserAgent(resp.sipuseragent);
       extensions[resp.exten].setStatus(resp.status);
-      logger.log.info(IDLOG, 'set pjsip details for ext "' + resp.exten + '"');
+      logger.info(IDLOG, 'set pjsip details for ext "' + resp.exten + '"');
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3511,7 +3511,7 @@ function extPjsipDetails(err, resp) {
 function trunkPjsipDetails(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'setting pjsip trunk details: ' + err.toString());
+      logger.error(IDLOG, 'setting pjsip trunk details: ' + err.toString());
       return;
     }
     if (!resp) {
@@ -3524,7 +3524,7 @@ function trunkPjsipDetails(err, resp) {
       trunks[resp.exten].setStatus(resp.status);
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3539,7 +3539,7 @@ function trunkPjsipDetails(err, resp) {
 function trunkSipDetails(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'setting sip trunk details: ' + err.toString());
+      logger.error(IDLOG, 'setting sip trunk details: ' + err.toString());
       return;
     }
 
@@ -3554,10 +3554,10 @@ function trunkSipDetails(err, resp) {
     // set the extension information
     trunks[data.exten].setSipUserAgent(data.sipuseragent);
     trunks[data.exten].setCodecs(data.codecs);
-    logger.log.info(IDLOG, 'set sip details for trunk ' + data.exten);
+    logger.info(IDLOG, 'set sip details for trunk ' + data.exten);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3572,7 +3572,7 @@ function trunkSipDetails(err, resp) {
 function updateExtIaxDetails(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating iax extension details: ' + err.toString());
+      logger.error(IDLOG, 'updating iax extension details: ' + err.toString());
       return;
     }
 
@@ -3580,11 +3580,11 @@ function updateExtIaxDetails(err, resp) {
     extIaxDetails(resp);
 
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for iax extension ' + resp.exten);
+    logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for iax extension ' + resp.exten);
     astProxy.emit(EVT_EXTEN_CHANGED, extensions[resp.exten]);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3606,10 +3606,10 @@ function extIaxDetails(resp) {
     extensions[resp.exten].setIp(resp.ip);
     extensions[resp.exten].setPort(resp.port);
     extensions[resp.exten].setIp(resp.ip);
-    logger.log.info(IDLOG, 'set iax details for ext ' + resp.exten);
+    logger.info(IDLOG, 'set iax details for ext ' + resp.exten);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -3624,7 +3624,7 @@ function extIaxDetails(resp) {
 function updateExtPjsipDetails(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating pjsip extension details: ' + err.toString());
+      logger.error(IDLOG, 'updating pjsip extension details: ' + err.toString());
       return;
     }
 
@@ -3632,11 +3632,11 @@ function updateExtPjsipDetails(err, resp) {
     extPjsipDetails(null, resp);
 
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for pjsip extension ' + resp.exten);
+    logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for pjsip extension ' + resp.exten);
     astProxy.emit(EVT_EXTEN_CHANGED, extensions[resp.exten]);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3651,7 +3651,7 @@ function updateExtPjsipDetails(err, resp) {
 function updateExtSipDetails(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating sip extension details: ' + err.toString());
+      logger.error(IDLOG, 'updating sip extension details: ' + err.toString());
       return;
     }
 
@@ -3659,11 +3659,11 @@ function updateExtSipDetails(err, resp) {
     extSipDetails(null, resp);
 
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for sip extension ' + resp.exten.exten);
+    logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for sip extension ' + resp.exten.exten);
     astProxy.emit(EVT_EXTEN_CHANGED, extensions[resp.exten.exten]);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3678,7 +3678,7 @@ function updateExtSipDetails(err, resp) {
 function updateConversationsForAllExten(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating conversation for all extensions: ' + err.toString());
+      logger.error(IDLOG, 'updating conversation for all extensions: ' + err.toString());
       return;
     }
     if (!resp) {
@@ -3708,13 +3708,13 @@ function updateConversationsForAllExten(err, resp) {
 
         // emit the event
         if (!reloading) {
-          logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + ext);
+          logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + ext);
           astProxy.emit(EVT_EXTEN_CHANGED, extensions[ext]);
         }
       }
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3729,7 +3729,7 @@ function updateConversationsForAllExten(err, resp) {
 function updateConversationsForAllTrunk(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating conversations of all trunk: ' + err.toString());
+      logger.error(IDLOG, 'updating conversations of all trunk: ' + err.toString());
       return;
     }
     // check parameter
@@ -3760,7 +3760,7 @@ function updateConversationsForAllTrunk(err, resp) {
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3776,7 +3776,7 @@ function updateConversationsForAllTrunk(err, resp) {
 function updateExtenConversations(err, resp, exten) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating conversations of extension ' + exten + ': ' + err.toString());
+      logger.error(IDLOG, 'updating conversations of extension ' + exten + ': ' + err.toString());
       return;
     }
 
@@ -3790,7 +3790,7 @@ function updateExtenConversations(err, resp, exten) {
 
       // reset all conversations of the extension
       extensions[exten].removeAllConversations();
-      logger.log.info(IDLOG, 'reset all conversations of the extension ' + exten);
+      logger.info(IDLOG, 'reset all conversations of the extension ' + exten);
 
       // cycle in all received channels
       var ext, chid;
@@ -3810,11 +3810,11 @@ function updateExtenConversations(err, resp, exten) {
         }
       }
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3836,7 +3836,7 @@ function isTrunk(trunk) {
     return false;
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
     return false;
   }
 }
@@ -3859,7 +3859,7 @@ function getTrunkName(trunk) {
       }
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -3875,7 +3875,7 @@ function getTrunkName(trunk) {
 function updateTrunkConversations(err, resp, trunk) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'updating conversations of trunk ' + trunk + ': ' + err.toString());
+      logger.error(IDLOG, 'updating conversations of trunk ' + trunk + ': ' + err.toString());
       return;
     }
 
@@ -3891,7 +3891,7 @@ function updateTrunkConversations(err, resp, trunk) {
 
       // reset all conversations of the trunk
       trunks[realTrunkName].removeAllConversations();
-      logger.log.info(IDLOG, 'reset all conversations of the trunk ' + realTrunkName);
+      logger.info(IDLOG, 'reset all conversations of the trunk ' + realTrunkName);
 
       // cycle in all received channels
       var trunkid, chid;
@@ -3912,15 +3912,15 @@ function updateTrunkConversations(err, resp, trunk) {
       }
 
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_TRUNK_CHANGED + ' for trunk ' + realTrunkName);
+      logger.info(IDLOG, 'emit event ' + EVT_TRUNK_CHANGED + ' for trunk ' + realTrunkName);
       astProxy.emit(EVT_TRUNK_CHANGED, trunks[realTrunkName]);
 
     } else {
-      logger.log.warn(IDLOG, 'try to update channel list of the non existent trunk ' + trunk);
+      logger.warn(IDLOG, 'try to update channel list of the non existent trunk ' + trunk);
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -4003,7 +4003,7 @@ function addConversationToExten(exten, resp, chid) {
 
       // if the conversation is recording, sets its recording status
       if (recordingConv[convid] !== undefined) {
-        logger.log.info(IDLOG, 'set recording status to conversation ' + convid);
+        logger.info(IDLOG, 'set recording status to conversation ' + convid);
 
         if (recordingConv[convid] === RECORDING_STATUS.TRUE) {
           conv.setRecording(true);
@@ -4013,10 +4013,10 @@ function addConversationToExten(exten, resp, chid) {
       }
       // add the created conversation to the extension
       extensions[exten].addConversation(conv);
-      logger.log.info(IDLOG, 'the conversation ' + convid + ' has been added to exten ' + exten);
+      logger.info(IDLOG, 'the conversation ' + convid + ' has been added to exten ' + exten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4040,7 +4040,7 @@ function isMainExtension(exten) {
     return false;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return false;
   }
 }
@@ -4133,7 +4133,7 @@ function addConversationToTrunk(trunk, resp, chid) {
 
       // if the conversation is recording, sets its recording status
       if (recordingConv[convid] !== undefined) {
-        logger.log.info(IDLOG, 'set recording status to conversation ' + convid);
+        logger.info(IDLOG, 'set recording status to conversation ' + convid);
 
         if (recordingConv[convid] === RECORDING_STATUS.TRUE) {
           conv.setRecording(true);
@@ -4144,18 +4144,18 @@ function addConversationToTrunk(trunk, resp, chid) {
 
       // add the created conversation to the trunk
       trunks[realTrunkName].addConversation(conv);
-      logger.log.info(IDLOG, 'the conversation ' + convid + ' has been added to trunk ' + realTrunkName);
+      logger.info(IDLOG, 'the conversation ' + convid + ' has been added to trunk ' + realTrunkName);
 
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_TRUNK_CHANGED + ' for trunk ' + realTrunkName);
+      logger.info(IDLOG, 'emit event ' + EVT_TRUNK_CHANGED + ' for trunk ' + realTrunkName);
       astProxy.emit(EVT_TRUNK_CHANGED, trunks[realTrunkName]);
 
     } else {
-      logger.log.warn(IDLOG, 'try to add new conversation to a non existent trunk ' + trunk);
+      logger.warn(IDLOG, 'try to add new conversation to a non existent trunk ' + trunk);
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4170,15 +4170,15 @@ function addConversationToTrunk(trunk, resp, chid) {
 function extenStatus(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'setting extension status: ' + err.toString());
+      logger.error(IDLOG, 'setting extension status: ' + err.toString());
       return;
     }
 
     extensions[resp.exten].setStatus(resp.status);
-    logger.log.info(IDLOG, 'sets status ' + resp.status + ' for extension ' + resp.exten);
+    logger.info(IDLOG, 'sets status ' + resp.status + ' for extension ' + resp.exten);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -4193,15 +4193,15 @@ function extenStatus(err, resp) {
 function sipTrunkStatus(err, resp) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'setting trunk status: ' + err.toString());
+      logger.error(IDLOG, 'setting trunk status: ' + err.toString());
       return;
     }
 
     trunks[resp.trunk].setStatus(resp.status);
-    logger.log.info(IDLOG, 'sets status ' + resp.status + ' for trunk ' + resp.trunk);
+    logger.info(IDLOG, 'sets status ' + resp.status + ' for trunk ' + resp.trunk);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -4218,7 +4218,7 @@ function on(type, cb) {
   try {
     return emitter.on(type, cb);
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4232,7 +4232,7 @@ function getExtensions() {
   try {
     return extensions;
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4246,7 +4246,7 @@ function getConference(extenId) {
   try {
     return conferences[extenId] || {};
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4268,12 +4268,12 @@ function getUserExtenIdFromConf(confId, userId) {
       if (extenId) {
         return extenId;
       }
-      logger.log.warn(IDLOG, 'getting extenId of userId "' + userId + '" of confId "' + confId + '": extenId "' + extenId + '" does not exist');
+      logger.warn(IDLOG, 'getting extenId of userId "' + userId + '" of confId "' + confId + '": extenId "' + extenId + '" does not exist');
     } else {
-      logger.log.warn(IDLOG, 'getting extenId of userId "' + userId + '" of confId "' + confId + '": conf does not exist');
+      logger.warn(IDLOG, 'getting extenId of userId "' + userId + '" of confId "' + confId + '": conf does not exist');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4310,7 +4310,7 @@ function evtExtenStatusChanged(exten, status) {
 
         // request sip details for current extension
         extensions[exten].setStatus(status);
-        logger.log.info(IDLOG, 'set status ' + status + ' for extension ' + exten);
+        logger.info(IDLOG, 'set status ' + status + ' for extension ' + exten);
 
         astProxy.doCmd({
           command: 'iaxDetails',
@@ -4324,7 +4324,7 @@ function evtExtenStatusChanged(exten, status) {
       var parking = exten; // to better understand the code
 
       // request all parked channels
-      logger.log.info(IDLOG, 'requests all parked channels to update the parking ' + parking);
+      logger.info(IDLOG, 'requests all parked channels to update the parking ' + parking);
       astProxy.doCmd({
         command: 'listParkedCalls'
       }, function (err, resp) {
@@ -4333,7 +4333,7 @@ function evtExtenStatusChanged(exten, status) {
       });
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4359,7 +4359,7 @@ function evtDeviceStatusChanged(exten) {
         }, updateExtPjsipDetails);
       } else if (extensions[exten].getChanType() === 'iax') {
         extensions[exten].setStatus(status);
-        logger.log.info(IDLOG, 'set status ' + status + ' for extension ' + exten);
+        logger.info(IDLOG, 'set status ' + status + ' for extension ' + exten);
         astProxy.doCmd({
           command: 'iaxDetails',
           exten: exten
@@ -4368,7 +4368,7 @@ function evtDeviceStatusChanged(exten) {
       updateConversationsOfNum(exten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4390,7 +4390,7 @@ function evtQueueMemberPausedChanged(queueId, memberId, paused, reason) {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
     if (!queues[queueId]) {
-      logger.log.warn(IDLOG, 'received event queue member paused changed for not existent queue "' + queueId + '"');
+      logger.warn(IDLOG, 'received event queue member paused changed for not existent queue "' + queueId + '"');
       return;
     }
     // get the queue member object and set its "paused" status
@@ -4403,15 +4403,15 @@ function evtQueueMemberPausedChanged(queueId, memberId, paused, reason) {
         return;
       }
       member.setPaused(paused, reason);
-      logger.log.info(IDLOG, 'paused status of queue member "' + memberId + '" of queue "' + queueId + '" has been changed to "' + paused + '"');
+      logger.info(IDLOG, 'paused status of queue member "' + memberId + '" of queue "' + queueId + '" has been changed to "' + paused + '"');
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_QUEUE_MEMBER_CHANGED + ' for queue member ' + memberId + ' of queue ' + queueId);
+      logger.info(IDLOG, 'emit event ' + EVT_QUEUE_MEMBER_CHANGED + ' for queue member ' + memberId + ' of queue ' + queueId);
       astProxy.emit(EVT_QUEUE_MEMBER_CHANGED, member);
     } else {
-      logger.log.warn(IDLOG, 'received event queue member paused changed for non existent member "' + memberId + '"');
+      logger.warn(IDLOG, 'received event queue member paused changed for non existent member "' + memberId + '"');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4451,7 +4451,7 @@ function evtQueueMemberStatus(data) {
       return;
     }
     if (!queues[data.queueId]) {
-      logger.log.warn(IDLOG, 'received event queue member status (' + data.member + ') for not existent queue "' + data.queueId + '"');
+      logger.warn(IDLOG, 'received event queue member status (' + data.member + ') for not existent queue "' + data.queueId + '"');
       return;
     }
     // the update of the data is done by two steps:
@@ -4465,7 +4465,7 @@ function evtQueueMemberStatus(data) {
     addQueueMemberLoggedIn(data, data.queueId);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4495,7 +4495,7 @@ function evtQueueMemberAdded(data) {
     }
 
     if (!queues[data.queueId]) {
-      logger.log.warn(IDLOG, 'received event queue member added for not existent queue "' + data.queueId + '"');
+      logger.warn(IDLOG, 'received event queue member added for not existent queue "' + data.queueId + '"');
       return;
     }
 
@@ -4503,7 +4503,7 @@ function evtQueueMemberAdded(data) {
     addQueueMemberLoggedIn(data, data.queueId);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4527,13 +4527,13 @@ function evtRename() {
     }
 
     // request all channels to update the conversations of all extensions
-    logger.log.info(IDLOG, 'requests the channel list to update the conversations of all extensions');
+    logger.info(IDLOG, 'requests the channel list to update the conversations of all extensions');
     astProxy.doCmd({
       command: 'listChannels'
     }, updateConversationsForAllExten);
     getListChannelsForTrunks();
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4557,7 +4557,7 @@ function evtQueueMemberRemoved(data) {
     }
 
     if (!queues[data.queueId]) {
-      logger.log.warn(IDLOG, 'received event queue member removed for not existent queue "' + data.queueId + '"');
+      logger.warn(IDLOG, 'received event queue member removed for not existent queue "' + data.queueId + '"');
       return;
     }
 
@@ -4565,22 +4565,22 @@ function evtQueueMemberRemoved(data) {
     var member = queues[data.queueId].getMember(data.member);
 
     if (!member) {
-      logger.log.warn(IDLOG, 'try to set logged in status to "false" of not existent member "' + data.member + '" of queue "' + data.queueId + '"');
+      logger.warn(IDLOG, 'try to set logged in status to "false" of not existent member "' + data.member + '" of queue "' + data.queueId + '"');
       return;
     }
 
     member.setLoggedIn(false);
-    logger.log.info(IDLOG, 'set the member "' + data.member + '" of queue "' + data.queueId + '" to logged off');
+    logger.info(IDLOG, 'set the member "' + data.member + '" of queue "' + data.queueId + '" to logged off');
 
     member.setPaused(false);
-    logger.log.info(IDLOG, 'set the member "' + data.member + '" of queue "' + data.queueId + '" to paused false');
+    logger.info(IDLOG, 'set the member "' + data.member + '" of queue "' + data.queueId + '" to paused false');
 
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_QUEUE_MEMBER_CHANGED + ' for queue member ' + data.member + ' of queue ' + data.queueId);
+    logger.info(IDLOG, 'emit event ' + EVT_QUEUE_MEMBER_CHANGED + ' for queue member ' + data.member + ' of queue ' + data.queueId);
     astProxy.emit(EVT_QUEUE_MEMBER_CHANGED, member);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4601,7 +4601,7 @@ function evtNewExternalCall(number) {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
 
-    logger.log.info(IDLOG, 'new external call from number ' + number + ': get data about the caller');
+    logger.info(IDLOG, 'new external call from number ' + number + ': get data about the caller');
 
     // initialize the caller data object. Due to asy
     if (callerIdentityData[number] === undefined) {
@@ -4612,14 +4612,14 @@ function evtNewExternalCall(number) {
     compCallerNote.getAllValidCallerNotesByNum(number, function (err, results) {
       try {
         if (err) {
-          logger.log.warn(IDLOG, 'retrieving caller notes data for new external call from number ' + number);
+          logger.warn(IDLOG, 'retrieving caller notes data for new external call from number ' + number);
 
         } else {
-          logger.log.info(IDLOG, 'add caller notes data for new external call from number ' + number);
+          logger.info(IDLOG, 'add caller notes data for new external call from number ' + number);
           callerIdentityData[number].callerNotes = results;
         }
       } catch (e) {
-        logger.log.error(IDLOG, e.stack);
+        logger.error(IDLOG, e.stack);
       }
     });
 
@@ -4627,19 +4627,19 @@ function evtNewExternalCall(number) {
     compPhonebook.getPbContactsByNum(number, function (err, results) {
       try {
         if (err) {
-          logger.log.warn(IDLOG, 'retrieving phonebook contacts data for new external call from number ' + number);
+          logger.warn(IDLOG, 'retrieving phonebook contacts data for new external call from number ' + number);
 
         } else {
-          logger.log.info(IDLOG, 'add phonebook contacts data for new external call from number ' + number);
+          logger.info(IDLOG, 'add phonebook contacts data for new external call from number ' + number);
           callerIdentityData[number].pbContacts = results;
         }
       } catch (e) {
-        logger.log.error(IDLOG, e.stack);
+        logger.error(IDLOG, e.stack);
       }
     });
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4661,20 +4661,20 @@ function evtExtenDndChanged(exten, enabled) {
         return;
       }
       extensions[exten].setDnd(enabled);
-      logger.log.info(IDLOG, 'set dnd status to ' + enabled + ' for extension ' + exten);
+      logger.info(IDLOG, 'set dnd status to ' + enabled + ' for extension ' + exten);
       // emit the events
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_DND_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_DND_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_DND_CHANGED, {
         exten: exten,
         enabled: enabled
       });
     } else {
-      logger.log.warn(IDLOG, 'try to set dnd status of non existent extension ' + exten);
+      logger.warn(IDLOG, 'try to set dnd status of non existent extension ' + exten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4697,28 +4697,28 @@ function evtExtenUnconditionalCfChanged(exten, enabled, to) {
         return;
       }
       if (enabled) {
-        logger.log.info(IDLOG, 'set cf status to ' + enabled + ' for extension ' + exten + ' to ' + to);
+        logger.info(IDLOG, 'set cf status to ' + enabled + ' for extension ' + exten + ' to ' + to);
         extensions[exten].setCf(to);
         // disable the call forward to voicemail because the call forward set the same property in the database
         evtExtenUnconditionalCfVmChanged(exten, false);
       } else {
-        logger.log.info(IDLOG, 'set cf status to ' + enabled + ' for extension ' + exten);
+        logger.info(IDLOG, 'set cf status to ' + enabled + ' for extension ' + exten);
         extensions[exten].disableCf();
       }
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CF_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CF_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CF_CHANGED, {
         exten: exten,
         enabled: enabled,
         to: to
       });
     } else {
-      logger.log.warn(IDLOG, 'try to set call forward status of non existent extension ' + exten);
+      logger.warn(IDLOG, 'try to set call forward status of non existent extension ' + exten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4740,31 +4740,31 @@ function evtExtenCfbChanged(exten, enabled, to) {
     if (extensions[exten]) { // the exten is an extension
 
       if (enabled) {
-        logger.log.info(IDLOG, 'set cfb status to ' + enabled + ' for extension ' + exten + ' to ' + to);
+        logger.info(IDLOG, 'set cfb status to ' + enabled + ' for extension ' + exten + ' to ' + to);
         extensions[exten].setCfb(to);
 
         // disable the call forward to voicemail because the call forward set the same property in the database
         evtExtenCfbVmChanged(exten, false);
 
       } else {
-        logger.log.info(IDLOG, 'set cfb status to ' + enabled + ' for extension ' + exten);
+        logger.info(IDLOG, 'set cfb status to ' + enabled + ' for extension ' + exten);
         extensions[exten].disableCfb();
       }
 
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CFB_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CFB_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CFB_CHANGED, {
         exten: exten,
         enabled: enabled,
         to: to
       });
     } else {
-      logger.log.warn(IDLOG, 'try to set call forward busy status of non existent extension ' + exten);
+      logger.warn(IDLOG, 'try to set call forward busy status of non existent extension ' + exten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4786,31 +4786,31 @@ function evtExtenCfuChanged(exten, enabled, to) {
     if (extensions[exten]) { // the exten is an extension
 
       if (enabled) {
-        logger.log.info(IDLOG, 'set cfu status to ' + enabled + ' for extension ' + exten + ' to ' + to);
+        logger.info(IDLOG, 'set cfu status to ' + enabled + ' for extension ' + exten + ' to ' + to);
         extensions[exten].setCfu(to);
 
         // disable the call forward to voicemail because the call forward set the same property in the database
         evtExtenCfuVmChanged(exten, false);
 
       } else {
-        logger.log.info(IDLOG, 'set cfu status to ' + enabled + ' for extension ' + exten);
+        logger.info(IDLOG, 'set cfu status to ' + enabled + ' for extension ' + exten);
         extensions[exten].disableCfu();
       }
 
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CFU_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CFU_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CFU_CHANGED, {
         exten: exten,
         enabled: enabled,
         to: to
       });
     } else {
-      logger.log.warn(IDLOG, 'try to set call forward on unavailable status of non existent extension ' + exten);
+      logger.warn(IDLOG, 'try to set call forward on unavailable status of non existent extension ' + exten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4833,28 +4833,28 @@ function evtExtenUnconditionalCfVmChanged(exten, enabled, vm) {
         return;
       }
       if (enabled) {
-        logger.log.info(IDLOG, 'set cfvm status to ' + enabled + ' for extension ' + exten + ' to voicemail ' + vm);
+        logger.info(IDLOG, 'set cfvm status to ' + enabled + ' for extension ' + exten + ' to voicemail ' + vm);
         extensions[exten].setCfVm(vm);
         // disable the call forward because the call forward to voicemail set the same property in the database
         evtExtenUnconditionalCfChanged(exten, false);
       } else {
-        logger.log.info(IDLOG, 'set cfvm status to ' + enabled + ' for extension ' + exten);
+        logger.info(IDLOG, 'set cfvm status to ' + enabled + ' for extension ' + exten);
         extensions[exten].disableCfVm();
       }
       // emit the events
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CFVM_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CFVM_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CFVM_CHANGED, {
         exten: exten,
         enabled: enabled,
         vm: vm
       });
     } else {
-      logger.log.warn(IDLOG, 'try to set call forward to voicemail status of non existent extension ' + exten);
+      logger.warn(IDLOG, 'try to set call forward to voicemail status of non existent extension ' + exten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4877,21 +4877,21 @@ function evtExtenCfbVmChanged(exten, enabled, vm) {
     if (extensions[exten]) {
 
       if (enabled) {
-        logger.log.info(IDLOG, 'set cfbvm status to ' + enabled + ' for extension ' + exten + ' to voicemail ' + vm);
+        logger.info(IDLOG, 'set cfbvm status to ' + enabled + ' for extension ' + exten + ' to voicemail ' + vm);
         extensions[exten].setCfbVm(vm);
 
         // disable the call forward busy because the call forward to voicemail set the same property in the database
         evtExtenCfbChanged(exten, false);
 
       } else {
-        logger.log.info(IDLOG, 'set cfbvm status to ' + enabled + ' for extension ' + exten);
+        logger.info(IDLOG, 'set cfbvm status to ' + enabled + ' for extension ' + exten);
         extensions[exten].disableCfbVm();
       }
 
       // emit the events
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CFVM_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CFVM_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CFBVM_CHANGED, {
         exten: exten,
         enabled: enabled,
@@ -4899,10 +4899,10 @@ function evtExtenCfbVmChanged(exten, enabled, vm) {
       });
 
     } else {
-      logger.log.warn(IDLOG, 'try to set call forward busy to voicemail status of non existent extension ' + exten);
+      logger.warn(IDLOG, 'try to set call forward busy to voicemail status of non existent extension ' + exten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4925,21 +4925,21 @@ function evtExtenCfuVmChanged(exten, enabled, vm) {
     if (extensions[exten]) {
 
       if (enabled) {
-        logger.log.info(IDLOG, 'set cfuvm status to ' + enabled + ' for extension ' + exten + ' to voicemail ' + vm);
+        logger.info(IDLOG, 'set cfuvm status to ' + enabled + ' for extension ' + exten + ' to voicemail ' + vm);
         extensions[exten].setCfuVm(vm);
 
         // disable the call forward unavailable because the call forward to voicemail set the same property in the database
         evtExtenCfuChanged(exten, false);
 
       } else {
-        logger.log.info(IDLOG, 'set cfuvm status to ' + enabled + ' for extension ' + exten);
+        logger.info(IDLOG, 'set cfuvm status to ' + enabled + ' for extension ' + exten);
         extensions[exten].disableCfuVm();
       }
 
       // emit the events
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CFUVM_CHANGED + ' for extension ' + exten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CFUVM_CHANGED + ' for extension ' + exten);
       astProxy.emit(EVT_EXTEN_CFUVM_CHANGED, {
         exten: exten,
         enabled: enabled,
@@ -4947,10 +4947,10 @@ function evtExtenCfuVmChanged(exten, enabled, vm) {
       });
 
     } else {
-      logger.log.warn(IDLOG, 'try to set call forward unavailable to voicemail status of non existent extension ' + exten);
+      logger.warn(IDLOG, 'try to set call forward unavailable to voicemail status of non existent extension ' + exten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -4974,7 +4974,7 @@ function isExten(id) {
     return false;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5011,11 +5011,11 @@ function setDnd(exten, activate, cb) {
       });
     } else {
       var str = 'try to set dnd status of non existent extension "' + exten + '"';
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -5036,7 +5036,7 @@ function isExtenDnd(exten) {
       return extensions[exten].getDnd();
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5056,7 +5056,7 @@ function isExtenCf(exten) {
       return !(extensions[exten].getCf() === '');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5076,7 +5076,7 @@ function isExtenCfb(exten) {
       return !(extensions[exten].getCfb() === '');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5096,7 +5096,7 @@ function isExtenCfu(exten) {
       return !(extensions[exten].getCfu() === '');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5116,7 +5116,7 @@ function isExtenCfbVm(exten) {
       return !(extensions[exten].getCfbVm() === '');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5136,7 +5136,7 @@ function isExtenCfuVm(exten) {
       return !(extensions[exten].getCfuVm() === '');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5155,9 +5155,9 @@ function getExtenCfValue(exten) {
     if (extensions[exten]) {
       return extensions[exten].getCf();
     }
-    logger.log.warn(IDLOG, 'returning cf value of non existent extension "' + exten + '"');
+    logger.warn(IDLOG, 'returning cf value of non existent extension "' + exten + '"');
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5176,9 +5176,9 @@ function getExtenCfbValue(exten) {
     if (extensions[exten]) {
       return extensions[exten].getCfb();
     }
-    logger.log.warn(IDLOG, 'returning cfb value of non existent extension "' + exten + '"');
+    logger.warn(IDLOG, 'returning cfb value of non existent extension "' + exten + '"');
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5197,9 +5197,9 @@ function getExtenCfuValue(exten) {
     if (extensions[exten]) {
       return extensions[exten].getCfu();
     }
-    logger.log.warn(IDLOG, 'returning cfu value of non existent extension "' + exten + '"');
+    logger.warn(IDLOG, 'returning cfu value of non existent extension "' + exten + '"');
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5219,7 +5219,7 @@ function isExtenCfVm(exten) {
       return !(extensions[exten].getCfVm() === '');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5258,12 +5258,12 @@ function setUnconditionalCf(exten, activate, to, cb) {
 
     } else {
       var str = 'try to set unconditional call forward status of non existent extension ' + exten;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -5302,12 +5302,12 @@ function setCfb(exten, activate, to, cb) {
 
     } else {
       var str = 'try to set call forward busy status of non existent extension ' + exten;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -5347,12 +5347,12 @@ function setCfbVm(exten, activate, to, cb) {
 
     } else {
       var str = 'try to set call forward busy to voicemail of non existent extension ' + exten;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -5392,12 +5392,12 @@ function setCfuVm(exten, activate, to, cb) {
 
     } else {
       var str = 'try to set call forward unavailable to voicemail of non existent extension ' + exten;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -5436,12 +5436,12 @@ function setCfu(exten, activate, to, cb) {
 
     } else {
       var str = 'try to set call forward unavailable status of non existent extension ' + exten;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -5481,12 +5481,12 @@ function setUnconditionalCfVm(exten, activate, to, cb) {
 
     } else {
       var str = 'try to set call forward to voicemail of non existent extension ' + exten;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -5513,11 +5513,11 @@ function evtNewVoicemailMessage(data) {
     }
 
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_NEW_VOICE_MESSAGE + ' in voicemail ' + data.voicemail + ' with context ' + data.context);
+    logger.info(IDLOG, 'emit event ' + EVT_NEW_VOICE_MESSAGE + ' in voicemail ' + data.voicemail + ' with context ' + data.context);
     astProxy.emit(EVT_NEW_VOICE_MESSAGE, data);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5548,10 +5548,10 @@ function evtNewCdr(data) {
     if (typeof data !== 'object') {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
-    logger.log.info(IDLOG, 'emit event ' + EVT_NEW_CDR + ' with uniqueid "' + data.uniqueid + '"');
+    logger.info(IDLOG, 'emit event ' + EVT_NEW_CDR + ' with uniqueid "' + data.uniqueid + '"');
     astProxy.emit(EVT_NEW_CDR, data);
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5575,11 +5575,11 @@ function evtUpdateVoicemailMessages(data) {
     }
 
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_UPDATE_VOICE_MESSAGES + ' of voicemail ' + data.voicemail + ' with context ' + data.context);
+    logger.info(IDLOG, 'emit event ' + EVT_UPDATE_VOICE_MESSAGES + ' of voicemail ' + data.voicemail + ' with context ' + data.context);
     astProxy.emit(EVT_UPDATE_VOICE_MESSAGES, data);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5596,7 +5596,7 @@ function evtRemoveQueueWaitingCaller(data) {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
 
-    logger.log.info(IDLOG, 'queue waiting caller ' + data.channel + ' has left the queue ' + data.queue);
+    logger.info(IDLOG, 'queue waiting caller ' + data.channel + ' has left the queue ' + data.queue);
 
     // request details for the current queue to update the waiting callers.
     // This is done to remove the current one and update the position of the remaining waiting callers
@@ -5606,7 +5606,7 @@ function evtRemoveQueueWaitingCaller(data) {
     }, updateQueueWaitingCallers);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5626,7 +5626,7 @@ function evtRemoveMeetmeUserConf(data) {
 
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
-    logger.log.info(IDLOG, 'user id "' + data.userId + '" with exten id "' + data.extenId + '" has left the meetme conf ' + data.confId);
+    logger.info(IDLOG, 'user id "' + data.userId + '" with exten id "' + data.extenId + '" has left the meetme conf ' + data.confId);
     astProxy.doCmd({
       command: 'listMeetmeConf',
       meetmeConfCode: getMeetmeConfCode(),
@@ -5637,7 +5637,7 @@ function evtRemoveMeetmeUserConf(data) {
     });
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5655,15 +5655,15 @@ function evtRemoveMeetmeConf(data) {
 
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
-    logger.log.info(IDLOG, 'meetme conf "' + data.confId + '" has been ended');
+    logger.info(IDLOG, 'meetme conf "' + data.confId + '" has been ended');
     delete conferences[data.confId];
 
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_MEETME_CONF_END + ' for conf ' + data.confId);
+    logger.info(IDLOG, 'emit event ' + EVT_MEETME_CONF_END + ' for conf ' + data.confId);
     astProxy.emit(EVT_MEETME_CONF_END, data.confId);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5688,7 +5688,7 @@ function evtAddMeetmeUserConf(data) {
 
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
-    logger.log.info(IDLOG, 'user id "' + data.userId + '" with exten id "' + data.extenId + '" has joined the meetme conf ' + data.confId);
+    logger.info(IDLOG, 'user id "' + data.userId + '" with exten id "' + data.extenId + '" has joined the meetme conf ' + data.confId);
     astProxy.doCmd({
       command: 'listMeetmeConf',
       meetmeConfCode: getMeetmeConfCode(),
@@ -5700,7 +5700,7 @@ function evtAddMeetmeUserConf(data) {
 
     // request all channels
     if (extensions[data.extenId]) {
-      logger.log.info(IDLOG, 'requests the channel list to update the extension ' + data.extenId);
+      logger.info(IDLOG, 'requests the channel list to update the extension ' + data.extenId);
       astProxy.doCmd({
         command: 'listChannels'
       }, function (err, resp) {
@@ -5710,7 +5710,7 @@ function evtAddMeetmeUserConf(data) {
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5730,7 +5730,7 @@ function evtMeetmeUserConfMute(data) {
 
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
-    logger.log.info(IDLOG, 'mute status of user id "' + data.userId + '" of meetme conf "' + data.confId + '" has been changed to ' + data.mute);
+    logger.info(IDLOG, 'mute status of user id "' + data.userId + '" of meetme conf "' + data.confId + '" has been changed to ' + data.mute);
     astProxy.doCmd({
       command: 'listMeetmeConf',
       meetmeConfCode: getMeetmeConfCode(),
@@ -5741,7 +5741,7 @@ function evtMeetmeUserConfMute(data) {
     });
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5760,13 +5760,13 @@ function evtNewQueueWaitingCaller(data) {
     var q = wCaller.getQueue();
     if (queues[q]) {
       queues[q].addWaitingCaller(wCaller);
-      logger.log.info(IDLOG, 'added new queue waiting caller ' + wCaller.getNumber() + ' to queue ' + q);
+      logger.info(IDLOG, 'added new queue waiting caller ' + wCaller.getNumber() + ' to queue ' + q);
       getListChannelsForTrunks();
-      logger.log.info(IDLOG, 'emit event ' + EVT_QUEUE_CHANGED + ' for queue ' + q);
+      logger.info(IDLOG, 'emit event ' + EVT_QUEUE_CHANGED + ' for queue ' + q);
       astProxy.emit(EVT_QUEUE_CHANGED, queues[q]);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5794,7 +5794,7 @@ function evtSpyStartConversation(data) {
     });
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5842,7 +5842,7 @@ function evtConversationDialing(data) {
       }
 
       // emit the event
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_DIALING + ' for extension ' + dialingExten + ' with caller identity');
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_DIALING + ' for extension ' + dialingExten + ' with caller identity');
       astProxy.emit(EVT_EXTEN_DIALING, {
         dialingExten: dialingExten,
         callerIdentity: obj,
@@ -5867,16 +5867,16 @@ function evtConversationDialing(data) {
         }
         if (trunksEventsEnabled) {
           // update conversations of all trunks
-          logger.log.info(IDLOG, 'update conversations of all trunks');
+          logger.info(IDLOG, 'update conversations of all trunks');
           updateConversationsForAllTrunk(err, resp);
         }
       } catch (err1) {
-        logger.log.error(IDLOG, err1.stack);
+        logger.error(IDLOG, err1.stack);
       }
     });
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -5896,14 +5896,14 @@ function evtConversationConnected(num1, num2) {
     updateConversationsOfNum(num1);
     updateConversationsOfNum(num2);
     // emit the event
-    logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CONNECTED + ' between num1=' + num1 + ' and num2=' + num2);
+    logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CONNECTED + ' between num1=' + num1 + ' and num2=' + num2);
     astProxy.emit(EVT_EXTEN_CONNECTED, {
       num1: num1,
       num2: num2
     });
     getListChannelsForTrunks();
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5924,12 +5924,12 @@ function evtConversationUnhold(data) {
     }
     if (extensions[data.whoPutsOnUnholdExten]) {
       extensions[data.whoPutsOnUnholdExten].setStatus(EXTEN_STATUS_ENUM.BUSY);
-      logger.log.info(IDLOG, 'set busy (from unhold event) for extension ' + data.whoPutsOnUnholdExten);
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + data.whoPutsOnUnholdExten);
+      logger.info(IDLOG, 'set busy (from unhold event) for extension ' + data.whoPutsOnUnholdExten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + data.whoPutsOnUnholdExten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[data.whoPutsOnUnholdExten]);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5950,12 +5950,12 @@ function evtConversationHold(data) {
     }
     if (extensions[data.whoPutsOnHoldExten]) {
       extensions[data.whoPutsOnHoldExten].setStatus(EXTEN_STATUS_ENUM.ONHOLD);
-      logger.log.info(IDLOG, 'set hold status (from hold event) for extension ' + data.whoPutsOnHoldExten);
-      logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + data.whoPutsOnHoldExten);
+      logger.info(IDLOG, 'set hold status (from hold event) for extension ' + data.whoPutsOnHoldExten);
+      logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + data.whoPutsOnHoldExten);
       astProxy.emit(EVT_EXTEN_CHANGED, extensions[data.whoPutsOnHoldExten]);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -5972,7 +5972,7 @@ function updateConversationsOfNum(num) {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
     if (extensions[num]) {
-      logger.log.info(IDLOG, 'requests the channel list to update the extension ' + num);
+      logger.info(IDLOG, 'requests the channel list to update the extension ' + num);
       astProxy.doCmd({
         command: 'listChannels'
       }, function (err, resp) {
@@ -5983,7 +5983,7 @@ function updateConversationsOfNum(num) {
       getListChannelsForSingleTrunk(num);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6000,7 +6000,7 @@ function evtConversationInfoChanged(num1, num2) {
     updateConversationsOfNum(num1);
     updateConversationsOfNum(num2);
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6039,7 +6039,7 @@ function getRecordFilename(exten, convid, now) {
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6071,7 +6071,7 @@ function getRecordFilepath(exten, convid, now) {
     return YYYYMMDD + path.sep + filename;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6109,7 +6109,7 @@ function getExtenSourceChannelConversation(exten, convid) {
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6134,7 +6134,7 @@ function getExtenIdSourceChannelConversation(exten, convid) {
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6177,7 +6177,7 @@ function getExtenIdChannelConversation(exten, convid) {
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6212,7 +6212,7 @@ function addPrefix(num) {
     return num;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return num;
   }
 }
@@ -6241,20 +6241,20 @@ function call(endpointType, endpointId, to, extenForContext, cb) {
     var err;
     if (endpointType === 'extension' && !extensions[endpointId]) {
       err = 'making new call from non existent extension ' + endpointId;
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
       return;
     }
     if (!extensions[extenForContext]) {
       err = 'making new call: no extenForContext "' + extenForContext + '" to get the "context" for the call';
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
       return;
     }
 
     to = addPrefix(to);
 
-    logger.log.info(IDLOG, 'execute call from ' + endpointId + ' to ' + to);
+    logger.info(IDLOG, 'execute call from ' + endpointId + ' to ' + to);
     astProxy.doCmd({
       command: 'call',
       context: extensions[extenForContext].getContext(),
@@ -6266,7 +6266,7 @@ function call(endpointType, endpointId, to, extenForContext, cb) {
       callCb(error);
     });
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -6295,7 +6295,7 @@ function muteConversation(extension, convid, cb) {
       // get the channel to mute
       var ch = getExtenIdChannelConversation(extension, convid);
 
-      logger.log.info(IDLOG, 'execute mute of convid "' + convid + '" by exten "' + extension + '"');
+      logger.info(IDLOG, 'execute mute of convid "' + convid + '" by exten "' + extension + '"');
       astProxy.doCmd({
         command: 'mute',
         channel: ch
@@ -6306,11 +6306,11 @@ function muteConversation(extension, convid, cb) {
 
     } else {
       var err = 'muting conversation "' + convid + '" by a non existent extension ' + extension;
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -6335,7 +6335,7 @@ function unmuteConversation(extension, convid, cb) {
       // get the channel to mute
       var ch = getExtenIdChannelConversation(extension, convid);
 
-      logger.log.info(IDLOG, 'execute unmute of convid "' + convid + '" by exten "' + extension + '"');
+      logger.info(IDLOG, 'execute unmute of convid "' + convid + '" by exten "' + extension + '"');
       astProxy.doCmd({
         command: 'unmute',
         channel: ch
@@ -6346,11 +6346,11 @@ function unmuteConversation(extension, convid, cb) {
 
     } else {
       var err = 'unmuting conversation "' + convid + '" by a non existent extension ' + extension;
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -6382,12 +6382,12 @@ function muteUserMeetmeConf(confId, userId, extenId, direction, cb) {
       },
       function (error, resp) {
         if (error) {
-          logger.log.error(IDLOG, error.stack);
+          logger.error(IDLOG, error.stack);
           cb(error);
           return;
         }
         if (resp[userId] && resp[userId].channel) {
-          logger.log.info(IDLOG, 'execute mute of user "' + userId + '" (ch: ' + resp[userId].channel + ') of meetme conf "' + confId + '" on direction "' + direction + '"');
+          logger.info(IDLOG, 'execute mute of user "' + userId + '" (ch: ' + resp[userId].channel + ') of meetme conf "' + confId + '" on direction "' + direction + '"');
           astProxy.doCmd({
               command: 'mute',
               channel: resp[userId].channel,
@@ -6399,12 +6399,12 @@ function muteUserMeetmeConf(confId, userId, extenId, direction, cb) {
             });
         } else {
           var str = 'meetme channel to mute not found for userId "' + userId + '" (exten: ' + extenId + ') for confId "' + confId + '"';
-          logger.log.error(IDLOG, str);
+          logger.error(IDLOG, str);
           cb(str);
         }
       });
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -6436,13 +6436,13 @@ function unmuteUserMeetmeConf(confId, userId, extenId, onlyListen, cb) {
       },
       function (error, resp) {
         if (error) {
-          logger.log.error(IDLOG, error.stack);
+          logger.error(IDLOG, error.stack);
           cb(error);
           return;
         }
         var direction = onlyListen === true ? 'out' : 'all';
         if (resp[userId] && resp[userId].channel) {
-          logger.log.info(IDLOG, 'execute unmute of user "' + userId + '" (ch: ' + resp[userId].channel + ') of meetme conf "' + confId + '" on direction "' + direction + '"');
+          logger.info(IDLOG, 'execute unmute of user "' + userId + '" (ch: ' + resp[userId].channel + ') of meetme conf "' + confId + '" on direction "' + direction + '"');
           astProxy.doCmd({
               command: 'unmute',
               channel: resp[userId].channel,
@@ -6454,12 +6454,12 @@ function unmuteUserMeetmeConf(confId, userId, extenId, onlyListen, cb) {
             });
         } else {
           var str = 'meetme channel to unmute not found for userId "' + userId + '" (exten: ' + extenId + ') for confId "' + confId + '"';
-          logger.log.error(IDLOG, str);
+          logger.error(IDLOG, str);
           cb(str);
         }
       });
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -6481,7 +6481,7 @@ function hangupUserMeetmeConf(confId, extenId, cb) {
 
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
-    logger.log.info(IDLOG, 'execute hangup of user "' + extenId + '" of meetme conf "' + confId + '"');
+    logger.info(IDLOG, 'execute hangup of user "' + extenId + '" of meetme conf "' + confId + '"');
     var warn;
 
     if (!conferences[confId]) {
@@ -6503,7 +6503,7 @@ function hangupUserMeetmeConf(confId, extenId, cb) {
     }
 
     // execute the hangup
-    logger.log.info(IDLOG, 'execute hangup of the channel ' + ch + ' of exten ' + extenId);
+    logger.info(IDLOG, 'execute hangup of the channel ' + ch + ' of exten ' + extenId);
     astProxy.doCmd({
       command: 'hangup',
       channel: ch
@@ -6513,7 +6513,7 @@ function hangupUserMeetmeConf(confId, extenId, cb) {
     });
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -6545,26 +6545,26 @@ function sendDtmfToConversation(extension, convid, tone, cb) {
       var counterpartNum = conv.getCounterpartNum();
       var chToSend = utilChannel13.extractExtensionFromChannel(channel) === counterpartNum ? channel : chSource.getBridgedChannel();
 
-      logger.log.info(IDLOG, 'send dtmf tone "' + tone + '" from exten "' + extension + '" to channel "' + chToSend + '" of convid "' + convid + '"');
+      logger.info(IDLOG, 'send dtmf tone "' + tone + '" from exten "' + extension + '" to channel "' + chToSend + '" of convid "' + convid + '"');
       astProxy.doCmd({
         command: 'playDTMF',
         channel: chToSend,
         digit: tone
       }, function (error) {
         if (error) {
-          logger.log.warn(IDLOG, 'play dtmf tone "' + tone + '" to channel "' + chToSend + '": failed: ' + error.message);
+          logger.warn(IDLOG, 'play dtmf tone "' + tone + '" to channel "' + chToSend + '": failed: ' + error.message);
         } else {
-          logger.log.info(IDLOG, 'played dtmf tone "' + tone + '" to channel "' + chToSend + '" succesfully');
+          logger.info(IDLOG, 'played dtmf tone "' + tone + '" to channel "' + chToSend + '" succesfully');
         }
         cb(error);
       });
     } else {
       var err = 'sending dtmf tone "' + tone + '" from a non existent extension ' + extension;
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -6599,7 +6599,7 @@ function pickupParking(parking, destId, extForCtx, cb) {
     if (extensions[destId] && ch !== undefined) {
 
       // the pickup operation is made by redirect operation
-      logger.log.info(IDLOG, 'pickup from ' + destId + ' of the channel ' + ch + ' of parking ' + parking + ' ' +
+      logger.info(IDLOG, 'pickup from ' + destId + ' of the channel ' + ch + ' of parking ' + parking + ' ' +
         'using context "' + ctx + '"');
       astProxy.doCmd({
         command: 'redirectChannel',
@@ -6613,11 +6613,11 @@ function pickupParking(parking, destId, extForCtx, cb) {
 
     } else {
       var str = 'pickup parking from ' + destId + ' of parking ' + parking;
-      logger.log.error(IDLOG, str);
+      logger.error(IDLOG, str);
       cb(str);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -6664,10 +6664,10 @@ function opWaitConv(opWaitQueue, convid, extens, cb) {
       }
     }
     if (found === undefined) {
-      logger.log.warn(IDLOG, 'conv "' + convid + '" to put in waiting for the operator panel not found in extens ' + extens);
+      logger.warn(IDLOG, 'conv "' + convid + '" to put in waiting for the operator panel not found in extens ' + extens);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -6696,37 +6696,37 @@ function pickupQueueWaitingCaller(queue, waitCallerId, destId, extForCtx, cb) {
     var str;
     if (!queues[queue]) {
       str = 'picking up qWaitCaller: queue "' + queue + '" does not exist';
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
       return;
     }
     if (!queues[queue].waitingCallerExists(waitCallerId)) {
       str = 'picking up qWaitCaller: waitingCaller "' + waitCallerId + '" does not exist';
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
       return;
     }
     if (!extensions[destId]) {
       str = 'picking up qWaitCaller: destId "' + destId + '" does not exist';
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
       return;
     }
     if (!extensions[extForCtx]) {
       str = 'no extension to get context for pickup qWaitCaller (extForCtx="' + extForCtx + '")';
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
       return;
     }
     var ch = (queues[queue].getWaitingCaller(waitCallerId)).getChannel();
     if (!ch) {
       str = 'picking up qWaitCaller: no channel to pickup (ch: ' + ch + ')';
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
       return;
     }
     var ctx = extensions[extForCtx].getContext();
-    logger.log.info(IDLOG, 'pickup waiting caller "' + waitCallerId + '" (ch: ' + ch + ') of queue "' + queue + '" from exten "' +
+    logger.info(IDLOG, 'pickup waiting caller "' + waitCallerId + '" (ch: ' + ch + ') of queue "' + queue + '" from exten "' +
       destId + '" with context ' + ctx);
     astProxy.doCmd({
       command: 'redirectChannel',
@@ -6738,7 +6738,7 @@ function pickupQueueWaitingCaller(queue, waitCallerId, destId, extForCtx, cb) {
       pickupQueueWaitingCallerCb(err);
     });
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -6770,7 +6770,7 @@ function pickupConversation(endpointId, destId, extForCtx, cb) {
       }
       var ctx = extensions[extForCtx].getContext();
       // the pickup operation is made by call operation
-      logger.log.info(IDLOG, 'pickup from "' + destId + '" of exten "' + endpointId + '"');
+      logger.info(IDLOG, 'pickup from "' + destId + '" of exten "' + endpointId + '"');
       astProxy.doCmd({
         command: 'call',
         context: ctx,
@@ -6783,7 +6783,7 @@ function pickupConversation(endpointId, destId, extForCtx, cb) {
       });
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -6800,12 +6800,12 @@ function evtAstShutdown(data) {
     if (typeof data !== 'object') {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
-    logger.log.warn(IDLOG, 'asterisk shutdown' +
+    logger.warn(IDLOG, 'asterisk shutdown' +
       (data.shutdown ? ' "' + data.shutdown + '"' : '') +
       (data.restart ? ' (restart: ' + data.restart + ')' : '')
     );
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6821,9 +6821,9 @@ function evtAstModuleReloaded(data) {
     if (typeof data !== 'object') {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
-    logger.log.warn(IDLOG, 'asterisk module "' + data.module + '" reloaded: ' + data.status);
+    logger.warn(IDLOG, 'asterisk module "' + data.module + '" reloaded: ' + data.status);
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6864,7 +6864,7 @@ function evtHangupConversation(data) {
       });
 
       // emit the event
-      logger.log.info(IDLOG, 'emit event "' + EVT_EXTEN_HANGUP + '" for extension ' + data.channelExten);
+      logger.info(IDLOG, 'emit event "' + EVT_EXTEN_HANGUP + '" for extension ' + data.channelExten);
       delete data.channel;
       astProxy.emit(EVT_EXTEN_HANGUP, data);
     }
@@ -6874,7 +6874,7 @@ function evtHangupConversation(data) {
       getListChannelsForSingleTrunk(data.channelExten);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6903,7 +6903,7 @@ function startMeetmeConference(convid, ownerExtenId, addExtenId, cb) {
     // check the extension existence
     if (!extensions[ownerExtenId]) {
       warn = 'starting meetme conf of owner exten "' + ownerExtenId + '" failed: exten non existent';
-      logger.log.warn(IDLOG, warn);
+      logger.warn(IDLOG, warn);
       cb(warn);
       return;
     }
@@ -6912,7 +6912,7 @@ function startMeetmeConference(convid, ownerExtenId, addExtenId, cb) {
 
     if (!conv) {
       warn = 'starting meetme conf of owner exten "' + ownerExtenId + '" failed: convid "' + convid + '" non existent';
-      logger.log.warn(IDLOG, warn);
+      logger.warn(IDLOG, warn);
       cb(warn);
       return;
     }
@@ -6927,7 +6927,7 @@ function startMeetmeConference(convid, ownerExtenId, addExtenId, cb) {
     });
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -6950,7 +6950,7 @@ function endMeetmeConf(confId, cb) {
     // check the conference existence
     if (!conferences[confId]) {
       var warn = 'ending entire meetme conf "' + confId + '" failed: conf does not exist';
-      logger.log.warn(IDLOG, warn);
+      logger.warn(IDLOG, warn);
       cb(warn);
       return;
     }
@@ -6962,7 +6962,7 @@ function endMeetmeConf(confId, cb) {
       arrUsers.push(users[extenId]);
     }
 
-    logger.log.info(IDLOG, 'starting end entire meetme conf "' + confId + '"');
+    logger.info(IDLOG, 'starting end entire meetme conf "' + confId + '"');
     async.each(arrUsers, function (u, eachCb) {
 
       var ch = u.getChannel();
@@ -6974,11 +6974,11 @@ function endMeetmeConf(confId, cb) {
         channel: ch
       }, function (err) {
         if (err) {
-          logger.log.error(IDLOG, 'hanging up channel "' + ch + '" of user "' + uid + '" ' +
+          logger.error(IDLOG, 'hanging up channel "' + ch + '" of user "' + uid + '" ' +
             'exten "' + eid + '" of conf "' + confId + '"');
           eachCb(err);
         } else {
-          logger.log.info(IDLOG, 'channel "' + ch + '" of user "' + uid + '" ' +
+          logger.info(IDLOG, 'channel "' + ch + '" of user "' + uid + '" ' +
             'exten "' + eid + '" of conf "' + confId + '" has been hanged up successfully');
           eachCb();
         }
@@ -6986,16 +6986,16 @@ function endMeetmeConf(confId, cb) {
     }, function (err) {
 
       if (err) {
-        logger.log.error(IDLOG, 'ending entire meetme conf "' + confId + '": ' + err.toString());
+        logger.error(IDLOG, 'ending entire meetme conf "' + confId + '": ' + err.toString());
         cb(err);
       } else {
-        logger.log.info(IDLOG, 'entire meetme conf "' + confId + '" has been ended successfully');
+        logger.info(IDLOG, 'entire meetme conf "' + confId + '" has been ended successfully');
         cb(null);
       }
     });
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -7018,7 +7018,7 @@ function isExtenInMeetmeConf(ownerExtenId) {
     return false;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -7037,7 +7037,7 @@ function hangupMainExtension(endpointId, cb) {
     }
     var err;
     if (extensions[endpointId]) {
-      logger.log.info(IDLOG, 'execute hangup of main exten "' + endpointId + '"');
+      logger.info(IDLOG, 'execute hangup of main exten "' + endpointId + '"');
       astProxy.doCmd({
         command: 'hangup',
         channel: '/^PJSIP/[0123456789]*' + endpointId + '-/'
@@ -7047,11 +7047,11 @@ function hangupMainExtension(endpointId, cb) {
       });
     } else {
       err = 'try to hangup main extension for the non existent endpoint ' + endpointId;
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -7082,7 +7082,7 @@ function hangupConversation(endpointId, convid, cb) {
 
       if (ch) {
         // execute the hangup
-        logger.log.info(IDLOG, 'execute hangup of the channel ' + ch + ' of exten ' + endpointId);
+        logger.info(IDLOG, 'execute hangup of the channel ' + ch + ' of exten ' + endpointId);
         astProxy.doCmd({
           command: 'hangup',
           channel: ch
@@ -7092,18 +7092,18 @@ function hangupConversation(endpointId, convid, cb) {
         });
       } else {
         err = 'no channel to hangup of conversation ' + convid + ' of exten ' + endpointId;
-        logger.log.warn(IDLOG, err);
+        logger.warn(IDLOG, err);
         var allConvs = extensions[endpointId].getAllConversations();
-        logger.log.warn(IDLOG, 'conversations of ' + endpointId + ' are: ' + JSON.stringify(allConvs));
+        logger.warn(IDLOG, 'conversations of ' + endpointId + ' are: ' + JSON.stringify(allConvs));
         cb(err);
       }
     } else {
       err = 'try to hangup conversation for the non existent endpoint ' + endpointId;
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -7130,7 +7130,7 @@ function hangupChannel(endpointType, endpointId, ch, cb) {
     // check the endpoint existence
     if (endpointType === 'extension' && extensions[endpointId]) {
 
-      logger.log.info(IDLOG, 'execute hangup of the channel ' + ch + ' of exten ' + endpointId);
+      logger.info(IDLOG, 'execute hangup of the channel ' + ch + ' of exten ' + endpointId);
       astProxy.doCmd({
         command: 'hangup',
         channel: ch
@@ -7141,12 +7141,12 @@ function hangupChannel(endpointType, endpointId, ch, cb) {
 
     } else {
       err = 'try to hangup asterisk channel for the non existent endpoint ' + endpointType + ' ' + endpointId;
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
     }
 
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -7161,12 +7161,12 @@ function hangupChannel(endpointType, endpointId, ch, cb) {
 function pickupQueueWaitingCallerCb(err) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'pickup queue waiting caller failed: ' + err.toString());
+      logger.error(IDLOG, 'pickup queue waiting caller failed: ' + err.toString());
     } else {
-      logger.log.info(IDLOG, 'pickup queue waiting caller successfully');
+      logger.info(IDLOG, 'pickup queue waiting caller successfully');
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -7180,12 +7180,12 @@ function pickupQueueWaitingCallerCb(err) {
 function pickupConvCb(err) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'pickup call failed: ' + err.toString());
+      logger.error(IDLOG, 'pickup call failed: ' + err.toString());
     } else {
-      logger.log.info(IDLOG, 'pickup call successfully');
+      logger.info(IDLOG, 'pickup call successfully');
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -7199,12 +7199,12 @@ function pickupConvCb(err) {
 function redirectConvCb(err) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'redirect channel failed: ' + err.toString());
+      logger.error(IDLOG, 'redirect channel failed: ' + err.toString());
     } else {
-      logger.log.info(IDLOG, 'redirect channel succesfully');
+      logger.info(IDLOG, 'redirect channel succesfully');
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -7218,12 +7218,12 @@ function redirectConvCb(err) {
 function blindTransferConvCb(err) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'blind transfer conversation failed: ' + err.toString());
+      logger.error(IDLOG, 'blind transfer conversation failed: ' + err.toString());
     } else {
-      logger.log.info(IDLOG, 'blind transfer channel successfully');
+      logger.info(IDLOG, 'blind transfer channel successfully');
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -7237,12 +7237,12 @@ function blindTransferConvCb(err) {
 function attendedTransferConvCb(err) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'attended transfer conversation failed: ' + err.toString());
+      logger.error(IDLOG, 'attended transfer conversation failed: ' + err.toString());
     } else {
-      logger.log.info(IDLOG, 'attended transfer channel successfully');
+      logger.info(IDLOG, 'attended transfer channel successfully');
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -7256,13 +7256,13 @@ function attendedTransferConvCb(err) {
 function transferConvToVoicemailCb(err) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'transfer channel to voicemail failed: ' + err.toString());
+      logger.error(IDLOG, 'transfer channel to voicemail failed: ' + err.toString());
     } else {
-      logger.log.info(IDLOG, 'transfer channel to voicemail successfully');
+      logger.info(IDLOG, 'transfer channel to voicemail successfully');
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -7276,13 +7276,13 @@ function transferConvToVoicemailCb(err) {
 function callCb(error) {
   try {
     if (error) {
-      logger.log.warn(IDLOG, 'call failed: ' + error.message);
+      logger.warn(IDLOG, 'call failed: ' + error.message);
     } else {
-      logger.log.info(IDLOG, 'call succesfully');
+      logger.info(IDLOG, 'call succesfully');
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -7296,13 +7296,13 @@ function callCb(error) {
 function muteCb(error) {
   try {
     if (error) {
-      logger.log.warn(IDLOG, 'mute failed: ' + error.message);
+      logger.warn(IDLOG, 'mute failed: ' + error.message);
     } else {
-      logger.log.info(IDLOG, 'mute succesfully');
+      logger.info(IDLOG, 'mute succesfully');
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -7316,12 +7316,12 @@ function muteCb(error) {
 function muteUserMeetmeConfCb(error) {
   try {
     if (error) {
-      logger.log.warn(IDLOG, 'mute user of meetme conf failed: ' + error.message);
+      logger.warn(IDLOG, 'mute user of meetme conf failed: ' + error.message);
     } else {
-      logger.log.info(IDLOG, 'mute user of meetme conf succesfully');
+      logger.info(IDLOG, 'mute user of meetme conf succesfully');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -7335,13 +7335,13 @@ function muteUserMeetmeConfCb(error) {
 function unmuteUserMeetmeConfCb(error) {
   try {
     if (error) {
-      logger.log.warn(IDLOG, 'unmute user of meetme conf failed: ' + error.message);
+      logger.warn(IDLOG, 'unmute user of meetme conf failed: ' + error.message);
     } else {
-      logger.log.info(IDLOG, 'unmute user of meetme conf succesfully');
+      logger.info(IDLOG, 'unmute user of meetme conf succesfully');
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -7356,13 +7356,13 @@ function unmuteUserMeetmeConfCb(error) {
 function startSpySpeakConvCb(err, convid) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'start spy speak convid ' + convid + ' with speaking failed: ' + err.toString());
+      logger.error(IDLOG, 'start spy speak convid ' + convid + ' with speaking failed: ' + err.toString());
     } else {
-      logger.log.info(IDLOG, 'start spy speak convid ' + convid + ' with speaking succesfully');
+      logger.info(IDLOG, 'start spy speak convid ' + convid + ' with speaking succesfully');
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -7377,13 +7377,13 @@ function startSpySpeakConvCb(err, convid) {
 function startSpyListenConvCb(err, convid) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'start spy listen convid ' + convid + ' with only listening failed: ' + err.toString());
+      logger.error(IDLOG, 'start spy listen convid ' + convid + ' with only listening failed: ' + err.toString());
     } else {
-      logger.log.info(IDLOG, 'start spy listen convid ' + convid + ' with only listening succesfully');
+      logger.info(IDLOG, 'start spy listen convid ' + convid + ' with only listening succesfully');
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -7397,13 +7397,13 @@ function startSpyListenConvCb(err, convid) {
 function hangupConvCb(err) {
   try {
     if (err) {
-      logger.log.warn(IDLOG, 'hangup channel failed' + err.toString());
+      logger.warn(IDLOG, 'hangup channel failed' + err.toString());
     } else {
-      logger.log.info(IDLOG, 'hangup channel succesfully');
+      logger.info(IDLOG, 'hangup channel succesfully');
     }
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -7446,7 +7446,7 @@ function redirectConversation(extension, convid, to, extForCtx, cb) {
 
       if (chToRedirect !== undefined) {
         // redirect the channel
-        logger.log.info(IDLOG, 'redirect of the channel ' + chToRedirect + ' of exten ' + extension + ' to ' + to);
+        logger.info(IDLOG, 'redirect of the channel ' + chToRedirect + ' of exten ' + extension + ' to ' + to);
         astProxy.doCmd({
           command: 'redirectChannel',
           context: ctx,
@@ -7458,16 +7458,16 @@ function redirectConversation(extension, convid, to, extForCtx, cb) {
         });
       } else {
         msg = 'getting the channel to redirect ' + chToRedirect;
-        logger.log.error(IDLOG, msg);
+        logger.error(IDLOG, msg);
         cb(msg);
       }
     } else {
       msg = 'redirecting conversation: extension "' + extension + '" not present';
-      logger.log.warn(IDLOG, msg);
+      logger.warn(IDLOG, msg);
       cb(msg);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -7519,7 +7519,7 @@ function forceHangupConversation(endpointType, endpointId, convid, extForCtx, cb
         var to = 'xyzw';
 
         // redirect the channel to a non existent destination to force the hangup
-        logger.log.info(IDLOG, 'force hangup of the channel ' + chToHangup + ' of exten ' + endpointId + ' to non existent destination ' + to);
+        logger.info(IDLOG, 'force hangup of the channel ' + chToHangup + ' of exten ' + endpointId + ' to non existent destination ' + to);
         astProxy.doCmd({
           command: 'redirectChannel',
           context: ctx,
@@ -7528,25 +7528,25 @@ function forceHangupConversation(endpointType, endpointId, convid, extForCtx, cb
         }, function (err) {
           cb(err);
           if (err) {
-            logger.log.error(IDLOG, 'force hangup channel failed: ' + err.toString());
+            logger.error(IDLOG, 'force hangup channel failed: ' + err.toString());
           } else {
-            logger.log.info(IDLOG, 'force hangup channel succesfully');
+            logger.info(IDLOG, 'force hangup channel succesfully');
           }
         });
 
       } else {
         msg = 'getting the channel to force hangup ' + chToHangup;
-        logger.log.error(IDLOG, msg);
+        logger.error(IDLOG, msg);
         cb(msg);
       }
 
     } else {
       msg = 'force hangup conversation: unknown endpointType ' + endpointType + ' or extension ' + endpointId + ' not present';
-      logger.log.warn(IDLOG, msg);
+      logger.warn(IDLOG, msg);
       cb(msg);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -7577,7 +7577,7 @@ function redirectWaitingCaller(waitingCallerId, queue, to, extForCtx, cb) {
       var ch = queues[queue].getAllWaitingCallers()[waitingCallerId].getChannel();
 
       if (ch !== undefined) {
-        logger.log.info(IDLOG, 'redirect channel ' + ch + ' of waitingCaller ' + waitingCallerId + ' from queue ' + queue + ' to ' + to);
+        logger.info(IDLOG, 'redirect channel ' + ch + ' of waitingCaller ' + waitingCallerId + ' from queue ' + queue + ' to ' + to);
         astProxy.doCmd({
           command: 'redirectChannel',
           context: ctx,
@@ -7589,16 +7589,16 @@ function redirectWaitingCaller(waitingCallerId, queue, to, extForCtx, cb) {
         });
       } else {
         var str = 'redirecting waiting caller ' + waitingCallerId + ' from queue ' + queue + ' to ' + to + ': no channel found';
-        logger.log.error(IDLOG, str);
+        logger.error(IDLOG, str);
         cb(str);
       }
     } else {
       var msg = 'redirecting waiting caller ' + waitingCallerId + ' from queue ' + queue + ' to ' + to + ': non existent queue ' + queue;
-      logger.log.warn(IDLOG, msg);
+      logger.warn(IDLOG, msg);
       cb(msg);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -7633,7 +7633,7 @@ function redirectParking(parking, to, extForCtx, cb) {
 
       if (ch !== undefined) {
 
-        logger.log.info(IDLOG, 'redirect channel ' + ch + ' from parking ' + parking + ' to ' + to);
+        logger.info(IDLOG, 'redirect channel ' + ch + ' from parking ' + parking + ' to ' + to);
         astProxy.doCmd({
           command: 'redirectChannel',
           context: ctx,
@@ -7646,17 +7646,17 @@ function redirectParking(parking, to, extForCtx, cb) {
 
       } else {
         var str = 'redirecting parked caller of parking ' + parking + ' to ' + to + ': no channel found';
-        logger.log.error(IDLOG, str);
+        logger.error(IDLOG, str);
         cb(str);
       }
 
     } else {
       var msg = 'redirecting parked caller of parking ' + parking + ' to ' + to + ': non existent parking ' + parking;
-      logger.log.warn(IDLOG, msg);
+      logger.warn(IDLOG, msg);
       cb(msg);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -7683,7 +7683,7 @@ function blindTransferConversation(extension, convid, to, cb) {
       var conv = convs[convid];
       if (!conv) {
         msg = 'blind transfer convid "' + convid + '": no conversation present in extension ' + extension;
-        logger.log.warn(IDLOG, msg);
+        logger.warn(IDLOG, msg);
         cb(msg);
         return;
       }
@@ -7695,7 +7695,7 @@ function blindTransferConversation(extension, convid, to, cb) {
       var chToTransfer = utilChannel13.extractExtensionFromChannel(channel) === extension ? channel : bridgedChannel;
 
       if (chToTransfer !== undefined) {
-        logger.log.info(IDLOG, 'blind transfer channel ' + chToTransfer + ' of exten ' + extension + ' to ' + to);
+        logger.info(IDLOG, 'blind transfer channel ' + chToTransfer + ' of exten ' + extension + ' to ' + to);
         astProxy.doCmd({
           command: 'blindTransfer',
           chToTransfer: chToTransfer,
@@ -7707,16 +7707,16 @@ function blindTransferConversation(extension, convid, to, cb) {
         });
       } else {
         msg = 'blind transfer: no channel to transfer ' + chToTransfer;
-        logger.log.error(IDLOG, msg);
+        logger.error(IDLOG, msg);
         cb(msg);
       }
     } else {
       msg = 'blind transfer conversation: extension ' + extension + ' not present';
-      logger.log.warn(IDLOG, msg);
+      logger.warn(IDLOG, msg);
       cb(msg);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -7748,7 +7748,7 @@ function attendedTransferConversation(extension, convid, to, cb) {
 
       if (!conv) {
         msg = 'attended transfer convid "' + convid + '": no conversation present in extension ' + extension;
-        logger.log.warn(IDLOG, msg);
+        logger.warn(IDLOG, msg);
         cb(msg);
         return;
       }
@@ -7764,7 +7764,7 @@ function attendedTransferConversation(extension, convid, to, cb) {
       if (chToTransfer !== undefined) {
 
         // attended transfer the channel
-        logger.log.info(IDLOG, 'attended transfer of the channel ' + chToTransfer + ' of exten ' + extension + ' to ' + to);
+        logger.info(IDLOG, 'attended transfer of the channel ' + chToTransfer + ' of exten ' + extension + ' to ' + to);
         astProxy.doCmd({
           command: 'attendedTransfer',
           chToTransfer: chToTransfer,
@@ -7776,16 +7776,16 @@ function attendedTransferConversation(extension, convid, to, cb) {
 
       } else {
         msg = 'attended transfer: no channel to transfer ' + chToTransfer;
-        logger.log.error(IDLOG, msg);
+        logger.error(IDLOG, msg);
         cb(msg);
       }
     } else {
       msg = 'attended transfer conversation: extension ' + extension + ' not present';
-      logger.log.warn(IDLOG, msg);
+      logger.warn(IDLOG, msg);
       cb(msg);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -7825,7 +7825,7 @@ function transferConversationToVoicemail(endpointType, endpointId, convid, voice
 
       if (!conv) {
         msg = 'transfer convid "' + convid + '" to voicemail "' + voicemail + '": no conversation present in extension ' + endpointId;
-        logger.log.warn(IDLOG, msg);
+        logger.warn(IDLOG, msg);
         cb(msg);
         return;
       }
@@ -7840,7 +7840,7 @@ function transferConversationToVoicemail(endpointType, endpointId, convid, voice
       if (chToTransfer !== undefined) {
 
         // transfer the channel to the voicemail
-        logger.log.info(IDLOG, 'transfer of the channel ' + chToTransfer + ' of exten ' + endpointId + ' to voicemail ' + voicemail);
+        logger.info(IDLOG, 'transfer of the channel ' + chToTransfer + ' of exten ' + endpointId + ' to voicemail ' + voicemail);
         astProxy.doCmd({
           command: 'transferToVoicemail',
           context: ctx,
@@ -7853,17 +7853,17 @@ function transferConversationToVoicemail(endpointType, endpointId, convid, voice
 
       } else {
         msg = 'transfer to voicemail: no channel to transfer ' + chToTransfer;
-        logger.log.error(IDLOG, msg);
+        logger.error(IDLOG, msg);
         cb(msg);
       }
 
     } else {
       msg = 'transfer conversation to voicemail: unknown endpointType ' + endpointType + ' or extension ' + endpointId + ' not present';
-      logger.log.warn(IDLOG, msg);
+      logger.warn(IDLOG, msg);
       cb(msg);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -7896,7 +7896,7 @@ function parkConversation(extension, convid, applicantId, cb) {
       // check the presence of the conversation
       if (typeof conv !== 'object') {
         err = 'parking the conversation ' + convid + ': no conversation present for exten "' + extension + '"';
-        logger.log.warn(IDLOG, err);
+        logger.warn(IDLOG, err);
         cb(err);
         return;
       }
@@ -7911,7 +7911,7 @@ function parkConversation(extension, convid, applicantId, cb) {
         utilChannel13.extractExtensionFromChannel(bridgedChannel) !== applicantId) {
 
         err = 'applicant extension "' + applicantId + '" not allowed to park a conversation not owned by him ' + convid;
-        logger.log.warn(IDLOG, err);
+        logger.warn(IDLOG, err);
         cb(err);
         return;
       }
@@ -7929,7 +7929,7 @@ function parkConversation(extension, convid, applicantId, cb) {
       if (chToPark !== undefined && chToReturn !== undefined) {
 
         // park the channel
-        logger.log.info(IDLOG, 'execute the park of the channel ' + chToPark + ' of exten ' + extension);
+        logger.info(IDLOG, 'execute the park of the channel ' + chToPark + ' of exten ' + extension);
         astProxy.doCmd({
           command: 'parkChannel',
           chToPark: chToPark,
@@ -7937,26 +7937,26 @@ function parkConversation(extension, convid, applicantId, cb) {
         }, function (err, resp) {
           try {
             if (err) {
-              logger.log.error(IDLOG, 'parking the channel ' + chToPark + ' by the applicant ' + applicantId);
+              logger.error(IDLOG, 'parking the channel ' + chToPark + ' by the applicant ' + applicantId);
               cb(err);
               return;
             }
-            logger.log.info(IDLOG, 'channel ' + chToPark + ' has been parked successfully');
+            logger.info(IDLOG, 'channel ' + chToPark + ' has been parked successfully');
             cb(null);
 
           } catch (e) {
-            logger.log.error(IDLOG, e.stack);
+            logger.error(IDLOG, e.stack);
             cb(e);
           }
         });
       } else {
         err = 'getting the channel to park: "' + chToPark + '"';
-        logger.log.error(IDLOG, err);
+        logger.error(IDLOG, err);
         cb(err);
       }
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -7979,7 +7979,7 @@ function recordAudioFile(data, cb) {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
 
-    logger.log.info(IDLOG, 'execute record audio file "' + data.filepath + '" with exten "' + data.exten + '"');
+    logger.info(IDLOG, 'execute record audio file "' + data.filepath + '" with exten "' + data.exten + '"');
     var cmd = {
       command: 'recordAudioFile',
       context: extensions[data.exten].getContext(),
@@ -7990,20 +7990,20 @@ function recordAudioFile(data, cb) {
     astProxy.doCmd(cmd, function (err) {
       try {
         if (err) {
-          logger.log.error(IDLOG, 'recording audio file "' + data.filepath + '" with exten "' + data.exten + '"');
+          logger.error(IDLOG, 'recording audio file "' + data.filepath + '" with exten "' + data.exten + '"');
           cb(err);
           return;
         }
-        logger.log.info(IDLOG, 'record audio file "' + data.filepath + '" with exten "' + data.exten + '" has been started');
+        logger.info(IDLOG, 'record audio file "' + data.filepath + '" with exten "' + data.exten + '" has been started');
         cb(null);
 
       } catch (e) {
-        logger.log.error(IDLOG, e.stack);
+        logger.error(IDLOG, e.stack);
         cb(e);
       }
     });
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -8026,7 +8026,7 @@ function inoutDynQueues(endpointId, cb) {
     // check the endpoint existence
     if (extensions[endpointId]) {
 
-      logger.log.info(IDLOG, 'execute inout to all queues in which the ' + endpointId + ' is dynamic');
+      logger.info(IDLOG, 'execute inout to all queues in which the ' + endpointId + ' is dynamic');
       astProxy.doCmd({
         command: 'inoutDynQueues',
         context: extensions[endpointId].getContext(),
@@ -8034,25 +8034,25 @@ function inoutDynQueues(endpointId, cb) {
       }, function (err) {
         try {
           if (err) {
-            logger.log.error(IDLOG, 'inout to all queues for which exten ' + endpointId + ' is dynamic');
+            logger.error(IDLOG, 'inout to all queues for which exten ' + endpointId + ' is dynamic');
             cb(err);
             return;
           }
-          logger.log.info(IDLOG, 'inout to all queues for which exten ' + endpointId + ' is dynamic has been successful');
+          logger.info(IDLOG, 'inout to all queues for which exten ' + endpointId + ' is dynamic has been successful');
           cb(null);
 
         } catch (e) {
-          logger.log.error(IDLOG, e.stack);
+          logger.error(IDLOG, e.stack);
           cb(e);
         }
       });
     } else {
       var err = 'inout to all queues in which the endpoint is dynamic: extension not present';
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -8112,7 +8112,7 @@ function queueMemberPauseUnpause(endpointId, queueId, reason, paused, cb) {
             obj.queue = queueId;
           }
 
-          logger.log.info(IDLOG, 'execute ' + logWord + ' ' + endpointId + ' of ' + logQueue);
+          logger.info(IDLOG, 'execute ' + logWord + ' ' + endpointId + ' of ' + logQueue);
           astProxy.doCmd(obj, function (err1) {
             try {
               if (err1) {
@@ -8120,11 +8120,11 @@ function queueMemberPauseUnpause(endpointId, queueId, reason, paused, cb) {
                 callback(str);
 
               } else {
-                logger.log.info(IDLOG, logWord + ' extension ' + endpointId + ' from ' + logQueue + ' has been successful');
+                logger.info(IDLOG, logWord + ' extension ' + endpointId + ' from ' + logQueue + ' has been successful');
                 callback();
               }
             } catch (err2) {
-              logger.log.error(IDLOG, err2.stack);
+              logger.error(IDLOG, err2.stack);
               cb(err2.stack);
             }
           });
@@ -8144,7 +8144,7 @@ function queueMemberPauseUnpause(endpointId, queueId, reason, paused, cb) {
             interface: name
           };
 
-          logger.log.info(IDLOG, 'add new entry in queue_log asterisk db: interface "' + name + '", queue "' +
+          logger.info(IDLOG, 'add new entry in queue_log asterisk db: interface "' + name + '", queue "' +
             queueId + '", event "' + queueLogEvent + '" and reason "' + reason + '"');
 
           astProxy.doCmd(obj, function (err3) {
@@ -8155,13 +8155,13 @@ function queueMemberPauseUnpause(endpointId, queueId, reason, paused, cb) {
                 callback(str);
 
               } else {
-                logger.log.info(IDLOG, 'add new entry in "queue_log" asterisk db has been successful: interface "' + name + '", queue "' +
+                logger.info(IDLOG, 'add new entry in "queue_log" asterisk db has been successful: interface "' + name + '", queue "' +
                   queueId + '", event "' + queueLogEvent + '" and reason "' + reason + '"');
                 callback();
               }
 
             } catch (err4) {
-              logger.log.error(IDLOG, err4.stack);
+              logger.error(IDLOG, err4.stack);
               callback(err4.stack);
             }
           });
@@ -8170,7 +8170,7 @@ function queueMemberPauseUnpause(endpointId, queueId, reason, paused, cb) {
       ], function (err5) {
 
         if (err5) {
-          logger.log.error(IDLOG, err5);
+          logger.error(IDLOG, err5);
         }
 
         cb(err5);
@@ -8178,11 +8178,11 @@ function queueMemberPauseUnpause(endpointId, queueId, reason, paused, cb) {
 
     } else {
       var err = logWord + ' queue member: extension not present';
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -8224,7 +8224,7 @@ function queueMemberAdd(endpointId, queueId, paused, cb) {
             family: 'QPENALTY',
             key: queueId + '/agents/' + endpointId
           };
-          logger.log.info(IDLOG, 'get agent penalty of exten "' + endpointId + '" of queue "' + queueId + '"');
+          logger.info(IDLOG, 'get agent penalty of exten "' + endpointId + '" of queue "' + queueId + '"');
           astProxy.doCmd(obj1, function (err1, resp) {
             try {
               if (err1 || typeof resp.val === undefined) {
@@ -8242,24 +8242,24 @@ function queueMemberAdd(endpointId, queueId, paused, cb) {
                 if (paused) {
                   obj2.paused = paused;
                 }
-                logger.log.info(IDLOG, 'execute queue member add of ' + endpointId + ' to queue ' + queueId);
+                logger.info(IDLOG, 'execute queue member add of ' + endpointId + ' to queue ' + queueId);
                 astProxy.doCmd(obj2, function (err2) {
                   try {
                     if (err2) {
                       var str = 'queue member add of ' + endpointId + ' to queue ' + queueId + ' has been failed: ' + err2.toString();
                       callback(str);
                     } else {
-                      logger.log.info(IDLOG, 'queue member add of ' + endpointId + ' to queue ' + queueId + ' has been successful');
+                      logger.info(IDLOG, 'queue member add of ' + endpointId + ' to queue ' + queueId + ' has been successful');
                       callback();
                     }
                   } catch (err3) {
-                    logger.log.error(IDLOG, err3.stack);
+                    logger.error(IDLOG, err3.stack);
                     callback(err3.stack);
                   }
                 });
               }
             } catch (err4) {
-              logger.log.error(IDLOG, err4.stack);
+              logger.error(IDLOG, err4.stack);
               callback(err4.stack);
             }
           });
@@ -8278,7 +8278,7 @@ function queueMemberAdd(endpointId, queueId, paused, cb) {
             message: 'Local/' + endpointId + '@from-queue/n'
           };
 
-          logger.log.info(IDLOG, 'add new entry in queue_log asterisk db: interface "' + name + '", queue "' + queueId + '" and event "ADDMEMBER"');
+          logger.info(IDLOG, 'add new entry in queue_log asterisk db: interface "' + name + '", queue "' + queueId + '" and event "ADDMEMBER"');
           astProxy.doCmd(obj3, function (err4) {
             try {
               if (err4) {
@@ -8286,12 +8286,12 @@ function queueMemberAdd(endpointId, queueId, paused, cb) {
                 callback(str);
 
               } else {
-                logger.log.info(IDLOG, 'add new entry in "queue_log" asterisk db has been successful: interface "' + name + '", queue "' + queueId + '" and event "ADDMEMBER"');
+                logger.info(IDLOG, 'add new entry in "queue_log" asterisk db has been successful: interface "' + name + '", queue "' + queueId + '" and event "ADDMEMBER"');
                 callback();
               }
 
             } catch (err5) {
-              logger.log.error(IDLOG, err5.stack);
+              logger.error(IDLOG, err5.stack);
               callback(err5.stack);
             }
           });
@@ -8300,18 +8300,18 @@ function queueMemberAdd(endpointId, queueId, paused, cb) {
       ], function (err6) {
 
         if (err6) {
-          logger.log.error(IDLOG, err6);
+          logger.error(IDLOG, err6);
         }
         cb(err6);
       });
 
     } else {
       var str = 'queue member add of ' + endpointId + ' to queue ' + queueId + ': extension not present';
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err.stack);
   }
 }
@@ -8355,7 +8355,7 @@ function queueMemberRemove(endpointId, queueId, cb) {
             exten: endpointId
           };
 
-          logger.log.info(IDLOG, 'execute queue member remove of ' + endpointId + ' from queue ' + queueId);
+          logger.info(IDLOG, 'execute queue member remove of ' + endpointId + ' from queue ' + queueId);
           astProxy.doCmd(obj, function (err1) {
             try {
               if (err1) {
@@ -8363,12 +8363,12 @@ function queueMemberRemove(endpointId, queueId, cb) {
                 callback(str);
 
               } else {
-                logger.log.info(IDLOG, 'queue member remove of ' + endpointId + ' from queue ' + queueId + ' has been successful');
+                logger.info(IDLOG, 'queue member remove of ' + endpointId + ' from queue ' + queueId + ' has been successful');
                 callback();
               }
 
             } catch (err2) {
-              logger.log.error(IDLOG, err2.stack);
+              logger.error(IDLOG, err2.stack);
               cb(err2.stack);
             }
           });
@@ -8387,7 +8387,7 @@ function queueMemberRemove(endpointId, queueId, cb) {
             message: 'Local/' + endpointId + '@from-queue/n'
           };
 
-          logger.log.info(IDLOG, 'add new entry in queue_log asterisk db: interface "' + name + '", queue "' + queueId + '" and event "REMOVEMEMBER"');
+          logger.info(IDLOG, 'add new entry in queue_log asterisk db: interface "' + name + '", queue "' + queueId + '" and event "REMOVEMEMBER"');
           astProxy.doCmd(obj, function (err3) {
             try {
               if (err3) {
@@ -8395,12 +8395,12 @@ function queueMemberRemove(endpointId, queueId, cb) {
                 callback(str);
 
               } else {
-                logger.log.info(IDLOG, 'add new entry in "queue_log" asterisk db has been successful: interface "' + name + '", queue "' + queueId + '" and event "REMOVEMEMBER"');
+                logger.info(IDLOG, 'add new entry in "queue_log" asterisk db has been successful: interface "' + name + '", queue "' + queueId + '" and event "REMOVEMEMBER"');
                 callback();
               }
 
             } catch (err4) {
-              logger.log.error(IDLOG, err4.stack);
+              logger.error(IDLOG, err4.stack);
               callback(err4.stack);
             }
           });
@@ -8409,7 +8409,7 @@ function queueMemberRemove(endpointId, queueId, cb) {
       ], function (err5) {
 
         if (err5) {
-          logger.log.error(IDLOG, err5);
+          logger.error(IDLOG, err5);
         }
 
         cb(err5);
@@ -8417,12 +8417,12 @@ function queueMemberRemove(endpointId, queueId, cb) {
 
     } else {
       var err = 'queue member remove of ' + endpointId + ' from queue ' + queueId + ': extension not present';
-      logger.log.warn(IDLOG, err);
+      logger.warn(IDLOG, err);
       cb(err);
     }
 
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -8462,7 +8462,7 @@ function getQueueIdsOfExten(extenId) {
     return result;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return {};
   }
 }
@@ -8483,7 +8483,7 @@ function isExtenDynMemberQueue(extenId, queueId) {
     }
 
     if (!queues[queueId]) {
-      logger.log.warn(IDLOG, 'checking if the exten "' + extenId + '" is dynamic member of non existent queue "' + queueId + '"');
+      logger.warn(IDLOG, 'checking if the exten "' + extenId + '" is dynamic member of non existent queue "' + queueId + '"');
       return false;
     }
 
@@ -8494,12 +8494,12 @@ function isExtenDynMemberQueue(extenId, queueId) {
       return allMembers[extenId].isDynamic();
 
     } else {
-      logger.log.warn(IDLOG, 'checking if the exten "' + extenId + '" is a dynamic member of queue "' + queueId + '": it is not its member');
+      logger.warn(IDLOG, 'checking if the exten "' + extenId + '" is a dynamic member of queue "' + queueId + '": it is not its member');
     }
     return false;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return false;
   }
 }
@@ -8520,7 +8520,7 @@ function isDynMemberLoggedInQueue(extenId, queueId) {
     }
 
     if (!queues[queueId]) {
-      logger.log.warn(IDLOG, 'checking if the queue dyn member "' + extenId + '" is logged into non existent queue "' + queueId + '"');
+      logger.warn(IDLOG, 'checking if the queue dyn member "' + extenId + '" is logged into non existent queue "' + queueId + '"');
       return false;
     }
 
@@ -8529,12 +8529,12 @@ function isDynMemberLoggedInQueue(extenId, queueId) {
     if (m) {
       return m.isLoggedIn();
     } else {
-      logger.log.warn(IDLOG, 'checking if the queue dyn member "' + extenId + '" is logged into the queue "' + queueId + '": it is not its member');
+      logger.warn(IDLOG, 'checking if the queue dyn member "' + extenId + '" is logged into the queue "' + queueId + '": it is not its member');
     }
     return false;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return false;
   }
 }
@@ -8566,12 +8566,12 @@ function stopRecordConversation(extension, convid, cb) {
 
       if (recordingConv[convid] === undefined) {
         str = 'the conversation ' + convid + ' is not recording';
-        logger.log.info(IDLOG, str);
+        logger.info(IDLOG, str);
         cb(str);
 
       } else if (chid) {
         // start the recording
-        logger.log.info(IDLOG, 'execute the stop record of the channel ' + chid + ' of exten ' + extension);
+        logger.info(IDLOG, 'execute the stop record of the channel ' + chid + ' of exten ' + extension);
         astProxy.doCmd({
           command: 'stopRecordCall',
           channel: chid
@@ -8582,19 +8582,19 @@ function stopRecordConversation(extension, convid, cb) {
 
       } else {
         str = 'no channel to stop record of conversation ' + convid + ' of exten ' + extension;
-        logger.log.warn(IDLOG, str);
+        logger.warn(IDLOG, str);
         cb(str);
       }
 
     } else {
       str = 'try to stop record conversation for the non existent endpoint ' + extension;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
 
   } catch (err) {
     cb(err);
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -8628,7 +8628,7 @@ function startSpySpeakConversation(endpointId, convid, destId, cb) {
       var spierId = spyChanType + '/' + destId;
 
       // start to spy
-      logger.log.info(IDLOG, 'execute the spy with only listening from ' + destId + ' of the channel ' + chToSpy + ' of exten ' + endpointId);
+      logger.info(IDLOG, 'execute the spy with only listening from ' + destId + ' of the channel ' + chToSpy + ' of exten ' + endpointId);
       astProxy.doCmd({
         command: 'spySpeak',
         spierId: spierId,
@@ -8640,12 +8640,12 @@ function startSpySpeakConversation(endpointId, convid, destId, cb) {
       });
 
     } else {
-      logger.log.warn(IDLOG, 'spy speak conversation of ' + endpointId + ' from ' + destId);
+      logger.warn(IDLOG, 'spy speak conversation of ' + endpointId + ' from ' + destId);
       cb();
     }
   } catch (err) {
     cb();
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -8680,7 +8680,7 @@ function startSpyListenConversation(endpointId, convid, destId, cb) {
       var spierId = spyChanType + '/' + destId;
 
       // start to spy
-      logger.log.info(IDLOG, 'execute the spy with only listening from ' + destId + ' of the channel ' + chToSpy + ' of exten ' + endpointId);
+      logger.info(IDLOG, 'execute the spy with only listening from ' + destId + ' of the channel ' + chToSpy + ' of exten ' + endpointId);
       astProxy.doCmd({
         command: 'spyListen',
         spierId: spierId,
@@ -8692,12 +8692,12 @@ function startSpyListenConversation(endpointId, convid, destId, cb) {
       });
     } else {
       var str = 'spy listen conversation of ' + endpointId + ' from ' + destId;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
   } catch (err) {
     cb(err);
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -8728,7 +8728,7 @@ function muteRecordConversation(extension, convid, cb) {
 
       // check if the conversation is already recording
       if (recordingConv[convid] === undefined) {
-        logger.log.info(IDLOG, 'the conversation ' + convid + ' is not recording, so it can not be mute');
+        logger.info(IDLOG, 'the conversation ' + convid + ' is not recording, so it can not be mute');
         cb();
 
       } else if (ch) {
@@ -8736,41 +8736,41 @@ function muteRecordConversation(extension, convid, cb) {
         var chid = ch.getChannel(); // the channel identifier
 
         // start the recording
-        logger.log.info(IDLOG, 'mute the recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid);
+        logger.info(IDLOG, 'mute the recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid);
         astProxy.doCmd({
           command: 'muteRecordCall',
           channel: chid
         }, function (err) {
           try {
             if (err) {
-              logger.log.error(IDLOG, 'muting recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid);
+              logger.error(IDLOG, 'muting recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid);
               cb(err);
               return;
             }
-            logger.log.info(IDLOG, 'mute the recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid + ' has been successfully');
+            logger.info(IDLOG, 'mute the recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid + ' has been successfully');
 
             // set the recording status mute of all conversations with specified convid
             setRecordStatusMuteConversations(convid);
             cb();
 
           } catch (e) {
-            logger.log.error(IDLOG, e.stack);
+            logger.error(IDLOG, e.stack);
             cb(e);
           }
         });
       } else {
         str = 'no channel to mute record of conversation ' + convid + ' of exten ' + extension;
-        logger.log.warn(IDLOG, str);
+        logger.warn(IDLOG, str);
         cb(str);
       }
     } else {
       str = 'try to mute the record conversation for the non existent endpoint ' + extension;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
   } catch (err) {
     cb(err);
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -8801,7 +8801,7 @@ function unmuteRecordConversation(extension, convid, cb) {
 
       // check if the conversation is already recording
       if (recordingConv[convid] === undefined) {
-        logger.log.info(IDLOG, 'the conversation ' + convid + ' is not recording, so it can not be unmute');
+        logger.info(IDLOG, 'the conversation ' + convid + ' is not recording, so it can not be unmute');
         cb();
 
       } else if (ch) {
@@ -8809,41 +8809,41 @@ function unmuteRecordConversation(extension, convid, cb) {
         var chid = ch.getChannel(); // the channel identifier
 
         // start the recording
-        logger.log.info(IDLOG, 'unmute the recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid);
+        logger.info(IDLOG, 'unmute the recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid);
         astProxy.doCmd({
           command: 'unmuteRecordCall',
           channel: chid
         }, function (err) {
           try {
             if (err) {
-              logger.log.error(IDLOG, 'unmuting recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid);
+              logger.error(IDLOG, 'unmuting recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid);
               cb(err);
               return;
             }
-            logger.log.info(IDLOG, 'unmuting the recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid + ' has been successfully');
+            logger.info(IDLOG, 'unmuting the recording of convid "' + convid + '" of extension "' + extension + '" with channel ' + chid + ' has been successfully');
             recordingConv[convid] = RECORDING_STATUS.TRUE;
             // set the recording status of all conversations with specified convid
             setRecordStatusConversations(convid, true);
             cb();
 
           } catch (e) {
-            logger.log.error(IDLOG, e.stack);
+            logger.error(IDLOG, e.stack);
             cb(e);
           }
         });
       } else {
         str = 'no channel to unmute record of conversation ' + convid + ' of exten ' + extension;
-        logger.log.warn(IDLOG, str);
+        logger.warn(IDLOG, str);
         cb(str);
       }
     } else {
       str = 'try to unmute the record conversation for the non existent endpoint ' + extension;
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
   } catch (err) {
     cb(err);
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -8878,14 +8878,14 @@ function startRecordConversation(extension, convid, cb) {
 
       // check if the conversation is already recording
       if (recordingConv[convid] !== undefined) {
-        logger.log.info(IDLOG, 'the conversation ' + convid + ' is already recording');
+        logger.info(IDLOG, 'the conversation ' + convid + ' is already recording');
         cb();
 
       } else if (ch) {
 
         var chid = ch.getChannel(); // the channel identifier
 
-        logger.log.info(IDLOG, 'set asterisk variables to record the convid "' + convid + '" of extension "' + extension + '"');
+        logger.info(IDLOG, 'set asterisk variables to record the convid "' + convid + '" of extension "' + extension + '"');
         // set some asterisk variables to fill the "recordingfile" field of the
         // asteriskcdrdb.cdr database table and then record the conversation
         async.series([
@@ -8893,7 +8893,7 @@ function startRecordConversation(extension, convid, cb) {
           // set the asterisk variables
           function (callback) {
 
-            logger.log.info(IDLOG, 'set "MASTER_CHANNEL(ONETOUCH_REC)" asterisk variable');
+            logger.info(IDLOG, 'set "MASTER_CHANNEL(ONETOUCH_REC)" asterisk variable');
             astProxy.doCmd({
               command: 'setVariable',
               name: 'MASTER_CHANNEL(ONETOUCH_REC)',
@@ -8908,7 +8908,7 @@ function startRecordConversation(extension, convid, cb) {
                 }
 
               } catch (e) {
-                logger.log.error(IDLOG, e.stack);
+                logger.error(IDLOG, e.stack);
                 callback(e);
               }
             });
@@ -8916,7 +8916,7 @@ function startRecordConversation(extension, convid, cb) {
 
           function (callback) {
 
-            logger.log.info(IDLOG, 'set "MASTER_CHANNEL(REC_STATUS)" asterisk variable');
+            logger.info(IDLOG, 'set "MASTER_CHANNEL(REC_STATUS)" asterisk variable');
             astProxy.doCmd({
               command: 'setVariable',
               name: 'MASTER_CHANNEL(REC_STATUS)',
@@ -8931,7 +8931,7 @@ function startRecordConversation(extension, convid, cb) {
                 }
 
               } catch (e) {
-                logger.log.error(IDLOG, e.stack);
+                logger.error(IDLOG, e.stack);
                 callback(e);
               }
             });
@@ -8939,7 +8939,7 @@ function startRecordConversation(extension, convid, cb) {
 
           function (callback) {
 
-            logger.log.info(IDLOG, 'set "MASTER_CHANNEL(CDR(recordingfile))" asterisk variable with filename "' + filename + '"');
+            logger.info(IDLOG, 'set "MASTER_CHANNEL(CDR(recordingfile))" asterisk variable with filename "' + filename + '"');
             astProxy.doCmd({
               command: 'setVariable',
               name: 'MASTER_CHANNEL(CDR(recordingfile))',
@@ -8954,7 +8954,7 @@ function startRecordConversation(extension, convid, cb) {
                 }
 
               } catch (e) {
-                logger.log.error(IDLOG, e.stack);
+                logger.error(IDLOG, e.stack);
                 callback(e);
               }
             });
@@ -8962,7 +8962,7 @@ function startRecordConversation(extension, convid, cb) {
 
           function (callback) {
 
-            logger.log.info(IDLOG, 'set "MASTER_CHANNEL(CDR(recordingfile))" asterisk variable');
+            logger.info(IDLOG, 'set "MASTER_CHANNEL(CDR(recordingfile))" asterisk variable');
             astProxy.doCmd({
               command: 'setVariable',
               name: 'MASTER_CHANNEL(ONETOUCH_RECFILE)',
@@ -8977,7 +8977,7 @@ function startRecordConversation(extension, convid, cb) {
                 }
 
               } catch (e) {
-                logger.log.error(IDLOG, e.stack);
+                logger.error(IDLOG, e.stack);
                 callback();
               }
             });
@@ -8986,14 +8986,14 @@ function startRecordConversation(extension, convid, cb) {
         ], function (err) {
 
           if (err) {
-            logger.log.error(IDLOG, 'setting asterisk variables to record the convid "' + convid + '" of extension "' + extension + '"');
+            logger.error(IDLOG, 'setting asterisk variables to record the convid "' + convid + '" of extension "' + extension + '"');
             return;
           }
 
-          logger.log.info(IDLOG, 'asterisk variables to record the convid "' + convid + '" of extension "' + extension + '" has been set');
+          logger.info(IDLOG, 'asterisk variables to record the convid "' + convid + '" of extension "' + extension + '" has been set');
 
           // start the recording
-          logger.log.info(IDLOG, 'record the convid "' + convid + '" of extension "' + extension + '"');
+          logger.info(IDLOG, 'record the convid "' + convid + '" of extension "' + extension + '"');
           astProxy.doCmd({
             command: 'recordCall',
             channel: chid,
@@ -9001,18 +9001,18 @@ function startRecordConversation(extension, convid, cb) {
           }, function (err) {
             try {
               if (err) {
-                logger.log.error(IDLOG, 'recording the convid "' + convid + '" of extension "' + extension + '"');
+                logger.error(IDLOG, 'recording the convid "' + convid + '" of extension "' + extension + '"');
                 cb(err);
                 return;
               }
-              logger.log.info(IDLOG, 'record the convid "' + convid + '" of extension "' + extension + '" has been successfully started in ' + filepath);
+              logger.info(IDLOG, 'record the convid "' + convid + '" of extension "' + extension + '" has been successfully started in ' + filepath);
 
               // set the recording status of the conversation
               startRecordCallCb(convid);
               cb();
 
             } catch (e) {
-              logger.log.error(IDLOG, e.stack);
+              logger.error(IDLOG, e.stack);
               cb(e);
             }
           });
@@ -9020,18 +9020,18 @@ function startRecordConversation(extension, convid, cb) {
 
       } else {
         str = 'no channel to record of conversation ' + convid + ' of exten ' + extension;
-        logger.log.warn(IDLOG, str);
+        logger.warn(IDLOG, str);
         cb(str);
       }
 
     } else {
       str = 'extension ' + extension + 'doesn\'t exist';
-      logger.log.warn(IDLOG, str);
+      logger.warn(IDLOG, str);
       cb(str);
     }
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -9048,10 +9048,10 @@ function startRecordConversation(extension, convid, cb) {
 function stopRecordCallCb(err, convid) {
   try {
     if (err) {
-      logger.log.error(IDLOG, 'stop record convid ' + convid + ' failed: ' + err.toString());
+      logger.error(IDLOG, 'stop record convid ' + convid + ' failed: ' + err.toString());
 
     } else {
-      logger.log.info(IDLOG, 'stop record convid ' + convid + ' started succesfully');
+      logger.info(IDLOG, 'stop record convid ' + convid + ' started succesfully');
 
       // remove the recording status of the conversation
       delete recordingConv[convid];
@@ -9059,7 +9059,7 @@ function stopRecordCallCb(err, convid) {
       setRecordStatusConversations(convid, false);
     }
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -9078,7 +9078,7 @@ function startRecordCallCb(convid) {
     setRecordStatusConversations(convid, true);
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
   }
 }
 
@@ -9111,10 +9111,10 @@ function setRecordStatusConversations(convid, value) {
           // same of that specified, set its recording status
           if (cid === convid) {
             convs[convid].setRecording(value);
-            logger.log.info(IDLOG, 'set recording status ' + value + ' to conversation ' + convid);
+            logger.info(IDLOG, 'set recording status ' + value + ' to conversation ' + convid);
 
             // emit the event
-            logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+            logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
             astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
           }
         }
@@ -9134,17 +9134,17 @@ function setRecordStatusConversations(convid, value) {
           // same of that specified, set its recording status
           if (cid === convid) {
             convs[convid].setRecording(value);
-            logger.log.info(IDLOG, 'set recording status ' + value + ' to conversation ' + convid);
+            logger.info(IDLOG, 'set recording status ' + value + ' to conversation ' + convid);
 
             // emit the event
-            logger.log.info(IDLOG, 'emit event ' + EVT_TRUNK_CHANGED + ' for trunk ' + trunk);
+            logger.info(IDLOG, 'emit event ' + EVT_TRUNK_CHANGED + ' for trunk ' + trunk);
             astProxy.emit(EVT_TRUNK_CHANGED, trunks[trunk]);
           }
         }
       }
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -9177,10 +9177,10 @@ function setRecordStatusMuteConversations(convid) {
           if (cid === convid) {
             recordingConv[convid] = RECORDING_STATUS.MUTE;
             convs[convid].setRecordingMute();
-            logger.log.info(IDLOG, 'set recording status "mute" to conversation ' + convid);
+            logger.info(IDLOG, 'set recording status "mute" to conversation ' + convid);
 
             // emit the event
-            logger.log.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
+            logger.info(IDLOG, 'emit event ' + EVT_EXTEN_CHANGED + ' for extension ' + exten);
             astProxy.emit(EVT_EXTEN_CHANGED, extensions[exten]);
           }
         }
@@ -9201,17 +9201,17 @@ function setRecordStatusMuteConversations(convid) {
           if (cid === convid) {
             recordingConv[convid] = RECORDING_STATUS.MUTE;
             convs[convid].setRecordingMute();
-            logger.log.info(IDLOG, 'set recording status "mute" to conversation ' + convid);
+            logger.info(IDLOG, 'set recording status "mute" to conversation ' + convid);
 
             // emit the event
-            logger.log.info(IDLOG, 'emit event ' + EVT_TRUNK_CHANGED + ' for trunk ' + trunk);
+            logger.info(IDLOG, 'emit event ' + EVT_TRUNK_CHANGED + ' for trunk ' + trunk);
             astProxy.emit(EVT_TRUNK_CHANGED, trunks[trunk]);
           }
         }
       }
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -9241,7 +9241,7 @@ function sendDTMFSequence(extension, sequence, callerid, fromExten, cb) {
 
     // check if the extension exists
     if (!extensions[extension]) {
-      logger.log.warn(IDLOG, 'sending DTMF sequence to non existing extension ' + extension);
+      logger.warn(IDLOG, 'sending DTMF sequence to non existing extension ' + extension);
       cb(extension + ' doesn\'t exist');
       return;
     }
@@ -9282,13 +9282,13 @@ function sendDTMFSequence(extension, sequence, callerid, fromExten, cb) {
         }
 
       } catch (e) {
-        logger.log.error(IDLOG, e.stack);
+        logger.error(IDLOG, e.stack);
         cb(e);
       }
     });
 
   } catch (error) {
-    logger.log.error(IDLOG, error.stack);
+    logger.error(IDLOG, error.stack);
     cb(error);
   }
 }
@@ -9330,11 +9330,11 @@ function sendDTMFSequenceToChannel(channel, sequence, cb) {
         }, function (err) {
 
           if (err) {
-            logger.log.error(IDLOG, 'playing DTMF digit "' + digit + '" to channel ' + channel);
+            logger.error(IDLOG, 'playing DTMF digit "' + digit + '" to channel ' + channel);
             seriesCb(err);
 
           } else {
-            logger.log.info(IDLOG, 'played DTMF digit "' + digit + '" to channel ' + channel + ' successfully');
+            logger.info(IDLOG, 'played DTMF digit "' + digit + '" to channel ' + channel + ' successfully');
             seriesCb();
           }
         });
@@ -9344,16 +9344,16 @@ function sendDTMFSequenceToChannel(channel, sequence, cb) {
     }, function (err) {
 
       if (err) {
-        logger.log.error(IDLOG, 'playing DTMF sequence "' + sequence + '" to channel ' + channel + ': ' + err.toString());
+        logger.error(IDLOG, 'playing DTMF sequence "' + sequence + '" to channel ' + channel + ': ' + err.toString());
         cb(err);
       } else {
-        logger.log.info(IDLOG, 'played DTMF sequence "' + sequence + '" to channel ' + channel + ' successfully');
+        logger.info(IDLOG, 'played DTMF sequence "' + sequence + '" to channel ' + channel + ' successfully');
         cb(null);
       }
     });
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
@@ -9392,20 +9392,20 @@ function callAndSendDTMFSequence(chanType, extension, sequence, callerid, fromEx
     astProxy.doCmd(opts, function (err) {
       try {
         if (err) {
-          logger.log.error(IDLOG, 'calling and sending DTMF sequence "' + sequence + '" to ' + chanType + ' ' + extension + ' with callerid ' + callerid);
+          logger.error(IDLOG, 'calling and sending DTMF sequence "' + sequence + '" to ' + chanType + ' ' + extension + ' with callerid ' + callerid);
           cb(err);
         } else {
-          logger.log.info(IDLOG, 'calling and sending DTMF sequence "' + sequence + '" to ' + chanType + ' ' + extension + ' with callerid ' + callerid + ' has successful');
+          logger.info(IDLOG, 'calling and sending DTMF sequence "' + sequence + '" to ' + chanType + ' ' + extension + ' with callerid ' + callerid + ' has successful');
           cb();
         }
 
       } catch (error) {
-        logger.log.error(IDLOG, error.stack);
+        logger.error(IDLOG, error.stack);
         cb(error);
       }
     });
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -9420,7 +9420,7 @@ function getEchoCallDestination() {
   try {
     return '*43';
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
   }
 }
 
@@ -9448,7 +9448,7 @@ function getExtensionsFromConversation(convid, exten) {
       // check if the extension has the specified conversation
       var conv = extensions[exten].getConversation(convid);
       if (typeof conv !== 'object') {
-        logger.log.warn(IDLOG, 'getting extensions from convid ' + convid + ': no conversation in extension ' + exten);
+        logger.warn(IDLOG, 'getting extensions from convid ' + convid + ': no conversation in extension ' + exten);
         return result;
       }
       result.push(exten);
@@ -9456,7 +9456,7 @@ function getExtensionsFromConversation(convid, exten) {
       // get the other number of the conversation and check if it's an extension number
       var chSource = conv.getSourceChannel();
       if (typeof chSource !== 'object') {
-        logger.log.warn(IDLOG, 'getting extensions from convid ' + convid + ': no source channel in conversation of extension ' + exten);
+        logger.warn(IDLOG, 'getting extensions from convid ' + convid + ': no source channel in conversation of extension ' + exten);
         return result;
       }
 
@@ -9473,12 +9473,12 @@ function getExtensionsFromConversation(convid, exten) {
       }
 
     } else {
-      logger.log.warn(IDLOG, 'getting the extensions of the convid ' + convid + ' from extension ' + exten + ': no extension ' + exten + ' present');
+      logger.warn(IDLOG, 'getting the extensions of the convid ' + convid + ' from extension ' + exten + ': no extension ' + exten + ' present');
     }
     return result;
 
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     return [];
   }
 }
@@ -9493,7 +9493,7 @@ function getBaseCallRecAudioPath() {
   try {
     return BASE_CALL_REC_AUDIO_PATH;
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
   }
 }
 
@@ -9514,7 +9514,7 @@ function setAsteriskPresence(extension, presenceState, cb) {
       throw new Error('wrong parameters: ' + JSON.stringify(arguments));
     }
 
-    logger.log.info(IDLOG, 'Set Asterisk Presence state to ' + presenceState + ' for user ' + extension);
+    logger.info(IDLOG, 'Set Asterisk Presence state to ' + presenceState + ' for user ' + extension);
     astProxy.doCmd({
       command: 'setPresenceState',
       exten: extension,
@@ -9523,7 +9523,7 @@ function setAsteriskPresence(extension, presenceState, cb) {
       cb(error);
     });
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -9576,26 +9576,26 @@ function createAlarm(params, cb) {
     var tmpfilepath = path.join(os.tmpdir(), filename);
     fs.writeFile(tmpfilepath, content, function (err) {
       if (err) {
-        logger.log.error(IDLOG, 'creating alarm for "' + params.extension + '" on ' + params.date + ' - ' + params.time + ' (' + timestamp + ')');
+        logger.error(IDLOG, 'creating alarm for "' + params.extension + '" on ' + params.date + ' - ' + params.time + ' (' + timestamp + ')');
         cb(err);
         return;
       }
       // set the file timestamp
       fs.utimes(tmpfilepath, timestamp, timestamp, function (err2) {
         if (err2) {
-          logger.log.error(IDLOG, 'creating alarm for "' + params.extension + '" on ' + params.date + ' - ' + params.time + ' (' + timestamp + ')');
+          logger.error(IDLOG, 'creating alarm for "' + params.extension + '" on ' + params.date + ' - ' + params.time + ' (' + timestamp + ')');
           cb(err);
           return;
         }
         // move the file to the correct asterisk destination
         fs.rename(tmpfilepath, filepath, function () {
-          logger.log.info(IDLOG, 'created alarm for "' + params.extension + '" on ' + params.date + ' - ' + params.time + ' (' + timestamp + ')');
+          logger.info(IDLOG, 'created alarm for "' + params.extension + '" on ' + params.date + ' - ' + params.time + ' (' + timestamp + ')');
           cb();
         });
       });
     });
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -9614,14 +9614,14 @@ function getAlarms(cb) {
     }
     fs.readdir(AST_ALARMS_DIRPATH, function (err, files) {
       if (err) {
-        logger.log.error(IDLOG, 'getting the list of all alarms');
+        logger.error(IDLOG, 'getting the list of all alarms');
         cb(err);
         return;
       }
       cb(null, files);
     });
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -9642,15 +9642,15 @@ function deleteAlarm(filename, cb) {
     var filepath = path.join(AST_ALARMS_DIRPATH, filename);
     fs.unlink(filepath, function (err) {
       if (err) {
-        logger.log.error(IDLOG, 'deleting alarm wakeup ' + filepath);
+        logger.error(IDLOG, 'deleting alarm wakeup ' + filepath);
         cb(err);
         return;
       }
-      logger.log.info(IDLOG, 'deleted alarm wakeup ' + filepath);
+      logger.info(IDLOG, 'deleted alarm wakeup ' + filepath);
       cb();
     });
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
     cb(e);
   }
 }
@@ -9664,7 +9664,7 @@ function disableTrunksEvents() {
   try {
     trunksEventsEnabled = false;
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
   }
 }
 
@@ -9678,7 +9678,7 @@ function setReloading(value) {
   try {
     reloading = value;
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
   }
 }
 
@@ -9694,10 +9694,10 @@ function setExtensionUsername(exten, username) {
     if (extensions[exten]) {
       extensions[exten].setUsername(username);
     } else {
-      logger.log.warn(IDLOG, `setting username ${username} to exten ${exten}`);
+      logger.warn(IDLOG, `setting username ${username} to exten ${exten}`);
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
   }
 }
 
@@ -9714,7 +9714,7 @@ function getUsernameByExtension(exten) {
       return extensions[exten].getUsername();
     }
   } catch (e) {
-    logger.log.error(IDLOG, e.stack);
+    logger.error(IDLOG, e.stack);
   }
 }
 

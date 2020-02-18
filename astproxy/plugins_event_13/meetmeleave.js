@@ -60,7 +60,7 @@ var astProxy;
             data.calleridname &&
             data.event === 'MeetmeLeave') {
 
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
 
             var MEETME_CONF_CODE = astProxy.proxyLogic.getMeetmeConfCode();
             var extOwnerId = data.meetme.substring(MEETME_CONF_CODE.length, data.meetme.length);
@@ -71,11 +71,11 @@ var astProxy;
             });
 
           } else {
-            logger.log.warn(IDLOG, 'MeetmeLeave event not recognized');
+            logger.warn(IDLOG, 'MeetmeLeave event not recognized');
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -99,7 +99,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -117,7 +117,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -128,6 +128,6 @@ var astProxy;
     exports.setLogger = meetmeLeave.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

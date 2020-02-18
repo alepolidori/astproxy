@@ -89,7 +89,7 @@ var IDLOG = '[listIaxPeers]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -128,7 +128,7 @@ var IDLOG = '[listIaxPeers]';
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid];
@@ -156,7 +156,7 @@ var IDLOG = '[listIaxPeers]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -167,6 +167,6 @@ var IDLOG = '[listIaxPeers]';
     exports.setLogger = listIaxPeers.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

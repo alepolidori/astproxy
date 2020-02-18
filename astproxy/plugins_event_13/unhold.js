@@ -56,7 +56,7 @@ var astProxy;
       data: function(data) {
         try {
           if (data.channel && data.calleridnum && data.connectedlinenum && data.event === 'Unhold') {
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
             var channelExten = utilChannel13.extractExtensionFromChannel(data.channel);
             astProxy.proxyLogic.evtConversationUnhold({
               whoPutsOnUnholdExten: channelExten,
@@ -65,7 +65,7 @@ var astProxy;
             });
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -89,7 +89,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -107,7 +107,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -118,6 +118,6 @@ var astProxy;
     exports.setLogger = unhold.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

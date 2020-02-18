@@ -59,7 +59,7 @@ var astProxy;
             data.queue && data.calleridname &&
             data.position && data.event === 'QueueCallerJoin') {
 
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
             astProxy.proxyLogic.evtNewQueueWaitingCaller({
               wait: 0, // because the channel has joined the queue now
               queue: data.queue,
@@ -70,7 +70,7 @@ var astProxy;
             });
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -94,7 +94,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -112,7 +112,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -123,6 +123,6 @@ var astProxy;
     exports.setLogger = queueCallerJoin.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

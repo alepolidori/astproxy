@@ -74,16 +74,16 @@ var astProxy;
       data: function(data) {
         try {
           if (data && data.event === 'Reload') {
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
             astProxy.proxyLogic.evtAstModuleReloaded({
               module: data.module,
               status: STATUS[data.status]
             });
           } else {
-            logger.log.warn(IDLOG, 'asterisk module reload event not recognized');
+            logger.warn(IDLOG, 'asterisk module reload event not recognized');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -106,7 +106,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -124,7 +124,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -135,6 +135,6 @@ var astProxy;
     exports.setLogger = reload.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

@@ -90,7 +90,7 @@ var IDLOG = '[callAndSendDTMF]';
                     am.send(act);
 
                 } catch (err) {
-                    logger.log.error(IDLOG, err.stack);
+                    logger.error(IDLOG, err.stack);
                 }
             },
 
@@ -123,7 +123,7 @@ var IDLOG = '[callAndSendDTMF]';
                     }
 
                 } catch (err) {
-                    logger.log.error(IDLOG, err.stack);
+                    logger.error(IDLOG, err.stack);
                     if (map[data.actionid]) {
                         map[data.actionid](err);
                         delete map[data.actionid]; // remove association ActionID-callback
@@ -151,7 +151,7 @@ var IDLOG = '[callAndSendDTMF]';
                         throw new Error('wrong logger object');
                     }
                 } catch (err) {
-                    logger.log.error(IDLOG, err.stack);
+                    logger.error(IDLOG, err.stack);
                 }
             }
         };
@@ -162,6 +162,6 @@ var IDLOG = '[callAndSendDTMF]';
         exports.setLogger = callAndSendDTMF.setLogger;
 
     } catch (err) {
-        logger.log.error(IDLOG, err.stack);
+        logger.error(IDLOG, err.stack);
     }
 })();

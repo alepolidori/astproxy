@@ -94,7 +94,7 @@ var IDLOG = '[spyListen]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -126,7 +126,7 @@ var IDLOG = '[spyListen]';
           delete map[data.actionid]; // remove association ActionID-callback
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid];
@@ -154,7 +154,7 @@ var IDLOG = '[spyListen]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -165,6 +165,6 @@ var IDLOG = '[spyListen]';
     exports.setLogger = spyListen.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

@@ -60,11 +60,11 @@ var astProxy;
             data.device.split('/')[0].toLowerCase() === 'pjsip' &&
             data.event === 'DeviceStateChange') {
 
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
             astProxy.proxyLogic.evtDeviceStatusChanged(data.device.split('/')[1]);
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -88,7 +88,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -106,7 +106,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -117,6 +117,6 @@ var astProxy;
     exports.setLogger = deviceStateChanged.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

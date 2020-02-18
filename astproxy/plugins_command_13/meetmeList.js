@@ -90,7 +90,7 @@ var IDLOG = '[meetmeList]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -129,7 +129,7 @@ var IDLOG = '[meetmeList]';
             delete map[data.actionid];
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid];
@@ -157,7 +157,7 @@ var IDLOG = '[meetmeList]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -168,6 +168,6 @@ var IDLOG = '[meetmeList]';
     exports.setLogger = meetmeList.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

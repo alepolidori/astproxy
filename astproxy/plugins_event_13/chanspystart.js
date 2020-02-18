@@ -59,7 +59,7 @@ var astProxy;
         try {
           if (data && data.spyerchannel && data.event === 'ChanSpyStart') {
 
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
 
             var spierId = utilChannel13.extractExtensionFromChannel(data.spyerchannel);
 
@@ -68,13 +68,13 @@ var astProxy;
                 spierId: spierId
               });
             } else {
-              logger.log.warn(IDLOG, 'event ChanSpyStart with unknown spier channel ' + data.spyerchannel);
+              logger.warn(IDLOG, 'event ChanSpyStart with unknown spier channel ' + data.spyerchannel);
             }
           } else {
-            logger.log.warn(IDLOG, 'ChanSpyStart event not recognized');
+            logger.warn(IDLOG, 'ChanSpyStart event not recognized');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -98,7 +98,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -116,7 +116,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -127,6 +127,6 @@ var astProxy;
     exports.setLogger = chanspystart.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

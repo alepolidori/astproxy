@@ -57,7 +57,7 @@ var astProxy;
           if (data.queue &&
             data.interface && data.event === 'QueueMemberRemoved') {
 
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
 
             // extract the queue member identifier. e.g. data.interface is: "Local/214@from-queue/n"
             var member = data.interface.split('@')[0].split('/')[1];
@@ -68,11 +68,11 @@ var astProxy;
             });
 
           } else {
-            logger.log.warn(IDLOG, 'QueueMemberRemoved event not recognized');
+            logger.warn(IDLOG, 'QueueMemberRemoved event not recognized');
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -96,7 +96,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -114,7 +114,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -125,6 +125,6 @@ var astProxy;
     exports.setLogger = queueMemberRemoved.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

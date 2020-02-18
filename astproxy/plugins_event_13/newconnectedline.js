@@ -56,12 +56,12 @@ var astProxy;
       data: function(data) {
         try {
           if (data.channel && data.connectedlinenum && data.event === 'NewConnectedLine') {
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
             var channelExten = utilChannel13.extractExtensionFromChannel(data.channel);
             astProxy.proxyLogic.evtConversationInfoChanged(channelExten, data.connectedlinenum);
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -85,7 +85,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -103,7 +103,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -114,6 +114,6 @@ var astProxy;
     exports.setLogger = newconnectedline.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

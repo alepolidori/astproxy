@@ -57,16 +57,16 @@ var astProxy;
       data: function(data) {
         try {
           if (data && data.event === 'Shutdown') {
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
             astProxy.proxyLogic.evtAstShutdown({
               shutdown: data.shutdown,
               restart: data.restart
             });
           } else {
-            logger.log.warn(IDLOG, 'shutdown event not recognized');
+            logger.warn(IDLOG, 'shutdown event not recognized');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -89,7 +89,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -107,7 +107,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -118,6 +118,6 @@ var astProxy;
     exports.setLogger = shutdown.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

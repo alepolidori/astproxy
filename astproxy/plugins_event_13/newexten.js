@@ -62,7 +62,7 @@ var astProxy;
             data.appdata.split('=')[1] === 'YES') {
 
             ext = (data.appdata.split('/')[1]).split(')')[0];
-            logger.log.info(IDLOG, 'received event DND "on" for extension ' + ext);
+            logger.info(IDLOG, 'received event DND "on" for extension ' + ext);
             astProxy.proxyLogic.evtExtenDndChanged(ext, true);
           }
           // DND off (e.g. data.appdata = 'Deleting: DND/202 YES')
@@ -70,7 +70,7 @@ var astProxy;
             data.appdata.indexOf('Deleting: DND/') === 0) {
 
             ext = (data.appdata.split('/')[1]).split(' ')[0];
-            logger.log.info(IDLOG, 'received event DND "off" for extension ' + ext);
+            logger.info(IDLOG, 'received event DND "off" for extension ' + ext);
             astProxy.proxyLogic.evtExtenDndChanged(ext, false);
           }
           // CF/CFVM on (e.g. data.appdata = 'DB(CF/202)=200')
@@ -100,12 +100,12 @@ var astProxy;
             }
             // CFVM on
             if (isCf2Vm) {
-              logger.log.info(IDLOG, 'received event CFVM "on" for extension ' + ext + ' to vm ' + vm);
+              logger.info(IDLOG, 'received event CFVM "on" for extension ' + ext + ' to vm ' + vm);
               astProxy.proxyLogic.evtExtenUnconditionalCfVmChanged(ext, true, vm);
             }
             // CF on
             else {
-              logger.log.info(IDLOG, 'received event CF "on" for extension ' + ext + ' to ' + to);
+              logger.info(IDLOG, 'received event CF "on" for extension ' + ext + ' to ' + to);
               astProxy.proxyLogic.evtExtenUnconditionalCfChanged(ext, true, to);
             }
           }
@@ -114,12 +114,12 @@ var astProxy;
             data.appdata.indexOf('Deleting: CF/') === 0) {
 
             ext = (data.appdata.split('/')[1]).split(' ')[0];
-            logger.log.info(IDLOG, 'received event CF/CFVM "off" for extension ' + ext);
+            logger.info(IDLOG, 'received event CF/CFVM "off" for extension ' + ext);
             astProxy.proxyLogic.evtExtenUnconditionalCfChanged(ext, false);
             astProxy.proxyLogic.evtExtenUnconditionalCfVmChanged(ext, false);
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -143,7 +143,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -161,7 +161,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -172,6 +172,6 @@ var astProxy;
     exports.setLogger = newExten.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

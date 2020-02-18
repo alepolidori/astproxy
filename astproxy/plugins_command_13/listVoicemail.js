@@ -87,7 +87,7 @@ var IDLOG = '[listVoicemail]';
           // send action to asterisk
           am.send(act);
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -137,7 +137,7 @@ var IDLOG = '[listVoicemail]';
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid];
@@ -165,7 +165,7 @@ var IDLOG = '[listVoicemail]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -176,6 +176,6 @@ var IDLOG = '[listVoicemail]';
     exports.setLogger = listVoicemail.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

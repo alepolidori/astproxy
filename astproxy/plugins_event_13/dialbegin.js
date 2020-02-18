@@ -63,7 +63,7 @@ var astProxy;
             var chDestExten = utilChannel13.extractExtensionFromChannel(data.destchannel);
             var chSourceExten = utilChannel13.extractExtensionFromChannel(data.channel);
 
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
             astProxy.proxyLogic.evtConversationDialing({
               chDest: data.destchannel,
               chSource: data.channel,
@@ -75,7 +75,7 @@ var astProxy;
             });
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -99,7 +99,7 @@ var astProxy;
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -117,7 +117,7 @@ var astProxy;
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -128,6 +128,6 @@ var astProxy;
     exports.setLogger = dialbegin.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

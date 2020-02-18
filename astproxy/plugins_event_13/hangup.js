@@ -124,7 +124,7 @@ var CAUSE = {
             // extract the extension name from the channel
             var channelExten = utilChannel13.extractExtensionFromChannel(data.channel);
 
-            logger.log.info(IDLOG, 'received event ' + data.event);
+            logger.info(IDLOG, 'received event ' + data.event);
             astProxy.proxyLogic.evtHangupConversation({
               cause: CAUSE[data.cause],
               channel: data.channel,
@@ -134,11 +134,11 @@ var CAUSE = {
             });
 
           } else {
-            logger.log.warn(IDLOG, 'hangup event not recognized');
+            logger.warn(IDLOG, 'hangup event not recognized');
           }
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -162,7 +162,7 @@ var CAUSE = {
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -180,7 +180,7 @@ var CAUSE = {
           }
           astProxy = ap;
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -191,6 +191,6 @@ var CAUSE = {
     exports.setLogger = hangup.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

@@ -80,7 +80,7 @@ var IDLOG = '[extenStatus]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -118,7 +118,7 @@ var IDLOG = '[extenStatus]';
           delete map[data.actionid];
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid];
@@ -146,7 +146,7 @@ var IDLOG = '[extenStatus]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -157,6 +157,6 @@ var IDLOG = '[extenStatus]';
     exports.setLogger = extenStatus.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

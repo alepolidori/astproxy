@@ -82,7 +82,7 @@ var IDLOG = '[queueMemberRemove]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -112,7 +112,7 @@ var IDLOG = '[queueMemberRemove]';
           delete map[data.actionid]; // remove association ActionID-callback
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid];
@@ -140,7 +140,7 @@ var IDLOG = '[queueMemberRemove]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -151,6 +151,6 @@ var IDLOG = '[queueMemberRemove]';
     exports.setLogger = queueMemberRemove.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

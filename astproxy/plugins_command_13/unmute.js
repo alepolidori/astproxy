@@ -84,7 +84,7 @@ var IDLOG = '[unmute]';
           am.send(act);
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       },
 
@@ -111,7 +111,7 @@ var IDLOG = '[unmute]';
           delete map[data.actionid]; // remove association ActionID-callback
 
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
           if (map[data.actionid]) {
             map[data.actionid](err);
             delete map[data.actionid]; // remove association ActionID-callback
@@ -139,7 +139,7 @@ var IDLOG = '[unmute]';
             throw new Error('wrong logger object');
           }
         } catch (err) {
-          logger.log.error(IDLOG, err.stack);
+          logger.error(IDLOG, err.stack);
         }
       }
     };
@@ -150,6 +150,6 @@ var IDLOG = '[unmute]';
     exports.setLogger = unmute.setLogger;
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 })();

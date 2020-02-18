@@ -53,13 +53,13 @@ function setLogger(log) {
       typeof log.log.error === 'function') {
 
       logger = log;
-      logger.log.info(IDLOG, 'new logger has been set');
+      logger.info(IDLOG, 'new logger has been set');
 
     } else {
       throw new Error('wrong logger object');
     }
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -72,9 +72,9 @@ function setLogger(log) {
 function setCompAstProxy(comp) {
   try {
     compAstProxy = comp;
-    logger.log.info(IDLOG, 'set asterisk proxy component');
+    logger.info(IDLOG, 'set asterisk proxy component');
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
   }
 }
 
@@ -91,7 +91,7 @@ function checkQueueRecallingStatus(num, cb) {
     if (typeof num !== 'string' || typeof cb !== 'function') {
       throw new Error('wrong parameters');
     }
-    logger.log.info(IDLOG, 'requests the channel list to be analized to get the recalling status');
+    logger.info(IDLOG, 'requests the channel list to be analized to get the recalling status');
     compAstProxy.doCmd({
       command: 'listChannels'
     }, function (err, results) {
@@ -102,7 +102,7 @@ function checkQueueRecallingStatus(num, cb) {
       }
     });
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     return false;
   }
 }
@@ -131,7 +131,7 @@ function analizeQueueRecallingStatus(results, num, cb) {
     cb(null, false);
 
   } catch (err) {
-    logger.log.error(IDLOG, err.stack);
+    logger.error(IDLOG, err.stack);
     cb(err);
   }
 }
