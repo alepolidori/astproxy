@@ -34,10 +34,10 @@ npm install astproxy
 2. Include the library:
 
 ```js
-const astproxy = require('../index');
+const astproxy = require('astproxy');
 ```
 
-3. Configure `astproxy'
+3. Configure `astproxy`
 
 `astproxy` uses [Asterisk AMI](https://wiki.asterisk.org/wiki/display/AST/The+Asterisk+Manager+TCP+IP+API) to communicate with Asterisk, so it needs some information to connect to it:
 
@@ -108,15 +108,23 @@ astproxy.configExtenNames({
 });
 ```
 
-in this case the extension `2001` has the name `User1`.
+in this case the extension `2001` has the name `User1`. `Astproxy` will consider only the extensions listed in this step and only if they exists into the PBX.
 
-6. Start the module:
+6. Register for the event `ready`:
+
+```js
+let ready = () => {
+  // astproxy is ready to be used.
+  // your code here
+};
+astproxy.on('ready', ready);
+```
+
+7. Start the module:
 
 ```js
 astproxy.start();
 ```
-
-At this point `astproxy` is ready to be used.
 
 ### Features
 
@@ -124,10 +132,10 @@ At this point `astproxy` is ready to be used.
 - Send command to Asterisk
 - Receive events from Asterisk
 - Provides all the JSON data about:
-  - extensions
-  - queues
-  - parkings
-  - call conversation
+  - `extensions`
+  - `queues`
+  - `parkings`
+  - `call conversation`
 - Runtime reloading
 
 ### Use Cases
@@ -137,3 +145,24 @@ An example of use cases could be:
 - originate a new call, answer to an incoming call, hangup a call
 - obtain all the extensions status: online, busy, ringing, offline, dnd, ...
 - obtain information about all phone conversations
+
+### Events
+
+```js
+const astproxy = require('astproxy');
+astproxy.config({
+  port: 5038,
+  host: 'localhost',
+  username: '<USERNAME>',
+  password: '<PASSWORD>',
+  reconnect: true,
+  reconnect_after: 3000
+});
+astproxy.on('ready', () => {});
+```
+
+- `ready`
+- `reloaded`
+- `extenChanged`
+- `extenHangup`
+- `extenDialing`
