@@ -1,6 +1,6 @@
 {
   "name": "astproxy",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Node.js proxy for Asterisk PBX",
   "main": "index.js",
   "scripts": {
